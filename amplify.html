@@ -1,0 +1,3081 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amplify by Automattic for Agencies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ── SOURCE SERIF 4 ── */
+    @font-face {
+      font-family: 'SourceSerif4';
+      font-weight: 300;
+      font-style: normal;
+      src: url('SourceSerif4-Light.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'SourceSerif4';
+      font-weight: 300;
+      font-style: italic;
+      src: url('SourceSerif4-LightItalic.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'SourceSerif4';
+      font-weight: 400;
+      font-style: normal;
+      src: url('SourceSerif4-Regular.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'SourceSerif4';
+      font-weight: 400;
+      font-style: italic;
+      src: url('SourceSerif4-Italic.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'SourceSerif4';
+      font-weight: 500;
+      font-style: normal;
+      src: url('SourceSerif4-Medium.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'SourceSerif4';
+      font-weight: 500;
+      font-style: italic;
+      src: url('SourceSerif4-MediumItalic.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'SourceSerif4';
+      font-weight: 600;
+      font-style: normal;
+      src: url('SourceSerif4-SemiBold.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'SourceSerif4';
+      font-weight: 600;
+      font-style: italic;
+      src: url('SourceSerif4-SemiBoldItalic.ttf') format('truetype');
+    }
+
+    /* ── KNOCKOUT FONT-FACE ── */
+    @font-face {
+      font-family: 'KnockoutFull';
+      font-style: normal;
+      font-weight: 400;
+      src: url('Knockout-67FullBantamwt.otf') format('opentype'); /* 67 Full Bantamweight */
+    }
+
+    @font-face {
+      font-family: 'Knockout';
+      font-style: normal;
+      font-weight: 300;
+      src: url('font.woff2') format('woff2');        /* 46 Flyweight — most condensed */
+    }
+    @font-face {
+      font-family: 'Knockout';
+      font-style: normal;
+      font-weight: 400;
+      src: url('font-19573626.woff2') format('woff2'); /* 47 Bantamweight */
+    }
+    @font-face {
+      font-family: 'Knockout';
+      font-style: normal;
+      font-weight: 500;
+      src: url('font-01695a8a.woff2') format('woff2'); /* 48 Featherweight */
+    }
+    @font-face {
+      font-family: 'Knockout';
+      font-style: normal;
+      font-weight: 600;
+      src: url('font-2843a1c5.woff2') format('woff2'); /* 49 Liteweight */
+    }
+    @font-face {
+      font-family: 'Knockout';
+      font-style: normal;
+      font-weight: 700;
+      src: url('font-0e6790ed.woff2') format('woff2'); /* 50 Welterweight — widest */
+    }
+
+    /* ── TOKENS ── */
+    :root {
+      --bg:          #ffffff;
+      --bg-subtle:   #f5f5f5;
+      --bg-card:     #f0f0f0;
+      --border:      #e2e2e2;
+      --border-mid:  #cccccc;
+      --text:        #0a0a0a;
+      --text-mid:    #3a3a3a;
+      --text-muted:  #767676;
+      --text-faint:  #b0b0b0;
+      --blue:        #0047ff;
+      --blue-hover:  #0038cc;
+      --blue-faint:  rgba(0,71,255,0.08);
+      --tag-human-bg:   rgba(0,71,255,0.08);
+      --tag-human-col:  #0047ff;
+      --tag-ai-bg:      rgba(124,58,237,0.09);
+      --tag-ai-col:     #6d28d9;
+      --tag-live-bg:    rgba(22,163,74,0.09);
+      --tag-live-col:   #15803d;
+      --tag-con-bg:     rgba(234,88,12,0.09);
+      --tag-con-col:    #c2410c;
+      --bar-fill:    #0047ff;
+      --ring-a:      #0047ff;
+      --ring-b:      #7c3aed;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    [data-theme="dark"] {
+      --bg:          #0a0a0a;
+      --bg-subtle:   #111111;
+      --bg-card:     #181818;
+      --border:      #242424;
+      --border-mid:  #333333;
+      --text:        #ffffff;
+      --text-mid:    #d4d4d4;
+      --text-muted:  #7a7a7a;
+      --text-faint:  #454545;
+      --blue:        #4f7cff;
+      --blue-hover:  #6b93ff;
+      --blue-faint:  rgba(79,124,255,0.12);
+      --tag-human-bg:   rgba(79,124,255,0.12);
+      --tag-human-col:  #7da4ff;
+      --tag-ai-bg:      rgba(167,139,250,0.12);
+      --tag-ai-col:     #c4b5fd;
+      --tag-live-bg:    rgba(74,222,128,0.10);
+      --tag-live-col:   #4ade80;
+      --tag-con-bg:     rgba(251,146,60,0.10);
+      --tag-con-col:    #fb923c;
+      --bar-fill:    #4f7cff;
+      --ring-a:      #4f7cff;
+      --ring-b:      #a78bfa;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.4), 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      height: 56px;
+      background: var(--bg);
+      transition: background 0.25s;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-wordmark {
+      display: flex;
+      align-items: baseline;
+      gap: 7px;
+      text-decoration: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    .nav-wordmark-title {
+      font-family: 'Nunito', sans-serif; /* default font option */
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .nav-wordmark-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-faint);
+      letter-spacing: 0;
+    }
+
+    /* font switcher */
+    .font-picker {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .font-opt {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+      letter-spacing: 0.2px;
+    }
+
+    .font-opt:hover { color: var(--text); border-color: var(--border-mid); }
+    .font-opt.active { background: var(--bg-card); color: var(--text); border-color: var(--border-mid); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: var(--bg-subtle);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-nav-ghost {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 18px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.15s, border-color 0.15s;
+      font-family: inherit;
+    }
+
+    .btn-nav-ghost:hover {
+      color: var(--text);
+      border-color: var(--border-mid);
+    }
+
+    .btn-nav-primary {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--blue);
+      border: none;
+      border-radius: 6px;
+      padding: 8px 18px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .btn-nav-primary:hover { background: var(--blue-hover); }
+
+    .theme-toggle {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 15px;
+      transition: background 0.15s, border-color 0.15s;
+      flex-shrink: 0;
+    }
+
+    .theme-toggle:hover {
+      background: var(--bg-subtle);
+      border-color: var(--border-mid);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 0.75fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 112px 30px 120px;
+    }
+
+    .hero-left {}
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .hero h1 {
+      font-family: 'SourceSerif4', Georgia, serif;
+      font-size: clamp(36px, 4.2vw, 54px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      text-transform: none;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--text);
+    }
+
+    .hero-sub {
+      font-size: 20px;
+      color: var(--text-mid);
+      line-height: 1.65;
+      max-width: 660px;
+      margin-bottom: 40px;
+    }
+
+    .hero-sub strong {
+      color: var(--text-mid);
+      font-weight: 400;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--blue);
+      border: none;
+      border-radius: 8px;
+      padding: 13px 24px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.15s;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .btn-primary:hover { background: var(--blue-hover); transform: translateY(-1px); }
+
+    .btn-ghost {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 13px 24px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.15s, border-color 0.15s;
+      font-family: inherit;
+    }
+
+    .btn-ghost:hover { color: var(--text); border-color: var(--border-mid); }
+
+    /* ── HERO SITE SELECTOR ── */
+    .site-selector {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: stretch;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: visible;
+      box-shadow: var(--shadow-card);
+      max-width: 88%;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .site-selector-pane {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .site-selector-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .site-selector-input {
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 0;
+      width: 100%;
+    }
+
+    .site-selector-input::placeholder { color: var(--text-faint); }
+
+    .site-selector-divider {
+      width: 1px;
+      background: var(--border);
+      align-self: stretch;
+      margin: 10px 0;
+    }
+
+    .site-selector-or {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      gap: 6px;
+    }
+
+    .site-selector-or-line {
+      width: 1px;
+      flex: 1;
+      background: var(--border);
+    }
+
+    .site-selector-or-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .site-selector-connected {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .site-selector-connected-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      height: 100%;
+    }
+
+    .site-selector-connected-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .connected-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+    }
+
+    .connected-placeholder {
+      font-size: 14px;
+      color: var(--text-faint);
+    }
+
+    .connected-chevron {
+      color: var(--text-faint);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .site-selector-connected.open .connected-chevron {
+      transform: rotate(180deg);
+    }
+
+    .connected-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      overflow: hidden;
+      z-index: 50;
+      display: none;
+    }
+
+    .site-selector-connected.open .connected-dropdown {
+      display: block;
+    }
+
+    .dropdown-header {
+      padding: 10px 14px 6px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      transition: background 0.12s;
+    }
+
+    .dropdown-item:hover { background: var(--bg-subtle); }
+
+    .dropdown-item-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+    }
+
+    .dropdown-item-url {
+      font-size: 13px;
+      color: var(--text);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .dropdown-item-label {
+      font-size: 11px;
+      color: var(--text-faint);
+      margin-left: auto;
+    }
+
+    .site-selector-action {
+      position: absolute;
+      right: -1px;
+      top: -1px;
+      bottom: -1px;
+      display: flex;
+      align-items: center;
+    }
+
+    .site-selector-btn {
+      height: calc(100% + 2px);
+      padding: 0 20px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      border: none;
+      border-radius: 0 12px 12px 0;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .site-selector-btn:hover { background: var(--blue-hover); }
+
+    .hero-lockup-note {
+      margin-top: 20px;
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .hero-lockup-note a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .hero-lockup-note a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── HERO VISUAL ── */
+    .hero-visual {
+      position: relative;
+    }
+
+    .score-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      transition: background 0.25s, border-color 0.25s;
+    }
+
+    .score-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .score-card-url {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+
+    .score-card-status {
+      font-size: 11px;
+      font-weight: 600;
+      color: #15803d;
+      background: rgba(22,163,74,0.1);
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    [data-theme="dark"] .score-card-status {
+      color: #4ade80;
+      background: rgba(74,222,128,0.1);
+    }
+
+    .score-main {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .score-ring-wrap {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      flex-shrink: 0;
+    }
+
+    .score-ring-wrap svg {
+      width: 88px;
+      height: 88px;
+      transform: rotate(-90deg);
+    }
+
+    .score-ring-track { fill: none; stroke: var(--border); stroke-width: 7; }
+    .score-ring-fill {
+      fill: none;
+      stroke: #15803d;
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-dasharray: 226;
+      stroke-dashoffset: 56;
+      transition: stroke 0.4s ease, stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .score-ring-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .score-ring-num {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .score-ring-of {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .score-desc-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .score-desc-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .score-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .score-bar-row {
+      display: grid;
+      grid-template-columns: 148px 1fr 28px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .score-bar-lbl {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .score-bar-track {
+      height: 5px;
+      background: var(--bg-card);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--bar-fill);
+      opacity: 0.85;
+    }
+
+    .score-bar-val {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    /* mode toggle on card */
+    .mode-toggle-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 0;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+    }
+
+    .mode-btn.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    /* animated score card internals */
+    .score-main {
+      transition: opacity 0.25s ease;
+    }
+
+    .score-bars {
+      transition: opacity 0.25s ease;
+    }
+
+    .score-card.switching .score-main,
+    .score-card.switching .score-bars {
+      opacity: 0;
+    }
+
+    .score-ring-num {
+      transition: opacity 0.2s ease;
+    }
+
+    .score-bar-fill {
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .score-bar-fill.good   { background: #15803d; opacity: 1; }
+    .score-bar-fill.warn   { background: #f59e0b; opacity: 1; }
+    .score-bar-fill.danger { background: #ef4444; opacity: 1; }
+
+    .score-bar-val.good    { color: #15803d; }
+    .score-bar-val.warn    { color: #d97706; }
+    .score-bar-val.danger  { color: #dc2626; }
+
+    [data-theme="dark"] .score-bar-val.good   { color: #4ade80; }
+    [data-theme="dark"] .score-bar-val.warn   { color: #fbbf24; }
+    [data-theme="dark"] .score-bar-val.danger { color: #f87171; }
+
+    .score-ring-fill {
+      transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* ── IMPACT HEADLINE ── */
+    .impact-section {
+      border-top: 1px solid var(--border);
+      padding: 60px 30px;
+      overflow: hidden;
+    }
+
+    .impact-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .impact-headline {
+      font-family: 'KnockoutFull', sans-serif;
+      font-size: clamp(72px, 10vw, 140px);
+      font-weight: 400;
+      line-height: 0.93;
+      letter-spacing: 0px;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .impact-headline em {
+      font-style: normal;
+      color: var(--text);
+    }
+
+    .impact-right p {
+      font-size: 16px;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+
+    .impact-right p strong {
+      color: var(--text-mid);
+      font-weight: 400;
+    }
+
+    /* ── BENEFITS STRIP ── */
+    .benefits-strip {
+      background: var(--bg);
+      padding: 0 30px 80px;
+    }
+
+    .benefits-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .benefit-item {
+      background: var(--bg-subtle);
+      border-radius: 16px;
+      padding: 44px 40px 48px;
+      border: none;
+    }
+
+    .benefit-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .benefit-item h3 {
+      font-family: 'Knockout', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0px;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .benefit-item p {
+      font-size: 15px;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .benefit-item p strong { color: var(--text-mid); font-weight: 400; }
+
+    /* ── HOW IT WORKS VISUAL ── */
+    .how-visual-section {
+      padding: 0 30px 100px;
+    }
+
+    .how-visual-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .how-visual-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      gap: 24px;
+    }
+
+    .how-visual-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .how-visual-title {
+      font-family: 'Knockout', sans-serif;
+      font-size: clamp(30px, 3vw, 44px);
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .how-mode-toggle {
+      display: flex;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .how-mode-btn {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 22px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .how-mode-btn.active {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .browser-mock {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.09), 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .browser-chrome {
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .browser-dots { display: flex; gap: 6px; flex-shrink: 0; }
+    .browser-dots span { width: 11px; height: 11px; border-radius: 50%; }
+    .browser-dot-r { background: #ff5f57; }
+    .browser-dot-y { background: #ffbd2e; }
+    .browser-dot-g { background: #28ca41; }
+
+    .browser-address { flex: 1; display: flex; justify-content: center; }
+
+    .browser-bar {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      max-width: 260px;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Preview viewport */
+    .preview-area {
+      position: relative;
+      height: 640px;
+      overflow: hidden;
+    }
+
+    /* ── FAKE AGENCY SITE ── */
+    .ag {
+      width: 100%;
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: #f7f7f5;
+      user-select: none;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .ag-nav {
+      background: #0d1117;
+      height: 60px;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .ag-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .ag-logo-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: #3b82f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .ag-logo-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.2px;
+    }
+
+    .ag-nav-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .ag-nav-links span {
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .ag-nav-cta {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0d1117;
+      background: #fff;
+      padding: 7px 16px;
+      border-radius: 6px;
+    }
+
+    .ag-hero {
+      background: #fff;
+      padding: 56px 48px 48px;
+      display: grid;
+      grid-template-columns: 1fr 0.65fr;
+      gap: 40px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .ag-hero-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #3b82f6;
+      margin-bottom: 14px;
+    }
+
+    .ag-hero-h1 {
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1.07;
+      letter-spacing: -1.5px;
+      color: #0d1117;
+      margin-bottom: 16px;
+    }
+
+    .ag-hero-sub {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.7;
+      max-width: 340px;
+      margin-bottom: 28px;
+    }
+
+    .ag-cta-row { display: flex; gap: 10px; }
+
+    .ag-btn-dark {
+      font-size: 12px;
+      font-weight: 600;
+      background: #0d1117;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 7px;
+    }
+
+    .ag-btn-outline {
+      font-size: 12px;
+      font-weight: 500;
+      background: transparent;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+      padding: 10px 20px;
+      border-radius: 7px;
+    }
+
+    .ag-hero-right {
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0d1117 0%, #1e293b 100%);
+      height: 220px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .ag-hero-right::before {
+      content: '';
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.25) 0%, transparent 70%);
+      top: -60px;
+      right: -60px;
+    }
+
+    .ag-stat-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      position: relative;
+    }
+
+    .ag-stat-num {
+      font-size: 58px;
+      font-weight: 800;
+      letter-spacing: -3px;
+      color: #fff;
+      line-height: 1;
+      position: relative;
+    }
+
+    .ag-stat-sub {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      position: relative;
+    }
+
+    .ag-projects {
+      padding: 28px 48px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      flex: 1;
+    }
+
+    .ag-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #eaecef;
+    }
+
+    .ag-card-thumb {
+      height: 80px;
+    }
+
+    .ag-card-body {
+      padding: 10px 14px 12px;
+    }
+
+    .ag-card-client {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 3px;
+    }
+
+    .ag-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0d1117;
+      line-height: 1.3;
+    }
+
+    /* ── OVERLAY PINS ── */
+    .overlay-pins {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .pin {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      opacity: 0;
+      transform: translateY(6px) scale(0.92);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .pin.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .pin-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      position: relative;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.9);
+    }
+
+    .pin-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid currentColor;
+      opacity: 0.3;
+      animation: pin-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pin-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.4); opacity: 0; }
+    }
+
+    .pin-dot.good    { background: #15803d; color: #15803d; }
+    .pin-dot.warn    { background: #f59e0b; color: #f59e0b; }
+    .pin-dot.danger  { background: #ef4444; color: #ef4444; }
+
+    .pin-label {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+      font-family: 'Inter', sans-serif;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .pin-label.good   { background: rgba(21,128,61,0.92);  color: #fff; }
+    .pin-label.warn   { background: rgba(245,158,11,0.92); color: #fff; }
+    .pin-label.danger { background: rgba(239,68,68,0.92);  color: #fff; }
+
+    /* ── OVERLAY SCORECARD ── */
+    .overlay-panel {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 220px;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+      backdrop-filter: blur(12px);
+      transition: opacity 0.3s ease;
+    }
+
+    [data-theme="dark"] .overlay-panel {
+      background: rgba(20,20,20,0.94);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .overlay-panel-mode {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 10px;
+    }
+
+    .overlay-panel-score-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .overlay-panel-num {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: #0d1117;
+      line-height: 1;
+      transition: color 0.4s;
+    }
+
+    [data-theme="dark"] .overlay-panel-num { color: #fff; }
+
+    .overlay-panel-of {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    .overlay-panel-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0d1117;
+      margin-bottom: 12px;
+    }
+
+    [data-theme="dark"] .overlay-panel-title { color: #fff; }
+
+    .overlay-mini-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .overlay-mini-row {
+      display: grid;
+      grid-template-columns: 1fr 26px;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .overlay-mini-track {
+      height: 4px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    [data-theme="dark"] .overlay-mini-track { background: rgba(255,255,255,0.1); }
+
+    .overlay-mini-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .overlay-mini-val {
+      font-size: 10px;
+      font-weight: 600;
+      text-align: right;
+      color: #64748b;
+    }
+
+    .overlay-improve-btn {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      padding: 8px 0;
+      background: var(--blue);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: inherit;
+      text-align: center;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      letter-spacing: 0.2px;
+      transition: opacity 0.15s;
+    }
+
+    .overlay-improve-btn:hover { opacity: 0.85; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-section {
+      padding: 0 30px 100px;
+    }
+
+    .testimonials-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .testimonial-card {
+      background: var(--bg-subtle);
+      border-radius: 16px;
+      padding: 52px 52px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .testimonial-agency {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-agency-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      flex-shrink: 0;
+    }
+
+    .testimonial-agency-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .testimonial-agency-url {
+      font-size: 11px;
+      color: var(--text-faint);
+    }
+
+    .testimonial-quote {
+      font-family: 'SourceSerif4', Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .testimonial-stat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin-top: -8px;
+    }
+
+    [data-theme="dark"] .testimonial-stat {
+      background: var(--bg-card);
+    }
+
+    .testimonial-stat-num {
+      font-family: 'Knockout', sans-serif;
+      font-size: 42px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .testimonial-stat-label {
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.4;
+      max-width: 250px;
+    }
+
+    .testimonial-attribution {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .testimonial-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .testimonial-role {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ── URL INPUT ── */
+    .url-section {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 80px 30px;
+    }
+
+    .url-section-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .url-section-title {
+      font-family: 'Knockout', sans-serif;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 600;
+      letter-spacing: 0px;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .url-form {
+      display: flex;
+      gap: 10px;
+      max-width: 640px;
+      margin-bottom: 14px;
+    }
+
+    .url-input {
+      flex: 1;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .url-input::placeholder { color: var(--text-faint); }
+    .url-input:focus { border-color: var(--blue); }
+
+    .url-note {
+      font-size: 12px;
+      color: var(--text-faint);
+    }
+
+    /* ── WHAT WE AUDIT ── */
+    .audit-section {
+      padding: 80px 30px;
+    }
+
+    .audit-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .audit-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .audit-header h2 {
+      font-family: 'Knockout', sans-serif;
+      font-size: clamp(36px, 4vw, 54px);
+      font-weight: 600;
+      letter-spacing: 0px;
+      line-height: 1.05;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .audit-header p {
+      font-size: 16px;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .audit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .audit-card {
+      background: var(--bg-subtle);
+      border-radius: 16px;
+      padding: 40px 36px 44px;
+      position: relative;
+      transition: background 0.15s;
+    }
+
+    .audit-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      margin-bottom: 28px;
+      flex-shrink: 0;
+    }
+
+    .audit-card-pill {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: var(--blue-faint);
+      color: var(--blue);
+    }
+
+    .audit-card h3 {
+      font-family: 'Knockout', sans-serif;
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0px;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .audit-card p {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+
+    /* ── AI WORKFLOW ── */
+    .ai-workflow-section {
+      border-top: 1px solid var(--border);
+      padding: 100px 30px;
+    }
+
+    .ai-workflow-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .ai-workflow-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .flow-diagram-wrap {
+      background: var(--bg-subtle);
+      border-radius: 20px;
+      padding: 48px 56px;
+    }
+
+    .ai-workflow-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .ai-workflow-title {
+      font-family: 'KnockoutFull', sans-serif;
+      font-size: clamp(56px, 6.5vw, 96px);
+      font-weight: 400;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 0.92;
+      margin-bottom: 28px;
+    }
+
+    .ai-workflow-body {
+      font-size: 17px;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 44px;
+      max-width: 580px;
+    }
+
+    /* ── FLOW DIAGRAM ── */
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      padding: 8px 0 0;
+      position: relative;
+      gap: 0;
+    }
+
+    .flow-node-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .flow-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      position: relative;
+    }
+
+    /* Per-node glow pulses */
+    .fc-amplify { background: #0047ff; animation: glowAmplify 3s ease-in-out infinite; }
+    .fc-ai      { background: #7c3aed; animation: glowAI 3s ease-in-out 0.4s infinite; }
+    .fc-studio  { background: #0891b2; animation: glowStudio 3s ease-in-out 0.8s infinite; }
+    .fc-deploy  { background: #059669; animation: glowDeploy 3s ease-in-out 1.2s infinite; }
+
+    @keyframes glowAmplify { 0%,100%{box-shadow:0 0 0 0 rgba(0,71,255,0)} 50%{box-shadow:0 0 22px 8px rgba(0,71,255,0.28)} }
+    @keyframes glowAI      { 0%,100%{box-shadow:0 0 0 0 rgba(124,58,237,0)} 50%{box-shadow:0 0 22px 8px rgba(124,58,237,0.28)} }
+    @keyframes glowStudio  { 0%,100%{box-shadow:0 0 0 0 rgba(8,145,178,0)} 50%{box-shadow:0 0 22px 8px rgba(8,145,178,0.28)} }
+    @keyframes glowDeploy  { 0%,100%{box-shadow:0 0 0 0 rgba(5,150,105,0)} 50%{box-shadow:0 0 22px 8px rgba(5,150,105,0.28)} }
+
+    /* Outer pulse rings */
+    .flow-circle::before,
+    .flow-circle::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      border: 1.5px solid currentColor;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .flow-circle::before { inset: -6px;  animation: ringOut 3s ease-out infinite; }
+    .flow-circle::after  { inset: -13px; animation: ringOut 3s ease-out 0.6s infinite; }
+
+    @keyframes ringOut {
+      0%   { transform: scale(0.85); opacity: 0.5; }
+      100% { transform: scale(1.15); opacity: 0; }
+    }
+
+    .flow-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .flow-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+      white-space: nowrap;
+      line-height: 1.5;
+    }
+
+    /* Connector */
+    .flow-conn {
+      flex: 1;
+      position: relative;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      min-width: 32px;
+    }
+
+    .flow-track {
+      width: 100%;
+      height: 1.5px;
+      background: var(--border-mid);
+      opacity: 0.35;
+      position: relative;
+    }
+
+    .flow-chevron {
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--border-mid);
+      opacity: 0.5;
+      display: flex;
+      align-items: center;
+    }
+
+    .flow-particle {
+      position: absolute;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      animation: ptTravel 3.6s linear infinite;
+    }
+
+    .flow-particle:nth-child(2) { animation-delay: -2.4s; }
+    .flow-particle:nth-child(3) { animation-delay: -1.2s; }
+
+    @keyframes ptTravel {
+      0%   { left: -5px;             opacity: 0; transform: translateY(-50%) scale(0.4); }
+      6%   { opacity: 1;             transform: translateY(-50%) scale(1); }
+      90%  { opacity: 1; }
+      100% { left: calc(100% + 5px); opacity: 0; transform: translateY(-50%) scale(0.4); }
+    }
+
+    /* Particle colors per connector — Stream */
+    .fconn-1 .flow-particle { background: #0047ff; box-shadow: 0 0 7px 2px rgba(0,71,255,0.7); }
+    .fconn-2 .flow-particle { background: #7c3aed; box-shadow: 0 0 7px 2px rgba(124,58,237,0.7); }
+    .fconn-3 .flow-particle { background: #0891b2; box-shadow: 0 0 7px 2px rgba(8,145,178,0.7); }
+
+
+    /* Prompt card mock */
+    .prompt-card {
+      background: #0d1117;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.18), 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .prompt-card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .prompt-card-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .prompt-card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .prompt-card-mode {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: rgba(79,124,255,0.18);
+      color: #7da4ff;
+    }
+
+    .prompt-card-count {
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .prompt-items {
+      padding: 8px 0;
+    }
+
+    .prompt-item {
+      padding: 14px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .prompt-item:last-child { border-bottom: none; }
+
+    .prompt-item-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .prompt-item-label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .prompt-item-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .prompt-item-dot.warn   { background: #f59e0b; }
+    .prompt-item-dot.danger { background: #ef4444; }
+    .prompt-item-dot.good   { background: #22c55e; }
+
+    .prompt-copy-btn {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+      color: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.06);
+      border-radius: 4px;
+      padding: 3px 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .prompt-copy-btn:hover {
+      color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .prompt-item-text {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.55;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .prompt-card-footer {
+      padding: 16px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .prompt-studio-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .prompt-studio-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .prompt-send-btn {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--blue);
+      border-radius: 7px;
+      padding: 8px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+      border: none;
+      font-family: inherit;
+    }
+
+    .prompt-send-btn:hover { background: var(--blue-hover); }
+
+    /* ── EXCLUSIVE BANNER ── */
+    .exclusive-section {
+      padding: 80px 30px;
+    }
+
+    .exclusive-card {
+      max-width: 1440px;
+      margin: 0 auto;
+      background: var(--blue);
+      border-radius: 16px;
+      padding: 64px 72px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+
+    .exclusive-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 14px;
+    }
+
+    .exclusive-card h2 {
+      font-family: 'Knockout', sans-serif;
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 600;
+      letter-spacing: 0px;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.0;
+      margin-bottom: 14px;
+    }
+
+    .exclusive-card p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.65;
+      max-width: 520px;
+    }
+
+    .exclusive-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn-white {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--blue);
+      background: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 18px 36px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .btn-white:hover { opacity: 0.9; }
+
+    .btn-outline-white {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.8);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 8px;
+      padding: 13px 24px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.15s, color 0.15s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .btn-outline-white:hover {
+      color: #fff;
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .exclusive-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      text-align: right;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--bg-subtle);
+      padding: 40px 30px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .footer-brand {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text-faint);
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      justify-content: flex-end;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 48px 20px 60px; }
+      .hero-visual { display: none; }
+      .impact-inner { grid-template-columns: 1fr; gap: 32px; }
+      .impact-section { padding: 48px 20px; }
+      .benefits-inner { grid-template-columns: 1fr; }
+      .benefit-item { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 20px; }
+      .benefit-item:last-child { border-bottom: none; }
+      .url-section { padding: 60px 20px; }
+      .url-form { flex-direction: column; }
+      .audit-section { padding: 60px 20px; }
+      .audit-header { grid-template-columns: 1fr; }
+      .audit-grid { grid-template-columns: 1fr; }
+      .steps-section { padding: 60px 20px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .exclusive-section { padding: 40px 20px; }
+      .exclusive-card { grid-template-columns: 1fr; padding: 40px 32px; }
+      .exclusive-actions { align-items: flex-start; }
+      .exclusive-note { text-align: left; }
+      footer { grid-template-columns: 1fr; text-align: center; padding: 32px 20px; }
+      .footer-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <a href="#" class="nav-wordmark">
+        <span class="nav-wordmark-title" id="amplifyTitle">Amplify</span>
+        <span class="nav-wordmark-sub">by Automattic for Agencies</span>
+      </a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">☀</button>
+      <a href="#" class="btn-nav-ghost">Login</a>
+      <a href="#audit" class="btn-nav-primary">Sign Up & Amplify</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <h1>Your agency's website needs to win more clients.</h1>
+
+      <p class="hero-sub">
+        First impressions happen fast, and the way clients find you is changing. AI tools now help businesses discover agencies before a single conversation happens. Amplify audits your site through both lenses, then generates precise agent-ready prompts so you can elevate your site instantly, captivate prospects, and close more deals.
+      </p>
+      <div class="site-selector">
+        <div class="site-selector-pane">
+          <span class="site-selector-label">Enter a URL</span>
+          <input class="site-selector-input" type="url" placeholder="https://yourgroovydomain.com" id="heroUrlInput" />
+        </div>
+        <div class="site-selector-or">
+          <span class="site-selector-or-line"></span>
+          <span class="site-selector-or-label">or</span>
+          <span class="site-selector-or-line"></span>
+        </div>
+        <div class="site-selector-pane site-selector-connected" id="connectedPane">
+          <span class="site-selector-label">Connected sites</span>
+          <div class="site-selector-connected-inner">
+            <div class="site-selector-connected-left">
+              <span class="connected-dot"></span>
+              <span class="connected-placeholder" id="connectedPlaceholder">Choose a site</span>
+            </div>
+            <svg class="connected-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="connected-dropdown" id="connectedDropdown">
+            <div class="dropdown-header">Your connected sites</div>
+            <div class="dropdown-item" data-url="pixelcraft.agency">
+              <span class="dropdown-item-dot"></span>
+              <span class="dropdown-item-url">pixelcraft.agency</span>
+              <span class="dropdown-item-label">Active</span>
+            </div>
+            <div class="dropdown-item" data-url="brightleaf.studio">
+              <span class="dropdown-item-dot"></span>
+              <span class="dropdown-item-url">brightleaf.studio</span>
+              <span class="dropdown-item-label">Active</span>
+            </div>
+            <div class="dropdown-item" data-url="novastudio.design">
+              <span class="dropdown-item-dot"></span>
+              <span class="dropdown-item-url">novastudio.design</span>
+              <span class="dropdown-item-label">Active</span>
+            </div>
+            <div class="dropdown-item" data-url="webweavers.co">
+              <span class="dropdown-item-dot"></span>
+              <span class="dropdown-item-url">webweavers.co</span>
+              <span class="dropdown-item-label">Active</span>
+            </div>
+            <div class="dropdown-item" data-url="yourgroovydomain.com">
+              <span class="dropdown-item-dot"></span>
+              <span class="dropdown-item-url">yourgroovydomain.com</span>
+              <span class="dropdown-item-label">Active</span>
+            </div>
+          </div>
+        </div>
+        <div class="site-selector-action">
+          <button class="site-selector-btn">Amplify it</button>
+        </div>
+      </div>
+      <p class="hero-lockup-note">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Available exclusively to verified Automattic for Agencies members. <a href="#">Sign up for free</a>
+      </p>
+    </div>
+
+    <!-- HERO VISUAL -->
+    <div class="hero-visual">
+      <div class="score-card">
+        <svg width="0" height="0" style="position:absolute">
+          <defs>
+            <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--ring-a)"/>
+              <stop offset="100%" stop-color="var(--ring-b)"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="score-card-header">
+          <span class="score-card-url">yourgroovydomain.com</span>
+          <span class="score-card-status">Audit complete</span>
+        </div>
+        <div class="mode-toggle-row">
+          <button class="mode-btn active" data-mode="human">Human Mode</button>
+          <button class="mode-btn" data-mode="ai">AI Mode</button>
+        </div>
+        <div class="score-main">
+          <div class="score-ring-wrap">
+            <svg viewBox="0 0 88 88">
+              <circle class="score-ring-track" cx="44" cy="44" r="36"/>
+              <circle class="score-ring-fill" id="scoreRing" cx="44" cy="44" r="36"/>
+            </svg>
+            <div class="score-ring-label">
+              <span class="score-ring-num" id="scoreNum">81</span>
+              <span class="score-ring-of">/ 100</span>
+            </div>
+          </div>
+          <div>
+            <div class="score-desc-title" id="scoreTitle">Looking Good</div>
+            <div class="score-desc-body" id="scoreBody">Your site makes a strong human impression. Here's where to push further.</div>
+          </div>
+        </div>
+        <div class="score-bars" id="scoreBars">
+          <div class="score-bar-row">
+            <span class="score-bar-lbl">First Impressions</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:88%"></div></div>
+            <span class="score-bar-val">88</span>
+          </div>
+          <div class="score-bar-row">
+            <span class="score-bar-lbl">SEO</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:71%"></div></div>
+            <span class="score-bar-val">71</span>
+          </div>
+          <div class="score-bar-row">
+            <span class="score-bar-lbl">Trust Signals</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:79%"></div></div>
+            <span class="score-bar-val">79</span>
+          </div>
+          <div class="score-bar-row">
+            <span class="score-bar-lbl">Service Clarity</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:65%"></div></div>
+            <span class="score-bar-val">65</span>
+          </div>
+          <div class="score-bar-row">
+            <span class="score-bar-lbl">Portfolio Quality</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div>
+            <span class="score-bar-val">80</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT HEADLINE -->
+  <div class="impact-section">
+    <div class="impact-inner">
+      <div class="impact-headline">Captivate<br>and Close.</div>
+      <div class="impact-right">
+        <p>
+          Your website is your first handshake, your elevator pitch, and your portfolio all rolled into one. And in the time it takes someone to decide whether to stay or bounce, your site either earns their trust or loses the job.
+        </p>
+        <p>
+          Amplify audits your site <strong>through the eyes of a potential client.</strong> Because the real question isn't whether your site looks good to you. It's whether it speaks to your target demographic, answers the questions in their head before they bounce, and gives them every reason to reach out instead of clicking back.
+        </p>
+        <p>
+          From UX and SEO to AEO readiness and credibility signals, Amplify scores your site across the dimensions that actually move the needle. Then it shows you exactly where to focus to <strong>captivate the right clients and secure more business.</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BENEFITS STRIP -->
+  <div class="benefits-strip">
+    <div class="benefits-inner">
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/></svg>
+        </div>
+        <h3>Two lenses. One complete picture.</h3>
+        <p>
+          Amplify audits your site two ways. <strong>Human mode</strong> reveals how a potential client perceives your site when they land on it. <strong>AI mode</strong> shows how ChatGPT, Gemini, and Perplexity read and rank your agency when someone searches for help.
+        </p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+        </div>
+        <div class="benefit-tags" style="display:none">
+          <span class="btag btag-live">Live Overlay</span>
+        </div>
+        <h3>See problems where they actually live.</h3>
+        <p>
+          Amplify overlays directly on your live site, <strong>pinning issues in context</strong> so you can see exactly what needs fixing and why, right on the page where it matters.
+        </p>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <h3>Audit your sites and your clients' too.</h3>
+        <p>
+          Enter any URL manually, or pull from your connected Automattic for Agencies account. Amplify works for <strong>your agency site and your client sites</strong>, delivering more value at every engagement.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS VISUAL -->
+  <section class="how-visual-section">
+    <div class="how-visual-inner">
+
+      <div class="how-visual-header">
+        <div>
+          <p class="how-visual-eyebrow">How it works</p>
+          <h2 class="how-visual-title">See it in action</h2>
+        </div>
+        <div class="how-mode-toggle">
+          <button class="how-mode-btn active" data-how-mode="human">Human Mode</button>
+          <button class="how-mode-btn" data-how-mode="ai">AI Mode</button>
+        </div>
+      </div>
+
+      <div class="browser-mock">
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <span class="browser-dot-r"></span>
+            <span class="browser-dot-y"></span>
+            <span class="browser-dot-g"></span>
+          </div>
+          <div class="browser-address">
+            <div class="browser-bar">crestlinestudio.com</div>
+          </div>
+        </div>
+
+        <div class="preview-area">
+          <!-- Fake agency site -->
+          <div class="ag">
+            <nav class="ag-nav">
+              <div class="ag-logo">
+                <div class="ag-logo-mark">CS</div>
+                <span class="ag-logo-name">Crestline Studio</span>
+              </div>
+              <div class="ag-nav-links">
+                <span>Work</span>
+                <span>Services</span>
+                <span>Studio</span>
+                <span>Contact</span>
+              </div>
+              <div class="ag-nav-cta">Start a project</div>
+            </nav>
+            <div class="ag-hero">
+              <div>
+                <div class="ag-hero-eyebrow">Digital Agency · Est. 2016</div>
+                <div class="ag-hero-h1">We build brands<br>that win online.</div>
+                <div class="ag-hero-sub">Crestline partners with ambitious companies to craft digital experiences that drive real, measurable growth.</div>
+                <div class="ag-cta-row">
+                  <div class="ag-btn-dark">See our work</div>
+                  <div class="ag-btn-outline">Get in touch</div>
+                </div>
+              </div>
+              <div class="ag-hero-right">
+                <div class="ag-stat-label">Avg. client growth</div>
+                <div class="ag-stat-num">+143%</div>
+                <div class="ag-stat-sub">in the first 12 months</div>
+              </div>
+            </div>
+            <div class="ag-projects">
+              <div class="ag-card">
+                <div class="ag-card-thumb" style="background: linear-gradient(135deg,#1e3a5f,#2d6a9f)"></div>
+                <div class="ag-card-body">
+                  <div class="ag-card-client">Fintech</div>
+                  <div class="ag-card-title">Vaultr: Brand &amp; Web Redesign</div>
+                </div>
+              </div>
+              <div class="ag-card">
+                <div class="ag-card-thumb" style="background: linear-gradient(135deg,#3d1f5c,#7c3aed)"></div>
+                <div class="ag-card-body">
+                  <div class="ag-card-client">SaaS</div>
+                  <div class="ag-card-title">Loopkit Growth Site</div>
+                </div>
+              </div>
+              <div class="ag-card">
+                <div class="ag-card-thumb" style="background: linear-gradient(135deg,#0f3d2e,#059669)"></div>
+                <div class="ag-card-body">
+                  <div class="ag-card-client">E-commerce</div>
+                  <div class="ag-card-title">Brightly: Store &amp; Brand</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Overlay pins (populated by JS) -->
+          <div class="overlay-pins" id="howPins"></div>
+
+          <!-- Floating score panel -->
+          <div class="overlay-panel" id="overlayPanel">
+            <div class="overlay-panel-mode" id="overlayPanelMode">Human Mode</div>
+            <div class="overlay-panel-score-row">
+              <span class="overlay-panel-num" id="overlayPanelNum">76</span>
+              <span class="overlay-panel-of">/ 100</span>
+            </div>
+            <div class="overlay-panel-title" id="overlayPanelTitle">Room to Amplify</div>
+            <div class="overlay-mini-bars" id="overlayMiniBars"></div>
+            <button class="overlay-improve-btn" id="overlayImproveBtn">Improve for Humans</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="testimonials-inner">
+
+      <!-- Big Red Jelly -->
+      <div class="testimonial-card">
+        <div class="testimonial-agency">
+          <div class="testimonial-agency-mark" style="background:#c0392b;">BRJ</div>
+          <div>
+            <div class="testimonial-agency-name">Big Red Jelly</div>
+            <div class="testimonial-agency-url">bigredjelly.com</div>
+          </div>
+        </div>
+        <p class="testimonial-quote">"We honestly thought our site was in great shape. We'd just finished a redesign. Amplify flagged issues within minutes that we'd completely overlooked: trust signals, service clarity, the way our CTA was buried on mobile. We made the fixes in a week. The results were hard to argue with."</p>
+        <div class="testimonial-stat">
+          <span class="testimonial-stat-num">+67%</span>
+          <span class="testimonial-stat-label">increase in contact form submissions from prospective clients</span>
+        </div>
+        <div class="testimonial-attribution">
+          <span class="testimonial-name">Ryan Seamons</span>
+          <span class="testimonial-role">Head of Growth, Big Red Jelly</span>
+        </div>
+      </div>
+
+      <!-- Maple Creative -->
+      <div class="testimonial-card">
+        <div class="testimonial-agency">
+          <div class="testimonial-agency-mark" style="background:#2d6a4f;">MC</div>
+          <div>
+            <div class="testimonial-agency-name">Maple Creative</div>
+            <div class="testimonial-agency-url">buildwithmaple.com</div>
+          </div>
+        </div>
+        <p class="testimonial-quote">"Before a sales call, we run the prospect's site through Amplify. In ten minutes we have a clear picture of what's broken and why it's costing them clients. We walk into the meeting with a scored report in hand and the conversation changes completely. It's become the most effective part of our sales process."</p>
+        <div class="testimonial-stat">
+          <span class="testimonial-stat-num">+78%</span>
+          <span class="testimonial-stat-label">increase in closed prospects using Amplify audit reports</span>
+        </div>
+        <div class="testimonial-attribution">
+          <span class="testimonial-name">Tyler Carey</span>
+          <span class="testimonial-role">Founder, Maple Creative</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AI WORKFLOW -->
+  <section class="ai-workflow-section">
+    <div class="ai-workflow-inner">
+
+      <!-- Top: text + prompt card -->
+      <div class="ai-workflow-top">
+        <div class="ai-workflow-left">
+          <p class="ai-workflow-eyebrow">AI Workflow Integration</p>
+          <h2 class="ai-workflow-title">Audit to Agent<br>in Seconds.</h2>
+          <p class="ai-workflow-body">Amplify generates a precise, agent-ready prompt for every issue it finds. Send any or all of them to your AI tool of choice: Claude, Codex, Gemini, whatever fits your workflow. Then, through WordPress Studio, those changes can be applied at lightning speed directly to your sites in staging or production.</p>
+        </div>
+
+        <div class="prompt-card">
+        <div class="prompt-card-header">
+          <div class="prompt-card-header-left">
+            <span class="prompt-card-title">Generated Prompts</span>
+            <span class="prompt-card-mode">Human Mode</span>
+          </div>
+          <span class="prompt-card-count">5 issues found</span>
+        </div>
+        <div class="prompt-items">
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <span class="prompt-item-label">
+                <span class="prompt-item-dot danger"></span>
+                Service Clarity
+              </span>
+              <span class="prompt-copy-btn">Copy</span>
+            </div>
+            <div class="prompt-item-text">Rewrite the services section of this WordPress page to clearly articulate the specific outcomes each service delivers. Replace generic descriptions with client-focused language that answers "what will this do for my business?"</div>
+          </div>
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <span class="prompt-item-label">
+                <span class="prompt-item-dot danger"></span>
+                Trust Signals
+              </span>
+              <span class="prompt-copy-btn">Copy</span>
+            </div>
+            <div class="prompt-item-text">Add a testimonials block above the fold on the homepage using the Jetpack Reviews block. Pull from existing client testimonials and prioritise quotes that reference measurable outcomes or specific project types.</div>
+          </div>
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <span class="prompt-item-label">
+                <span class="prompt-item-dot warn"></span>
+                CTA Optimization
+              </span>
+              <span class="prompt-copy-btn">Copy</span>
+            </div>
+            <div class="prompt-item-text">Update the primary hero button text from "Learn More" to a specific, action-oriented phrase that communicates value. Suggested: "See how we work" or "Start your project." Ensure it links to the contact or work page.</div>
+          </div>
+          <div class="prompt-item">
+            <div class="prompt-item-header">
+              <span class="prompt-item-label">
+                <span class="prompt-item-dot warn"></span>
+                Visual Hierarchy
+              </span>
+              <span class="prompt-copy-btn">Copy</span>
+            </div>
+            <div class="prompt-item-text">Audit the heading structure across the homepage. Ensure there is a single H1, that H2s clearly segment each section, and that no decorative text is marked as a heading element. Fix any heading tags used purely for styling.</div>
+          </div>
+        </div>
+        <div class="prompt-card-footer">
+          <span class="prompt-studio-label">
+            <span class="prompt-studio-dot"></span>
+            WordPress Studio connected
+          </span>
+          <button class="prompt-send-btn">
+            Send all to Claude
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+      </div><!-- /.ai-workflow-top -->
+
+      <!-- Full-width flow diagram -->
+      <div class="flow-diagram-wrap">
+        <div class="flow-diagram">
+
+          <!-- Node 1: Amplify Audit -->
+          <div class="flow-node-wrap">
+            <div class="flow-circle fc-amplify">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <span class="flow-label">Amplify Audit</span>
+            <span class="flow-sub">Human + AI Score</span>
+          </div>
+
+          <!-- Connector 1 -->
+          <div class="flow-conn fconn-1">
+            <div class="flow-track"></div>
+            <div class="flow-particle"></div>
+            <div class="flow-particle"></div>
+            <div class="flow-particle"></div>
+            <span class="flow-chevron">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </span>
+          </div>
+
+          <!-- Node 2: AI Prompts -->
+          <div class="flow-node-wrap">
+            <div class="flow-circle fc-ai">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <span class="flow-label">AI Prompts</span>
+            <span class="flow-sub">Claude · Codex<br>Gemini · GPT-4</span>
+          </div>
+
+          <!-- Connector 2 -->
+          <div class="flow-conn fconn-2">
+            <div class="flow-track"></div>
+            <div class="flow-particle"></div>
+            <div class="flow-particle"></div>
+            <div class="flow-particle"></div>
+            <span class="flow-chevron">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </span>
+          </div>
+
+          <!-- Node 3: WordPress Studio -->
+          <div class="flow-node-wrap">
+            <div class="flow-circle fc-studio">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </div>
+            <span class="flow-label">WordPress Studio</span>
+            <span class="flow-sub">Agent Execution</span>
+          </div>
+
+          <!-- Connector 3 -->
+          <div class="flow-conn fconn-3">
+            <div class="flow-track"></div>
+            <div class="flow-particle"></div>
+            <div class="flow-particle"></div>
+            <div class="flow-particle"></div>
+            <span class="flow-chevron">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </span>
+          </div>
+
+          <!-- Node 4: Deploy -->
+          <div class="flow-node-wrap">
+            <div class="flow-circle fc-deploy">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <span class="flow-label">Staging or Production</span>
+            <span class="flow-sub">Changes deployed live</span>
+          </div>
+
+        </div>
+      </div><!-- /.flow-diagram-wrap -->
+
+    </div>
+  </section>
+
+  <!-- WHAT WE AUDIT -->
+  <section class="audit-section">
+    <div class="audit-inner">
+      <div class="audit-header">
+        <h2>Every dimension<br>that wins or loses a client</h2>
+        <p>We evaluate your site across six categories that matter to the people deciding whether to hire you, not just the ones Google cares about.</p>
+      </div>
+      <div class="audit-grid">
+        <div class="audit-card">
+          <div class="audit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          </div>
+          <span class="audit-card-pill">UX</span>
+          <h3>First Impressions &amp; UX</h3>
+          <p>Load speed, layout clarity, mobile experience, and whether visitors can find what they need before they bounce.</p>
+        </div>
+        <div class="audit-card">
+          <div class="audit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <span class="audit-card-pill">SEO</span>
+          <h3>Search Engine Optimization</h3>
+          <p>Technical SEO health, meta structure, crawlability, and organic search performance for agency-related queries.</p>
+        </div>
+        <div class="audit-card">
+          <div class="audit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <span class="audit-card-pill">AEO</span>
+          <h3>AI &amp; Answer Engine Optimization</h3>
+          <p>Structured data, entity clarity, and AI citation readiness, so you show up when clients search via ChatGPT or Gemini.</p>
+        </div>
+        <div class="audit-card">
+          <div class="audit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span class="audit-card-pill">Trust</span>
+          <h3>Credibility &amp; Trust Signals</h3>
+          <p>Testimonials, case studies, media mentions, certifications: the proof that turns browsers into enquiries.</p>
+        </div>
+        <div class="audit-card">
+          <div class="audit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>
+          </div>
+          <span class="audit-card-pill">Clarity</span>
+          <h3>Service &amp; Audience Clarity</h3>
+          <p>Whether your offerings, process, and value proposition are crystal clear to exactly the type of client you want.</p>
+        </div>
+        <div class="audit-card">
+          <div class="audit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <span class="audit-card-pill">Portfolio</span>
+          <h3>Portfolio &amp; Proof of Work</h3>
+          <p>We go further and audit the sites you've built. Fast, accessible, ranking? Your portfolio is only as strong as the work it shows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXCLUSIVE BANNER -->
+  <section class="exclusive-section">
+    <div class="exclusive-card">
+      <div>
+        <div class="exclusive-eyebrow">Automattic for Agencies</div>
+        <h2>Built for agencies who<br>take their business seriously</h2>
+        <p>Amplify is an exclusive benefit for Automattic for Agencies members. Not yet a member? Join the community of professional WordPress agencies growing their business with Automattic.</p>
+      </div>
+      <div class="exclusive-actions">
+        <a href="#audit" class="btn-white">Sign up now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">Amplify · Automattic for Agencies</span>
+    <span class="footer-copy">© 2026 Automattic Inc.</span>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Automattic for Agencies Program</a>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    const stored = localStorage.getItem('amplify-theme') || 'light';
+    html.setAttribute('data-theme', stored);
+    toggle.textContent = stored === 'dark' ? '☀' : '☾';
+
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      toggle.textContent = next === 'dark' ? '☀' : '☾';
+      localStorage.setItem('amplify-theme', next);
+    });
+
+    // Score card mode data
+    const modes = {
+      human: {
+        score: 76,
+        title: 'Room to Amplify',
+        body: 'Strong foundations, but a few key areas are costing you clients before they ever reach out.',
+        metrics: [
+          { label: 'First Impressions', val: 88 },
+          { label: 'Trust Signals',     val: 82 },
+          { label: 'Portfolio Quality', val: 78 },
+          { label: 'SEO',               val: 71 },
+          { label: 'Accessibility',     val: 69 },
+          { label: 'Service Clarity',   val: 65 },
+          { label: 'UX',                val: 46 },
+          { label: 'Visual Design',     val: 38 },
+        ]
+      },
+      ai: {
+        score: 52,
+        title: 'Needs Attention',
+        body: 'AI agents are struggling to read and rank your site. These gaps are costing you visibility and clients.',
+        metrics: [
+          { label: 'Technical Performance', val: 74 },
+          { label: 'Content Specificity',   val: 66 },
+          { label: 'Crawl Health',          val: 61 },
+          { label: 'Content Freshness',     val: 57 },
+          { label: 'AEO Readiness',         val: 48 },
+          { label: 'Entity Clarity',        val: 43 },
+          { label: 'Schema Data',           val: 29 },
+        ]
+      }
+    };
+
+    const circumference = 2 * Math.PI * 36; // r=36
+
+    function scoreClass(val) {
+      if (val >= 80) return 'good';
+      if (val >= 50) return 'warn';
+      return 'danger';
+    }
+
+    function scoreColor(val) {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (val >= 80) return dark ? '#4ade80' : '#15803d';
+      if (val >= 50) return dark ? '#fbbf24' : '#f59e0b';
+      return dark ? '#f87171' : '#ef4444';
+    }
+
+    function setScore(mode) {
+      const d = modes[mode];
+      const card = document.querySelector('.score-card');
+
+      // fade out
+      card.classList.add('switching');
+
+      setTimeout(() => {
+        // update ring color + offset
+        const ring = document.getElementById('scoreRing');
+        const color = scoreColor(d.score);
+        const offset = circumference - (d.score / 100) * circumference;
+        ring.style.stroke = color;
+        ring.style.strokeDashoffset = offset;
+        ring.style.strokeDasharray = circumference;
+
+        // update ring number + color
+        const numEl = document.getElementById('scoreNum');
+        numEl.textContent = d.score;
+        numEl.style.color = color;
+
+        document.getElementById('scoreTitle').textContent = d.title;
+        document.getElementById('scoreBody').textContent = d.body;
+
+        // rebuild bars
+        const barsEl = document.getElementById('scoreBars');
+        barsEl.innerHTML = d.metrics.map(m => {
+          const cls = scoreClass(m.val);
+          return `
+            <div class="score-bar-row">
+              <span class="score-bar-lbl">${m.label}</span>
+              <div class="score-bar-track"><div class="score-bar-fill ${cls}" style="width:0%"></div></div>
+              <span class="score-bar-val ${cls}">${m.val}</span>
+            </div>
+          `;
+        }).join('');
+
+        // fade back in
+        card.classList.remove('switching');
+
+        // animate bars in after fade
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            barsEl.querySelectorAll('.score-bar-fill').forEach((bar, i) => {
+              bar.style.width = d.metrics[i].val + '%';
+            });
+          });
+        });
+      }, 220);
+    }
+
+    // initialise ring
+    setScore('human');
+
+    // mode toggle
+    document.querySelectorAll('.mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('active')) return;
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        setScore(btn.dataset.mode);
+      });
+    });
+
+    // ── HOW IT WORKS OVERLAY ──
+    const howData = {
+      human: {
+        score: 76, title: 'Room to Amplify', mode: 'Human Mode',
+        pins: [
+          { top: '14%', left: '7%',  label: 'Headline could be sharper',    sev: 'warn'   },
+          { top: '5%',  left: '58%', label: 'Nav links not descriptive',     sev: 'warn'   },
+          { top: '33%', left: '7%',  label: 'No social proof above fold',    sev: 'danger' },
+          { top: '44%', left: '7%',  label: 'CTA copy lacks urgency',        sev: 'warn'   },
+          { top: '22%', left: '60%', label: 'Hero clashes with site palette',  sev: 'warn'   },
+          { top: '75%', left: '6%',  label: 'Portfolio quality: solid',      sev: 'good'   },
+          { top: '77%', left: '38%', label: 'Missing testimonials',          sev: 'danger' },
+        ],
+        bars: [
+          { label: 'First Impressions', val: 88, cls: 'good'   },
+          { label: 'Trust Signals',     val: 54, cls: 'warn'   },
+          { label: 'Service Clarity',   val: 38, cls: 'danger' },
+        ]
+      },
+      ai: {
+        score: 52, title: 'Needs Attention', mode: 'AI Mode',
+        pins: [
+          { top: '14%', left: '7%',  label: 'H1 missing schema markup',     sev: 'danger' },
+          { top: '5%',  left: '50%', label: 'Entity type undefined',         sev: 'danger' },
+          { top: '27%', left: '7%',  label: 'Thin content detected',         sev: 'warn'   },
+          { top: '44%', left: '7%',  label: 'No FAQ structured data',        sev: 'danger' },
+          { top: '22%', left: '60%', label: 'No breadcrumb schema',          sev: 'warn'   },
+          { top: '75%', left: '6%',  label: 'Content freshness: stale',      sev: 'warn'   },
+          { top: '77%', left: '38%', label: 'AEO readiness: 48 / 100',       sev: 'danger' },
+        ],
+        bars: [
+          { label: 'Technical Perf.',   val: 74, cls: 'warn'   },
+          { label: 'AEO Readiness',     val: 48, cls: 'warn'   },
+          { label: 'Schema Data',       val: 29, cls: 'danger' },
+        ]
+      }
+    };
+
+    function scoreColorHex(val) {
+      const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      if (val >= 80) return dark ? '#4ade80' : '#15803d';
+      if (val >= 50) return dark ? '#fbbf24' : '#f59e0b';
+      return dark ? '#f87171' : '#ef4444';
+    }
+
+    function renderHowMode(mode) {
+      const d = howData[mode];
+      const pinsEl = document.getElementById('howPins');
+
+      // Fade out existing pins
+      pinsEl.querySelectorAll('.pin').forEach(p => p.classList.remove('visible'));
+
+      setTimeout(() => {
+        // Rebuild pins
+        pinsEl.innerHTML = d.pins.map((p, i) => `
+          <div class="pin" style="top:${p.top};left:${p.left};transition-delay:${i * 60}ms">
+            <div class="pin-dot ${p.sev}"></div>
+            <div class="pin-label ${p.sev}">${p.label}</div>
+          </div>
+        `).join('');
+
+        // Trigger fade-in
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            pinsEl.querySelectorAll('.pin').forEach(p => p.classList.add('visible'));
+          });
+        });
+
+        // Update panel
+        document.getElementById('overlayPanelMode').textContent  = d.mode;
+        document.getElementById('overlayPanelTitle').textContent = d.title;
+        document.getElementById('overlayImproveBtn').textContent = mode === 'human' ? 'Improve for Humans' : 'Improve for AI';
+        const numEl = document.getElementById('overlayPanelNum');
+        numEl.textContent  = d.score;
+        numEl.style.color  = scoreColorHex(d.score);
+
+        // Mini bars
+        const barsEl = document.getElementById('overlayMiniBars');
+        barsEl.innerHTML = d.bars.map(b => `
+          <div class="overlay-mini-row">
+            <div class="overlay-mini-track">
+              <div class="overlay-mini-fill ${b.cls}" style="width:0%"></div>
+            </div>
+            <span class="overlay-mini-val ${b.cls}">${b.val}</span>
+          </div>
+        `).join('');
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            barsEl.querySelectorAll('.overlay-mini-fill').forEach((bar, i) => {
+              bar.style.width = d.bars[i].val + '%';
+              bar.style.background = scoreColorHex(d.bars[i].val);
+            });
+          });
+        });
+      }, 220);
+    }
+
+    // Init
+    renderHowMode('human');
+
+    // Toggle
+    document.querySelectorAll('.how-mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('active')) return;
+        document.querySelectorAll('.how-mode-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderHowMode(btn.dataset.howMode);
+      });
+    });
+
+
+    // Connected sites dropdown
+    const connectedPane = document.getElementById('connectedPane');
+
+    connectedPane.addEventListener('click', (e) => {
+      connectedPane.classList.toggle('open');
+      e.stopPropagation();
+    });
+
+    document.addEventListener('click', () => {
+      connectedPane.classList.remove('open');
+    });
+
+    document.querySelectorAll('.dropdown-item').forEach(item => {
+      item.addEventListener('click', (e) => {
+        const url = item.dataset.url;
+        document.getElementById('heroUrlInput').value = 'https://' + url;
+        document.getElementById('connectedPlaceholder').textContent = url;
+        connectedPane.classList.remove('open');
+        e.stopPropagation();
+      });
+    });
+  </script>
+
+</body>
+</html>
