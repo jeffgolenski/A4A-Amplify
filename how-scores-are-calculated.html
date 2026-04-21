@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Scores Are Calculated · Amplify by Automattic for Agencies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ── SOURCE SERIF 4 ── */
+    @font-face { font-family: 'SourceSerif4'; font-weight: 300; font-style: normal; src: url('SourceSerif4-Light.ttf') format('truetype'); }
+    @font-face { font-family: 'SourceSerif4'; font-weight: 300; font-style: italic; src: url('SourceSerif4-LightItalic.ttf') format('truetype'); }
+    @font-face { font-family: 'SourceSerif4'; font-weight: 400; font-style: normal; src: url('SourceSerif4-Regular.ttf') format('truetype'); }
+    @font-face { font-family: 'SourceSerif4'; font-weight: 400; font-style: italic; src: url('SourceSerif4-Italic.ttf') format('truetype'); }
+    @font-face { font-family: 'SourceSerif4'; font-weight: 500; font-style: normal; src: url('SourceSerif4-Medium.ttf') format('truetype'); }
+    @font-face { font-family: 'SourceSerif4'; font-weight: 600; font-style: normal; src: url('SourceSerif4-SemiBold.ttf') format('truetype'); }
+
+    /* ── KNOCKOUT ── */
+    @font-face { font-family: 'Knockout'; font-weight: 300; src: url('font.woff2') format('woff2'); }
+    @font-face { font-family: 'Knockout'; font-weight: 400; src: url('font-19573626.woff2') format('woff2'); }
+    @font-face { font-family: 'Knockout'; font-weight: 500; src: url('font-01695a8a.woff2') format('woff2'); }
+    @font-face { font-family: 'Knockout'; font-weight: 600; src: url('font-2843a1c5.woff2') format('woff2'); }
+    @font-face { font-family: 'Knockout'; font-weight: 700; src: url('font-0e6790ed.woff2') format('woff2'); }
+
+    /* ── TOKENS ── */
+    :root {
+      --bg:          #ffffff;
+      --bg-subtle:   #f5f5f5;
+      --bg-card:     #f0f0f0;
+      --border:      #e2e2e2;
+      --border-mid:  #cccccc;
+      --text:        #0a0a0a;
+      --text-mid:    #3a3a3a;
+      --text-muted:  #767676;
+      --text-faint:  #b0b0b0;
+      --blue:        #0047ff;
+      --blue-hover:  #0038cc;
+      --blue-faint:  rgba(0,71,255,0.08);
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+      /* a11y-safe label color: #555 on white = 7.3:1 contrast */
+      --label-color: #555555;
+    }
+
+    [data-theme="dark"] {
+      --bg:          #0a0a0a;
+      --bg-subtle:   #111111;
+      --bg-card:     #181818;
+      --border:      #242424;
+      --border-mid:  #333333;
+      --text:        #ffffff;
+      --text-mid:    #d4d4d4;
+      --text-muted:  #7a7a7a;
+      --text-faint:  #454545;
+      --blue:        #4f7cff;
+      --blue-hover:  #6b93ff;
+      --blue-faint:  rgba(79,124,255,0.12);
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.4), 0 4px 20px rgba(0,0,0,0.3);
+      /* a11y-safe label color: #909090 on #0a0a0a = 6.3:1 contrast */
+      --label-color: #909090;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 30px; height: 56px;
+      background: var(--bg);
+      transition: background 0.25s;
+    }
+    .nav-left { display: flex; align-items: center; gap: 32px; }
+    .nav-wordmark { display: flex; align-items: baseline; gap: 7px; text-decoration: none; white-space: nowrap; line-height: 1; }
+    .nav-wordmark-title { font-family: 'Nunito', sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -0.4px; color: var(--text); line-height: 1; }
+    .nav-wordmark-sub { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 400; font-style: italic; color: var(--text-muted); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .btn-nav-ghost {
+      font-size: 14px; font-weight: 500; color: var(--text-muted);
+      background: transparent; border: 1px solid var(--border); border-radius: 6px;
+      padding: 8px 18px; cursor: pointer; text-decoration: none;
+      transition: color 0.15s, border-color 0.15s; font-family: inherit;
+    }
+    .btn-nav-ghost:hover { color: var(--text); border-color: var(--border-mid); }
+    .btn-nav-primary {
+      font-size: 14px; font-weight: 600; color: #fff;
+      background: var(--blue); border: none; border-radius: 6px;
+      padding: 8px 18px; cursor: pointer; text-decoration: none;
+      transition: background 0.15s; font-family: inherit; white-space: nowrap;
+    }
+    .btn-nav-primary:hover { background: var(--blue-hover); }
+    .theme-toggle {
+      width: 32px; height: 32px; border-radius: 6px;
+      border: 1px solid var(--border); background: transparent;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 15px;
+      transition: background 0.15s, border-color 0.15s; flex-shrink: 0;
+    }
+    .theme-toggle:hover { background: var(--bg-subtle); border-color: var(--border-mid); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 80px 30px 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-header-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 20px; display: block;
+    }
+    .page-header h1 {
+      font-family: 'SourceSerif4', Georgia, serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400; line-height: 1.12;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .page-header-sub {
+      font-size: 18px; line-height: 1.65;
+      color: var(--text-mid); max-width: 680px;
+    }
+
+    /* ── MODE TABS ── */
+    .mode-tabs-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 30px 0;
+    }
+    .mode-tabs {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .mode-tab {
+      font-size: 13px; font-weight: 600;
+      padding: 9px 22px; cursor: pointer;
+      border: none; background: transparent;
+      color: var(--text-muted);
+      font-family: inherit;
+      transition: background 0.15s, color 0.15s;
+    }
+    .mode-tab.active { background: var(--blue); color: #fff; }
+    .mode-tab:not(.active):hover { background: var(--bg-subtle); color: var(--text); }
+
+    /* ── CONTENT AREA ── */
+    .scores-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 30px 100px;
+    }
+    .mode-panel { display: none; }
+    .mode-panel.active { display: block; }
+
+    /* ── INTRO NOTE ── */
+    .mode-intro {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 48px;
+      padding: 16px 20px;
+      background: var(--bg-subtle);
+      border-radius: 8px;
+      border-left: 3px solid var(--blue);
+    }
+
+    /* ── CRITERION CARD ── */
+    .criterion {
+      margin-bottom: 56px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid var(--border);
+    }
+    .criterion:last-of-type { border-bottom: none; }
+
+    .criterion-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .criterion-num {
+      font-family: 'Knockout', Impact, sans-serif;
+      font-weight: 700;
+      font-size: 52px;
+      line-height: 1;
+      color: var(--text-faint);
+      flex-shrink: 0;
+      min-width: 48px;
+      padding-top: 4px;
+    }
+
+    .criterion-title {
+      font-family: 'Knockout', Impact, sans-serif;
+      font-weight: 600;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .criterion-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 620px;
+    }
+
+    /* ── SECTION LABEL (a11y-safe contrast) ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--label-color);
+      margin-bottom: 14px;
+    }
+
+    /* ── SIGNAL LIST ── */
+    .signals-section { margin-bottom: 28px; }
+
+    .signal-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Grid layout: fixed badge column, fluid text column */
+    .signal-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .signal-badge-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: flex-start;
+    }
+
+    .signal-text {
+      font-size: 14px;
+      color: var(--text-mid);
+      line-height: 1.55;
+      padding-top: 2px;
+    }
+
+    .signal-text strong { color: var(--text); font-weight: 600; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .badge-prog {
+      background: rgba(0,71,255,0.09);
+      color: #003acc;
+    }
+    [data-theme="dark"] .badge-prog {
+      background: rgba(79,124,255,0.15);
+      color: #7da4ff;
+    }
+
+    .badge-ai {
+      background: rgba(109,40,217,0.10);
+      color: #5b21b6;
+    }
+    [data-theme="dark"] .badge-ai {
+      background: rgba(167,139,250,0.14);
+      color: #c4b5fd;
+    }
+
+    .badge-salt {
+      background: rgba(180,83,9,0.08);
+      color: #92400e;
+    }
+    [data-theme="dark"] .badge-salt {
+      background: rgba(251,191,36,0.1);
+      color: #fbbf24;
+    }
+
+    .badge-phase2 {
+      background: var(--bg-card);
+      color: var(--text-muted);
+    }
+
+    /* ── STATS ROW ── */
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .stat-chip {
+      font-size: 13px;
+      color: var(--text-mid);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 7px 12px;
+      line-height: 1.45;
+      max-width: 280px;
+    }
+
+    .stat-chip strong { color: var(--text); font-weight: 600; }
+
+    /* ── SOURCES ── */
+    .sources-section {
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .source-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .source-list a {
+      font-size: 12px;
+      color: var(--blue);
+      text-decoration: none;
+      background: var(--blue-faint);
+      padding: 4px 10px;
+      border-radius: 4px;
+      transition: opacity 0.15s;
+    }
+    .source-list a:hover { opacity: 0.75; }
+
+    /* ── GRAIN OF SALT NOTE ── */
+    .grain-note {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+      background: rgba(180,83,9,0.05);
+      border: 1px solid rgba(180,83,9,0.18);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    [data-theme="dark"] .grain-note {
+      background: rgba(251,191,36,0.05);
+      border-color: rgba(251,191,36,0.15);
+    }
+    .grain-note-icon { font-size: 15px; flex-shrink: 0; line-height: 1.5; }
+
+    /* ── WCAG REF ── */
+    .wcag-ref {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-left: 4px;
+    }
+
+    /* ── AI MODE PLACEHOLDER ── */
+    .coming-soon {
+      text-align: center;
+      padding: 80px 30px;
+      color: var(--text-muted);
+    }
+    .coming-soon-icon { font-size: 40px; margin-bottom: 20px; }
+    .coming-soon h3 {
+      font-family: 'Knockout', Impact, sans-serif;
+      font-weight: 600; font-size: 22px;
+      letter-spacing: 0.5px; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 12px;
+    }
+    .coming-soon p { font-size: 15px; max-width: 440px; margin: 0 auto; line-height: 1.65; }
+
+    /* ── DISCLAIMER ── */
+    .disclaimer-section {
+      max-width: 960px;
+      margin: 0 auto 80px;
+      padding: 0 30px;
+    }
+    .disclaimer-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+    .disclaimer-card h3 {
+      font-family: 'Knockout', Impact, sans-serif;
+      font-weight: 600; font-size: 16px;
+      letter-spacing: 0.8px; text-transform: uppercase;
+      color: var(--text); margin-bottom: 12px;
+    }
+    .disclaimer-card p {
+      font-size: 13px; color: var(--text-muted);
+      line-height: 1.7; margin-bottom: 8px;
+    }
+    .disclaimer-card p:last-of-type { margin-bottom: 0; }
+    .disclaimer-links { display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
+    .disclaimer-links a { font-size: 13px; color: var(--blue); text-decoration: none; }
+    .disclaimer-links a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+      padding: 28px 30px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-brand { font-size: 13px; font-weight: 600; color: var(--text-mid); }
+    .footer-copy { font-size: 12px; color: var(--text-muted); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 12px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .page-header { padding: 56px 20px 48px; }
+      .mode-tabs-wrap { padding: 24px 20px 0; }
+      .scores-content { padding: 40px 20px 80px; }
+      .criterion-header { flex-direction: column; gap: 8px; }
+      .criterion-num { font-size: 36px; }
+      .signal-item { grid-template-columns: 110px 1fr; }
+      .stats-row { flex-direction: column; }
+      .stat-chip { max-width: 100%; }
+      footer { flex-direction: column; align-items: flex-start; padding: 24px 20px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <a href="amplify.html" class="nav-wordmark">
+        <span class="nav-wordmark-title">Amplify</span>
+        <span class="nav-wordmark-sub">by Automattic for Agencies</span>
+      </a>
+    </div>
+    <div class="nav-right">
+      <a href="amplify.html" class="btn-nav-ghost">Back to Amplify</a>
+      <a href="amplify.html#audit" class="btn-nav-primary">Amplify a site</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☾</button>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <span class="page-header-eyebrow">Methodology</span>
+    <h1>How scores are calculated</h1>
+    <p class="page-header-sub">Every score Amplify produces is grounded in established research, published standards, and real conversion data. Here is what we measure, how we measure it, and the sources behind each signal.</p>
+  </div>
+
+  <!-- MODE TABS -->
+  <div class="mode-tabs-wrap">
+    <div class="mode-tabs">
+      <button class="mode-tab active" onclick="switchMode('human', this)">Human Mode</button>
+      <button class="mode-tab" onclick="switchMode('ai', this)">AI Mode</button>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="scores-content">
+
+    <!-- HUMAN MODE PANEL -->
+    <div class="mode-panel active" id="panel-human">
+
+      <p class="mode-intro">Human Mode evaluates your site the way a potential client does, forming impressions in seconds, scanning for trust signals, and deciding whether you are worth reaching out to. The eight criteria below reflect the dimensions that research consistently shows influence whether a visitor becomes an enquiry.</p>
+
+      <!-- 01 AUDIENCE RESONANCE -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">01</span>
+          <div>
+            <div class="criterion-title">Audience Resonance</div>
+            <p class="criterion-desc">Does this site feel made for the right client? Within seconds of landing, a potential client should feel like the site is speaking directly to them.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip">First impressions form in as little as <strong>50 milliseconds</strong></div>
+          <div class="stat-chip">Users give a homepage <strong>3 to 5 seconds</strong> to earn trust</div>
+          <div class="stat-chip"><strong>75%</strong> of consumers judge credibility based on website design alone</div>
+          <div class="stat-chip">Specific, targeted messaging converts <strong>202% better</strong> than generic copy</div>
+          <div class="stat-chip">Only <strong>13%</strong> of customers feel brands truly understand their needs</div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>5-second clarity test:</strong> can an AI reading the homepage answer what this agency does, who they serve, and why a client should care?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Audience specificity:</strong> does the copy call out a specific type of client, industry, or pain point rather than speaking to everyone?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Pain point language:</strong> does the homepage reflect the actual problems potential clients have, in the words they would use?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Generic claim detection:</strong> hollow buzzwords ("results-driven," "passionate," "full-service") with no supporting specifics lower the score.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Hero headline clarity:</strong> does the H1 communicate the value proposition immediately, or is it vague?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Above-fold content presence:</strong> is there meaningful text above the fold, or only a full-screen image or video with no copy?</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://www.tandfonline.com/doi/abs/10.1080/01449290500330448" target="_blank">50ms First Impression Study (Behaviour &amp; Information Technology)</a></li>
+            <li><a href="https://www.nngroup.com/articles/first-impressions-human-automaticity/" target="_blank">First Impressions (Nielsen Norman Group)</a></li>
+            <li><a href="https://www.looppanel.com/blog/five-second-testing" target="_blank">Five-Second Testing (Looppanel)</a></li>
+            <li><a href="https://www.trajectorywebdesign.com/blog/b2b-website-messaging" target="_blank">B2B Website Messaging Framework (Trajectory)</a></li>
+            <li><a href="https://blog.hubspot.com/marketing/personalized-calls-to-action-convert-better-data" target="_blank">Personalized CTAs Convert 202% Better (HubSpot)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 02 CONTENT QUALITY -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">02</span>
+          <div>
+            <div class="criterion-title">Content Quality</div>
+            <p class="criterion-desc">Is the writing compelling, clear, and professional? Errors and poor readability erode trust before a client has read a single sentence.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip"><strong>97.2%</strong> of people say grammar influences their perception of a company</div>
+          <div class="stat-chip">Pages with spelling or grammar errors have <strong>85% higher bounce rates</strong></div>
+          <div class="stat-chip"><strong>59%</strong> of consumers are less likely to trust a brand with copy errors</div>
+          <div class="stat-chip">Ideal Flesch Reading Ease score for web content: <strong>60 to 70</strong> (8th to 9th grade level)</div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Flesch Reading Ease score</strong> calculated from extracted page text. A score of 60 to 70 is the target. Below 50 is flagged.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Sentence and paragraph length:</strong> a proxy for scannability. Long unbroken walls of text score lower.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Content volume:</strong> is there enough copy for a reader to understand what this agency does, or is the page mostly images?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Heading and subheading usage:</strong> does the page use H2s and H3s to break up content, or is it one uninterrupted block?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Grammar and spelling:</strong> AI reads the page copy and flags visible errors.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Passive voice density:</strong> excessive passive voice weakens authority and clarity.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Buzzword and jargon density:</strong> overlaps with Audience Resonance but scores how the copy reads, not who it speaks to.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Clarity per section:</strong> does each section say something meaningful, or is it filler?</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://www.researchgate.net/publication/318086625_Article_Recall_Credibility_Lower_with_Grammar_Errors" target="_blank">Grammar Errors Lower Credibility (ResearchGate)</a></li>
+            <li><a href="https://www.websitesuccess.co.uk/blog/what-do-typos-cost-you" target="_blank">Typos, SEO and Conversions (Website Success)</a></li>
+            <li><a href="https://yoast.com/flesch-reading-ease-score/" target="_blank">Flesch Reading Ease Score (Yoast)</a></li>
+            <li><a href="https://readable.com/readability/flesch-reading-ease-flesch-kincaid-grade-level/" target="_blank">Flesch Kincaid Grade Level (Readable)</a></li>
+            <li><a href="https://vwo.com/blog/website-copy-readability/" target="_blank">Website Readability (VWO)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 03 DESIGN & EXPERIENCE -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">03</span>
+          <div>
+            <div class="criterion-title">Design &amp; Experience</div>
+            <p class="criterion-desc">Does the site look credible and feel effortless to use? All signals in this criterion are grounded in the Laws of UX, a framework of established psychological and behavioral principles applied to interface design.</p>
+          </div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured via DOM analysis</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Hick's Law:</strong> decision time increases with the number of choices. Nav item count, visible CTAs, and form fields are checked. Menus exceeding seven items are flagged.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Miller's Law:</strong> working memory holds approximately seven items. Elements competing for attention in key zones (nav, hero, footer) are counted and flagged when excessive.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Fitts's Law:</strong> CTA button dimensions, touch target sizes, and spacing between clickable elements. Small or crowded targets score lower. This signal also feeds the Mobile Experience score.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col">
+                <span class="badge badge-prog">Programmatic</span>
+                <span class="badge badge-salt">Context-dependent</span>
+              </div>
+              <div class="signal-text"><strong>Jakob's Law:</strong> users expect sites to work like other sites. Standard pattern conformance is checked: logo placement, nav position, primary CTA, footer links.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Serial Position Effect:</strong> the first and last items in a series are best remembered. Key content placement in nav, hero, and page structure is evaluated.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="grain-note">
+          <span class="grain-note-icon">⚠️</span>
+          <span><strong>Jakob's Law is context-dependent.</strong> Agencies with intentionally non-standard designs should not be penalized the same as those with oversight-driven deviations. Use this signal as a directional indicator, not a verdict.</span>
+        </div>
+
+        <div class="signals-section" style="margin-top:24px;">
+          <div class="section-label">Signals measured via AI visual analysis</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Aesthetic-Usability Effect:</strong> beautiful design is perceived as more usable. Overall visual polish scored from a screenshot.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Von Restorff Effect:</strong> the element that stands out gets remembered. Does the primary CTA visually differentiate from everything around it?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col">
+                <span class="badge badge-ai">AI</span>
+                <span class="badge badge-salt">Context-dependent</span>
+              </div>
+              <div class="signal-text"><strong>Peak-End Rule:</strong> people judge an experience by its most intense moment and its ending. The hero (peak) and final CTA or footer (end) are evaluated.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Gestalt Laws</strong> (Proximity, Common Region, Similarity, Uniform Connectedness, Prägnanz): are related elements grouped? Is the layout clean or cluttered? Scored as one composite signal.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="grain-note">
+          <span class="grain-note-icon">⚠️</span>
+          <span><strong>Peak-End Rule is context-dependent.</strong> This signal assumes the hero is the site's strongest moment, which is not always the case. Use the score directionally and consider what your actual peak moment is.</span>
+        </div>
+
+        <div class="sources-section" style="margin-top:20px;">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://lawsofux.com/" target="_blank">Laws of UX (lawsofux.com)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 04 TRUST SIGNALS -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">04</span>
+          <div>
+            <div class="criterion-title">Trust Signals</div>
+            <p class="criterion-desc">Does this site give a potential client enough evidence to feel safe handing over a project? All signals are evaluated on the homepage only. A link to a dedicated page counts as sufficient evidence.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip"><strong>72%</strong> of consumers find testimonials more credible than brand claims</div>
+          <div class="stat-chip">Testimonials drive a <strong>34% increase</strong> in conversions on sales pages</div>
+          <div class="stat-chip"><strong>97%</strong> of consumers say reviews impact their purchasing decisions</div>
+          <div class="stat-chip">5 or more reviews makes a service <strong>270% more likely to convert</strong></div>
+          <div class="stat-chip">Above-fold award placement outperforms footer placement by <strong>40 to 60%</strong> in A/B tests</div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Testimonials:</strong> present on or linked from the homepage. Attributed testimonials (name, company, photo) score higher than anonymous ones.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Case studies:</strong> link or reference to case study content. Quality signal: presence of quantified outcomes (problem, solution, result with numbers).</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Client logos:</strong> any client logos present on the homepage.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Results and metrics:</strong> any quantified outcomes mentioned on the homepage ("increased conversions by 40%").</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Social proof volume:</strong> existence of reviews or ratings. Five or more is a meaningful threshold per research.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Awards and recognition:</strong> any awards present. Placement is also scored: above-fold visibility is rated higher than footer placement.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Team or About page:</strong> a homepage link or blurb counts as sufficient. Real people with names and faces signal legitimacy.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Years in business or client count:</strong> any mention on the homepage counts.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://boast.io/20-statistics-about-using-testimonials-in-marketing/" target="_blank">Testimonial Statistics (Boast)</a></li>
+            <li><a href="https://optinmonster.com/social-proof-statistics/" target="_blank">Social Proof Statistics (OptinMonster)</a></li>
+            <li><a href="https://wisernotify.com/blog/social-proof-statistics/" target="_blank">33 Social Proof Statistics (WiserNotify)</a></li>
+            <li><a href="https://digitalagencynetwork.com/master-case-studies-to-attract-more-clients-quick-guide-for-digital-agencies/" target="_blank">Agency Case Study Guide (Digital Agency Network)</a></li>
+            <li><a href="https://instapage.com/blog/digital-agency-case-studies" target="_blank">Agency Case Studies (Instapage)</a></li>
+            <li><a href="https://emplicit.co/how-to-use-trust-badges-for-higher-conversions/" target="_blank">Trust Badge Placement (Emplicit)</a></li>
+            <li><a href="https://hashmeta.com/blog/why-trust-blocks-increase-conversions-significantly-the-psychology-and-data-behind-digital-trust-signals/" target="_blank">Trust Blocks and Conversions (Hashmeta)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 05 MOBILE EXPERIENCE -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">05</span>
+          <div>
+            <div class="criterion-title">Mobile Experience</div>
+            <p class="criterion-desc">A first impression increasingly happens on a phone. Does the site hold up when a potential client pulls it up on their device?</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip">Mobile accounts for <strong>62 to 64%</strong> of global web traffic as of 2026</div>
+          <div class="stat-chip">Google minimum touch target: <strong>48x48px</strong> with 8px spacing</div>
+          <div class="stat-chip">Minimum body font size: <strong>16px.</strong> Below this, iOS Safari auto-zooms.</div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured via DOM analysis</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Viewport meta tag:</strong> <code>width=device-width, initial-scale=1</code> must be present. Without it, the page renders at desktop width and scales down.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Font size:</strong> body text must meet the 16px minimum. Below this threshold, iOS auto-zooms on form fields.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Touch targets:</strong> minimum 48x48px with 8px spacing per Google guidelines. This signal also feeds the Design and Experience score via Fitts's Law.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Horizontal overflow:</strong> any content that bleeds beyond the viewport width and causes horizontal scrolling is flagged.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Responsive breakpoints:</strong> does the CSS include mobile media queries at all?</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured via AI visual analysis</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Navigation usability:</strong> does the desktop nav collapse into something usable on mobile (hamburger menu, drawer, etc.)?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Content legibility:</strong> does the layout hold up at mobile viewport, or do elements overlap and stack awkwardly?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Intrusive interstitials:</strong> pop-ups or overlays that cover content on mobile. This signal also feeds the SEO score, as Google penalizes intrusive interstitials.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://gs.statcounter.com/platform-market-share/desktop-mobile/worldwide/" target="_blank">Mobile Market Share (StatCounter)</a></li>
+            <li><a href="https://www.mobiloud.com/blog/what-percentage-of-internet-traffic-is-mobile" target="_blank">Mobile Traffic Percentage (MobiLoud)</a></li>
+            <li><a href="https://blog.mobileviewer.io/blog/touch-target-size/" target="_blank">Touch Target Size, Google Guidelines</a></li>
+            <li><a href="https://fontfyi.com/blog/mobile-typography-accessibility/" target="_blank">Mobile Font Size Standards (FontFYI)</a></li>
+            <li><a href="https://digital.gov/guides/mobile-principles/tap-targets" target="_blank">Size fonts and tap targets (Digital.gov)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 06 SEO -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">06</span>
+          <div>
+            <div class="criterion-title">SEO</div>
+            <p class="criterion-desc">Can a potential client find this agency when they search? All SEO signals are sourced directly from Google Search Central documentation.</p>
+          </div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured via DOM analysis</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Title tag:</strong> present, unique, under 60 characters, and keyword-relevant.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Meta description:</strong> present and under 160 characters.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>H1 and heading hierarchy:</strong> one H1 present, logical H1 to H2 to H3 structure. Also feeds the Accessibility score.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Image alt text:</strong> meaningful images have descriptive alt attributes. Also feeds the Accessibility score.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Canonical tag:</strong> self-referencing canonical present.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>robots.txt and noindex:</strong> the page is not accidentally blocking crawlers.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Structured data:</strong> any schema markup present on the homepage. This signal also feeds the AI Mode score.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Intrusive interstitials:</strong> Google penalizes these on mobile. This signal also feeds the Mobile Experience score.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured via AI content analysis</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Keyword relevance:</strong> does the page content reflect what the agency actually does, in language clients would search for?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Thin content:</strong> is there enough substance for Google to understand what this page is about?</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank">SEO Starter Guide (Google Search Central)</a></li>
+            <li><a href="https://developers.google.com/search/docs/appearance/title-link" target="_blank">Title Links (Google Search Central)</a></li>
+            <li><a href="https://developers.google.com/search/docs/appearance/snippet" target="_blank">Meta Descriptions (Google Search Central)</a></li>
+            <li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" target="_blank">Canonical URLs (Google Search Central)</a></li>
+            <li><a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro" target="_blank">robots.txt Guide (Google Search Central)</a></li>
+            <li><a href="https://developers.google.com/search/docs/crawling-indexing/block-indexing" target="_blank">Noindex (Google Search Central)</a></li>
+            <li><a href="https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing" target="_blank">Mobile-first Indexing (Google Search Central)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 07 ACCESSIBILITY -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">07</span>
+          <div>
+            <div class="criterion-title">Accessibility</div>
+            <p class="criterion-desc">Does the site work for everyone, regardless of how they experience the web? Amplify measures against the WCAG AA conformance level, the widely accepted standard referenced by courts and regulators globally.</p>
+          </div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured via DOM analysis</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Image alt text</strong> <span class="wcag-ref">WCAG 1.1.1</span>: all meaningful images have descriptive alt attributes. Also feeds SEO.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Color contrast ratio</strong> <span class="wcag-ref">WCAG 1.4.3</span>: minimum 4.5:1 for normal text, 3:1 for large text.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Form labels</strong> <span class="wcag-ref">WCAG 1.3.1</span>: all input fields have associated labels.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Language attribute</strong> <span class="wcag-ref">WCAG 3.1.1</span>: <code>&lt;html lang=""&gt;</code> present so screen readers identify the language.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Skip navigation link</strong> <span class="wcag-ref">WCAG 2.4.1</span>: allows keyboard users to skip past repeated nav.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>No auto-playing media</strong> <span class="wcag-ref">WCAG 1.4.2</span>: audio or video that plays without user action.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Heading structure</strong> <span class="wcag-ref">WCAG 1.3.1</span>: logical, non-skipping hierarchy. Also feeds SEO.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured via AI visual analysis</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Focus indicators</strong> <span class="wcag-ref">WCAG 2.4.7</span>: are interactive elements visually distinguishable when focused?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-phase2">Phase 2</span></div>
+              <div class="signal-text"><strong>Keyboard navigability:</strong> full keyboard-only navigation testing requires interaction and will be added in a future release.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank">WCAG, Web Content Accessibility Guidelines (W3C)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 08 CONTACT & CONVERSION -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">08</span>
+          <div>
+            <div class="criterion-title">Contact &amp; Conversion</div>
+            <p class="criterion-desc">A potential client has made it through the site and is ready to reach out. Does the site make that easy, or does it create friction at the worst possible moment?</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip">Reducing a form from 11 to 4 fields increases conversions by <strong>120%</strong></div>
+          <div class="stat-chip">Action-oriented CTAs convert <strong>121% more</strong> than passive ones ("Learn More," "Submit")</div>
+          <div class="stat-chip">First-person CTA phrasing boosts click-through by <strong>90%</strong></div>
+          <div class="stat-chip">Above-fold CTAs outperform below-fold by <strong>304%</strong></div>
+          <div class="stat-chip">Personalized CTAs convert <strong>202% better</strong> than generic defaults</div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured via DOM analysis</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Contact information present:</strong> email address, phone number, or contact form visible on or linked from the homepage.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>CTA above the fold:</strong> at least one clear call-to-action is visible without scrolling.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>CTA repetition:</strong> does a CTA also appear near the bottom of the page? Ties back to the Peak-End Rule in Design and Experience.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col">
+                <span class="badge badge-prog">Programmatic</span>
+                <span class="badge badge-salt">Context-dependent</span>
+              </div>
+              <div class="signal-text"><strong>Form field count:</strong> fewer fields generally reduces friction. The research threshold is 4 or fewer for maximum conversion, but project inquiry forms reasonably require more context.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="grain-note">
+          <span class="grain-note-icon">⚠️</span>
+          <span><strong>Form field count is context-dependent.</strong> Fewer fields is not always better. A client requesting a project estimate expects to provide more detail than a newsletter subscriber. Use this signal directionally.</span>
+        </div>
+
+        <div class="signals-section" style="margin-top:24px;">
+          <div class="section-label">Signals measured via AI analysis</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>CTA clarity:</strong> is it obvious what happens when you click? Vague CTAs ("Learn more") score lower than action-oriented ones ("Start your project").</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Response time promise:</strong> does the site mention how quickly they respond? Any commitment ("we'll get back to you within 24 hours") reduces friction.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Friction language near CTAs:</strong> does anything adjacent to the CTA create hesitation? Requiring account creation before contact, or no privacy reassurance near a form, will lower the score.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://ventureharbour.com/how-form-length-impacts-conversion-rates/" target="_blank">Form Length and Conversion Rates (Venture Harbour)</a></li>
+            <li><a href="https://www.imagescape.com/media/filer_public/06/94/0694c7f4-8914-4598-8871-b857fbc12737/form_case_study.pdf" target="_blank">Form Field Case Study (Imagescape)</a></li>
+            <li><a href="https://wisernotify.com/blog/call-to-action-stats/" target="_blank">CTA Statistics 2026 (WiserNotify)</a></li>
+            <li><a href="https://blog.hubspot.com/marketing/personalized-calls-to-action-convert-better-data" target="_blank">Personalized CTAs (HubSpot)</a></li>
+            <li><a href="https://avintivmedia.com/blog/cta-placement-strategies-that-work/" target="_blank">CTA Placement Strategies (Avintiv)</a></li>
+            <li><a href="https://unbounce.com/conversion-rate-optimization/landing-page-cta-placement/" target="_blank">Best CTA Placement (Unbounce)</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div><!-- /panel-human -->
+
+    <!-- AI MODE PANEL -->
+    <div class="mode-panel" id="panel-ai">
+      <div class="coming-soon">
+        <div class="coming-soon-icon">⚙️</div>
+        <h3>AI Mode documentation coming soon</h3>
+        <p>AI Mode criteria are currently being finalized. This section will document how Technical Performance, Content Specificity, Crawl Health, Content Freshness, AEO Readiness, Entity Clarity, and Schema Data are measured.</p>
+      </div>
+    </div>
+
+  </div><!-- /scores-content -->
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer-section">
+    <div class="disclaimer-card">
+      <h3>Important notice</h3>
+      <p>Amplify scores are directional indicators grounded in established research and the collective expertise of Automattic. They are not definitive verdicts. A score reflects a point-in-time audit of your homepage and may not account for all site-specific context, audience nuances, or intentional design decisions.</p>
+      <p>Modifying your website based on Amplify recommendations is done at your own discretion and risk. Amplify does not guarantee specific outcomes as a result of acting on its recommendations. This includes changes to traffic, conversion rates, search rankings, or client enquiries.</p>
+      <p>Some signals in this tool are generated through AI analysis. These scores carry a higher degree of interpretive variance than programmatic checks and should be treated accordingly.</p>
+      <div class="disclaimer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Automattic for Agencies Program</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">Amplify · Automattic for Agencies</span>
+    <span class="footer-copy">© 2026 Automattic Inc.</span>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="#">Automattic for Agencies Program</a>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    const toggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+    const stored = localStorage.getItem('amplify-theme') || 'light';
+    html.setAttribute('data-theme', stored);
+    toggle.textContent = stored === 'dark' ? '☀' : '☾';
+    toggle.addEventListener('click', () => {
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      toggle.textContent = next === 'dark' ? '☀' : '☾';
+      localStorage.setItem('amplify-theme', next);
+    });
+
+    // Mode tabs
+    function switchMode(mode, btn) {
+      document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.mode-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + mode).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
