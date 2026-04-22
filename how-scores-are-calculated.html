@@ -234,21 +234,6 @@
     /* ── SIGNAL LIST ── */
     .signals-section { margin-bottom: 28px; }
 
-    .signal-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    /* Grid layout: fixed badge column, fluid text column */
-    .signal-item {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 12px;
-      align-items: start;
-    }
-
     .signal-badge-col {
       display: flex;
       flex-direction: column;
@@ -311,24 +296,44 @@
 
     /* ── STATS ROW ── */
     .stats-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 32px;
     }
 
     .stat-chip {
       font-size: 13px;
-      color: var(--text-mid);
-      background: var(--bg-subtle);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 7px 12px;
-      line-height: 1.45;
-      max-width: 280px;
+      color: var(--text-muted);
+      background: transparent;
+      border-left: 3px solid var(--blue);
+      padding: 8px 14px;
+      line-height: 1.6;
     }
 
-    .stat-chip strong { color: var(--text); font-weight: 600; }
+    .stat-chip strong {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── SIGNAL LIST ── */
+    .signal-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .signal-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .signal-item:last-child { border-bottom: none; }
 
     /* ── SOURCES ── */
     .sources-section {
@@ -446,8 +451,7 @@
       .criterion-header { flex-direction: column; gap: 8px; }
       .criterion-num { font-size: 36px; }
       .signal-item { grid-template-columns: 110px 1fr; }
-      .stats-row { flex-direction: column; }
-      .stat-chip { max-width: 100%; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
       footer { flex-direction: column; align-items: flex-start; padding: 24px 20px; }
     }
 
@@ -1069,11 +1073,423 @@
 
     <!-- AI MODE PANEL -->
     <div class="mode-panel" id="panel-ai">
-      <div class="coming-soon">
-        <div class="coming-soon-icon">⚙️</div>
-        <h3>AI Mode documentation coming soon</h3>
-        <p>AI Mode criteria are currently being finalized. This section will document how Technical Performance, Content Specificity, Crawl Health, Content Freshness, AEO Readiness, Entity Clarity, and Schema Data are measured.</p>
+
+      <p class="mode-intro">AI Mode evaluates your site the way AI tools do: crawling it, parsing its structure, extracting entities, and deciding whether to cite it in a generated answer. As potential clients increasingly use tools like ChatGPT and Perplexity to find agencies, this score reflects how well your site performs for that audience.</p>
+
+      <!-- 01 TECHNICAL HEALTH -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">01</span>
+          <div>
+            <div class="criterion-title">Technical Health</div>
+            <p class="criterion-desc">Can AI tools access, crawl, and render your site? If a crawler cannot reach your content, nothing else matters. This criterion covers both accessibility and raw performance.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip"><strong>53%</strong> of mobile users abandon a page that takes more than 3 seconds to load</div>
+          <div class="stat-chip">A <strong>1-second delay</strong> in load time reduces conversions by 7%</div>
+          <div class="stat-chip">Core Web Vitals became an official <strong>Google ranking factor</strong> in 2021</div>
+          <div class="stat-chip">HTTPS has been a confirmed <strong>Google ranking signal</strong> since 2014</div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>robots.txt:</strong> present and not blocking AI crawlers (GPTBot, ClaudeBot, anthropic-ai) alongside standard Googlebot. Many sites accidentally block AI tools with blanket rules.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>noindex:</strong> the homepage and key content pages are not flagged to prevent indexing.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>HTTPS:</strong> SSL active with no mixed content warnings. A baseline trust and ranking signal.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Sitemap:</strong> present, linked in robots.txt, with valid lastmod dates so crawlers know what has been updated.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>JavaScript dependency:</strong> critical content readable in raw HTML, not locked behind client-side rendering that crawlers cannot execute.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Core Web Vitals:</strong> LCP (load speed), CLS (layout stability), and INP (interactivity) measured against Google's thresholds.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro" target="_blank">Robots.txt Guide (Google Search Central)</a></li>
+            <li><a href="https://developers.google.com/search/docs/appearance/core-web-vitals" target="_blank">Core Web Vitals (Google Search Central)</a></li>
+            <li><a href="https://web.dev/articles/vitals" target="_blank">Core Web Vitals (web.dev)</a></li>
+            <li><a href="https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers" target="_blank">Google Crawlers Overview (Google Search Central)</a></li>
+          </ul>
+        </div>
       </div>
+
+      <!-- 02 STRUCTURED DATA -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">02</span>
+          <div>
+            <div class="criterion-title">Structured Data</div>
+            <p class="criterion-desc">Schema markup tells AI tools exactly what your site is about rather than making them infer it. It is the difference between an AI accurately describing your agency and producing a generic summary.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip">Sites with structured data see an average <strong>20 to 30% higher CTR</strong> in search results</div>
+          <div class="stat-chip">FAQ schema can take up to <strong>50% more SERP real estate</strong>, increasing visibility</div>
+          <div class="stat-chip"><strong>JSON-LD</strong> is Google's preferred structured data format</div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Organization schema:</strong> name, URL, logo, description, and sameAs social profiles marked up in JSON-LD.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Service schema:</strong> individual services listed with structured markup, not just free-form text.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>FAQ schema:</strong> question-and-answer content marked up for direct extraction by AI tools and search engines.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Review / AggregateRating schema:</strong> if testimonials or reviews are present, are they marked up so search engines and AI can read them?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Open Graph and Twitter Card meta:</strong> og:title, og:description, og:image, and Twitter card type all present and accurate.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://schema.org/" target="_blank">Schema.org (Full vocabulary)</a></li>
+            <li><a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank">Structured Data Overview (Google Search Central)</a></li>
+            <li><a href="https://developers.google.com/search/docs/appearance/structured-data/organization" target="_blank">Organization Schema (Google Search Central)</a></li>
+            <li><a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage" target="_blank">FAQ Schema (Google Search Central)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 03 ENTITY CLARITY -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">03</span>
+          <div>
+            <div class="criterion-title">Entity Clarity</div>
+            <p class="criterion-desc">Is your agency identifiable as a distinct, named entity with a clear type, location, and specialty? AI tools build knowledge graphs from the web. Sites with clear entity signals get described accurately. Vague sites get ignored or misrepresented.</p>
+          </div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Named entity identification:</strong> can an AI extract the business name, type, and core specialty in a single sentence from the homepage?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Service specificity:</strong> "WordPress agency specialising in WooCommerce for DTC brands" scores far higher than "we build websites for businesses."</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Geographic or market clarity:</strong> location, timezone, or market served is stated somewhere on the homepage.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Consistent identity signals:</strong> name, specialty, and positioning are consistent across the hero, about section, and footer. Contradictory or vague signals across zones lower the score.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Social profile links:</strong> LinkedIn and other professional profiles linked from the footer, providing cross-reference signals for knowledge graph construction.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://developers.google.com/search/docs/appearance/site-names" target="_blank">Site Names and Entity Understanding (Google Search Central)</a></li>
+            <li><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank">SEO Starter Guide (Google Search Central)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 04 CONTENT SPECIFICITY -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">04</span>
+          <div>
+            <div class="criterion-title">Content Specificity</div>
+            <p class="criterion-desc">Specific copy produces specific AI summaries. Generic copy produces generic answers that fail to differentiate your agency. When a potential client asks an AI tool "find me a WordPress agency for my ecommerce brand," only specific sites get cited.</p>
+          </div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Service detail:</strong> each service described with what it is, who it is for, and what outcome it delivers. Category labels alone score lower.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Named platforms and technologies:</strong> WordPress, WooCommerce, Shopify, Figma, and other tools stated explicitly rather than implied.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Named industries or client types:</strong> "DTC ecommerce brands" or "B2B SaaS companies" score higher than "businesses of all sizes."</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Specific outcomes:</strong> quantified results, named client wins, or concrete before-and-after improvements. Vague claims ("we get results") score lower.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Passage extraction quality:</strong> can a clean, accurate one or two sentence summary be pulled from each section without ambiguity or filler?</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://blog.google/products/search/passages/" target="_blank">Passage Ranking (Google Blog)</a></li>
+            <li><a href="https://ahrefs.com/blog/ai-search-optimization/" target="_blank">AI Search Optimization (Ahrefs)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 05 AEO READINESS -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">05</span>
+          <div>
+            <div class="criterion-title">AEO Readiness</div>
+            <p class="criterion-desc">Answer Engine Optimization. Is your content structured to surface in AI-generated answers? AI tools prioritize pages that answer questions directly and clearly, not pages that bury key information in long paragraphs.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip">ChatGPT reached <strong>100 million users</strong> in 2 months, the fastest-growing consumer app in history</div>
+          <div class="stat-chip">AI-generated answers from tools like ChatGPT, Perplexity, and Google AIO are now the <strong>first result</strong> many users see</div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>FAQ section present:</strong> clear question-and-answer pairs exist on the homepage or linked FAQ page.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>FAQ schema applied:</strong> Q&amp;A content confirmed to crawlers via structured markup, not just visually formatted.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Question-framed headings:</strong> H2s and H3s phrased as questions anticipate what a prospect or AI tool would ask ("What kind of agencies do you work with?").</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Direct answers:</strong> the first sentence after each heading answers the heading's implied question rather than building up to the answer slowly.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Who / what / who content:</strong> who you are, what you do, and who you serve: all three clear and findable above the fold or within the first scroll.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Featured snippet structure:</strong> key facts stated as clean, extractable sentences, not buried in paragraph three of a section.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://www.searchenginejournal.com/answer-engine-optimization/" target="_blank">Answer Engine Optimization Guide (Search Engine Journal)</a></li>
+            <li><a href="https://ahrefs.com/blog/ai-search-optimization/" target="_blank">How to Optimize for AI Search (Ahrefs)</a></li>
+            <li><a href="https://developers.google.com/search/docs/appearance/featured-snippets" target="_blank">Featured Snippets (Google Search Central)</a></li>
+            <li><a href="https://searchengineland.com/google-ai-overviews-optimization-guide" target="_blank">AI Overviews Optimization Guide (Search Engine Land)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 06 E-E-A-T SIGNALS -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">06</span>
+          <div>
+            <div class="criterion-title">E-E-A-T Signals</div>
+            <p class="criterion-desc">Experience, Expertise, Authoritativeness, Trustworthiness. Google's quality framework and the backbone of how AI tools evaluate whether a source is worth citing. Sites that demonstrate real-world expertise consistently outperform those that merely claim it.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip">E-E-A-T is a core framework in Google's <strong>Search Quality Evaluator Guidelines</strong></div>
+          <div class="stat-chip">Google added the first <strong>"E" for Experience</strong> in December 2022, recognising first-hand knowledge as distinct from expertise</div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Named team members with roles:</strong> real people with titles, not just "our team." Named individuals are a foundational trust signal for AI tools.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Author credentials:</strong> bios that cite experience, past clients, or certifications. Generic "about me" copy scores lower.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Demonstrated expertise:</strong> copy that shows knowledge through specifics rather than simply claiming expertise ("award-winning agency" with no evidence scores lower than a site with named case study outcomes).</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>External citations or press:</strong> mentions in other publications, podcast appearances, industry awards with named bodies.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Industry certifications:</strong> Google Partner, WooCommerce Expert, and similar. Listed with enough detail to verify.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>About / Team page linked:</strong> a dedicated page reachable from the homepage homepage navigation or footer.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Years in business stated:</strong> founding year or years of experience mentioned anywhere on the homepage.</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://static.googleusercontent.com/media/guidelines.raterhub.com/en//searchqualityevaluatorguidelines.pdf" target="_blank">Search Quality Evaluator Guidelines (Google)</a></li>
+            <li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank">Creating Helpful Content / E-E-A-T (Google Search Central)</a></li>
+            <li><a href="https://www.searchenginejournal.com/google-eat/what-is-eat/" target="_blank">E-E-A-T Explainer (Search Engine Journal)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 07 CONTENT FRESHNESS -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">07</span>
+          <div>
+            <div class="criterion-title">Content Freshness</div>
+            <p class="criterion-desc">AI tools and search engines deprioritise stale content. An outdated copyright year, a blog with nothing newer than 2022, or case studies from three redesigns ago all signal a site that has been left to gather dust.</p>
+          </div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-chip">Google's <strong>Query Deserves Freshness</strong> algorithm actively boosts recently updated content for time-sensitive queries</div>
+          <div class="stat-chip">Sites that update content regularly see up to <strong>3x more inbound traffic</strong> (HubSpot)</div>
+        </div>
+
+        <div class="signals-section">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Copyright year in footer:</strong> is it the current year? A stale year is an immediate credibility failure. AI tools read it.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Date stamps:</strong> visible publish or update dates on posts or case studies.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Blog or news section:</strong> present with content published within the last 6 months.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>Sitemap lastmod dates:</strong> recently updated entries confirm to crawlers that the site is actively maintained.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Recent portfolio or case study work:</strong> does the work shown feel current, or does it reference tools and trends from several years ago?</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Technology references:</strong> are platforms and tools mentioned still current, or are deprecated technologies being cited as current expertise?</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://googleblog.blogspot.com/2010/06/our-new-search-index-caffeine.html" target="_blank">Caffeine Update / Freshness Algorithm (Google Blog)</a></li>
+            <li><a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" target="_blank">Sitemaps and Freshness Signals (Google Search Central)</a></li>
+            <li><a href="https://www.searchenginejournal.com/content-freshness-seo/" target="_blank">Content Freshness and Rankings (Search Engine Journal)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 08 LLMS.TXT -->
+      <div class="criterion">
+        <div class="criterion-header">
+          <span class="criterion-num">08</span>
+          <div>
+            <div class="criterion-title">llms.txt</div>
+            <p class="criterion-desc">A plain-text file at your site root that gives AI tools a curated, concise summary of what your site contains, written specifically for LLMs rather than humans. Think of it as a robots.txt for the AI era.</p>
+          </div>
+        </div>
+
+        <div class="grain-note">
+          <span class="grain-note-icon">🌱</span>
+          <span><strong>Emerging standard.</strong> llms.txt was proposed in September 2024 and adoption is still minimal. Absence will not significantly penalise your score, but presence is a meaningful differentiator. We will flag the opportunity with implementation guidance in your report.</span>
+        </div>
+
+        <div class="signals-section" style="margin-top: 16px;">
+          <div class="section-label">Signals measured</div>
+          <ul class="signal-list">
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>llms.txt present:</strong> file exists at <code>yourdomain.com/llms.txt</code> with a concise, accurate description of the site.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+              <div class="signal-text"><strong>llms-full.txt present:</strong> extended version with deeper context about services, team, and expertise.</div>
+            </li>
+            <li class="signal-item">
+              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+              <div class="signal-text"><strong>Content quality:</strong> if present, does the file accurately and specifically describe the agency, or is it vague boilerplate that adds no signal value?</div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sources-section">
+          <div class="section-label">Sources</div>
+          <ul class="source-list">
+            <li><a href="https://llmstxt.org" target="_blank">llms.txt Specification (llmstxt.org)</a></li>
+            <li><a href="https://www.answer.ai/posts/2024-09-03-llmstxt.html" target="_blank">Original llms.txt Proposal by Jeremy Howard (Answer.AI)</a></li>
+            <li><a href="https://docs.anthropic.com" target="_blank">Anthropic Documentation</a></li>
+          </ul>
+        </div>
+      </div>
+
     </div>
 
   </div><!-- /scores-content -->
