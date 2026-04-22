@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html data-theme="light" lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How Scores Are Calculated · Amplify by Automattic for Agencies</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How Scores Are Calculated · Amplify by Automattic for Agencies</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&amp;family=Nunito:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<style>
 
     /* ── SOURCE SERIF 4 ── */
     @font-face { font-family: 'SourceSerif4'; font-weight: 300; font-style: normal; src: url('SourceSerif4-Light.ttf') format('truetype'); }
@@ -33,7 +33,7 @@
       --border-mid:  #cccccc;
       --text:        #0a0a0a;
       --text-mid:    #3a3a3a;
-      --text-muted:  #767676;
+      --text-muted:  #4a4a4a;
       --text-faint:  #b0b0b0;
       --blue:        #0047ff;
       --blue-hover:  #0038cc;
@@ -141,19 +141,27 @@
     }
     .mode-tabs {
       display: inline-flex;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
+      align-items: center;
+      background: var(--bg-card);
+      border-radius: 12px;
+      padding: 4px;
+      gap: 2px;
     }
     .mode-tab {
-      font-size: 13px; font-weight: 600;
-      padding: 9px 22px; cursor: pointer;
+      font-size: 15px; font-weight: 700;
+      padding: 11px 32px; cursor: pointer;
       border: none; background: transparent;
       color: var(--text-muted);
       font-family: inherit;
-      transition: background 0.15s, color 0.15s;
+      border-radius: 12px;
+      letter-spacing: -0.1px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
     }
-    .mode-tab.active { background: var(--blue); color: #fff; }
+    .mode-tab.active {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(0,71,255,0.25);
+    }
     .mode-tab:not(.active):hover { background: var(--bg-subtle); color: var(--text); }
 
     /* ── CONTENT AREA ── */
@@ -167,14 +175,10 @@
 
     /* ── INTRO NOTE ── */
     .mode-intro {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-muted);
       line-height: 1.7;
       margin-bottom: 48px;
-      padding: 16px 20px;
-      background: var(--bg-subtle);
-      border-radius: 8px;
-      border-left: 3px solid var(--blue);
     }
 
     /* ── CRITERION CARD ── */
@@ -191,13 +195,17 @@
       gap: 20px;
       margin-bottom: 24px;
     }
+    .criterion-header > div {
+      flex: 1;
+      min-width: 0;
+    }
 
     .criterion-num {
       font-family: 'Knockout', Impact, sans-serif;
       font-weight: 700;
-      font-size: 52px;
+      font-size: 64px;
       line-height: 1;
-      color: var(--text-faint);
+      color: var(--blue);
       flex-shrink: 0;
       min-width: 48px;
       padding-top: 4px;
@@ -239,6 +247,7 @@
       flex-direction: column;
       gap: 4px;
       align-items: flex-start;
+      padding-top: 2px;
     }
 
     .signal-text {
@@ -326,7 +335,7 @@
 
     .signal-item {
       display: grid;
-      grid-template-columns: 130px 1fr;
+      grid-template-columns: 130px 1fr 44px;
       gap: 12px;
       align-items: start;
       padding: 12px 0;
@@ -334,6 +343,15 @@
     }
 
     .signal-item:last-child { border-bottom: none; }
+
+    .signal-pts {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: right;
+      padding-top: 2px;
+      white-space: nowrap;
+    }
 
     /* ── SOURCES ── */
     .sources-section {
@@ -458,17 +476,21 @@
 
     .criterion-pts {
       font-family: 'Inter', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 700;
       letter-spacing: 0;
       text-transform: none;
-      color: var(--text-muted);
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      color: var(--blue);
+      background: var(--blue-faint);
+      border: 1px solid rgba(0,71,255,0.18);
       border-radius: 20px;
-      padding: 2px 10px;
+      padding: 4px 14px;
       white-space: nowrap;
       flex-shrink: 0;
+      align-self: center;
+    }
+    [data-theme="dark"] .criterion-pts {
+      border-color: rgba(79,124,255,0.25);
     }
 
     /* ── SCORE OVERVIEW ── */
@@ -583,1207 +605,1133 @@
       .scores-content { padding: 40px 20px 80px; }
       .criterion-header { flex-direction: column; gap: 8px; }
       .criterion-num { font-size: 36px; }
-      .signal-item { grid-template-columns: 110px 1fr; }
+      .signal-item { grid-template-columns: 110px 1fr 36px; }
       .stats-row { grid-template-columns: repeat(2, 1fr); }
       footer { flex-direction: column; align-items: flex-start; padding: 24px 20px; }
     }
 
-  </style>
+  
+    /* ── BACK TO TOP ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s, background 0.15s;
+      z-index: 300;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .back-to-top:hover { background: var(--text-mid); }
+
+    /* ── SCORE BAR LINKS ── */
+    .score-bar-link {
+      color: inherit;
+      text-decoration: none;
+    }
+    .score-bar-link:hover {
+      color: var(--blue);
+      text-decoration: underline;
+    }
+</style>
 </head>
 <body>
-
-  <!-- NAV -->
-  <nav>
-    <div class="nav-left">
-      <a href="amplify.html" class="nav-wordmark">
-        <span class="nav-wordmark-title">Amplify</span>
-        <span class="nav-wordmark-sub">by Automattic for Agencies</span>
-      </a>
-    </div>
-    <div class="nav-right">
-      <a href="amplify.html" class="btn-nav-ghost">Back to Amplify</a>
-      <a href="amplify.html#audit" class="btn-nav-primary">Amplify a site</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☾</button>
-    </div>
-  </nav>
-
-  <!-- PAGE HEADER -->
-  <div class="page-header">
-    <span class="page-header-eyebrow">Methodology</span>
-    <h1>How scores are calculated</h1>
-    <p class="page-header-sub">Every score Amplify produces is grounded in established research, published standards, and real conversion data. Here is what we measure, how we measure it, and the sources behind each signal.</p>
-  </div>
-
-  <!-- MODE TABS -->
-  <div class="mode-tabs-wrap">
-    <div class="mode-tabs">
-      <button class="mode-tab active" onclick="switchMode('human', this)">Human Mode</button>
-      <button class="mode-tab" onclick="switchMode('ai', this)">AI Mode</button>
-    </div>
-  </div>
-
-  <!-- CONTENT -->
-  <div class="scores-content">
-
-    <!-- HUMAN MODE PANEL -->
-    <div class="mode-panel active" id="panel-human">
-
-      <p class="mode-intro">Human Mode evaluates your site the way a potential client does, forming impressions in seconds, scanning for trust signals, and deciding whether you are worth reaching out to. The eight criteria below reflect the dimensions that research consistently shows influence whether a visitor becomes an enquiry.</p>
-
-      <!-- SCORE OVERVIEW -->
-      <div class="score-overview">
-        <div>
-          <div class="score-overview-label">Criteria breakdown — 100 points total</div>
-          <div class="score-bar-row"><span class="score-bar-name">Trust Signals</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-pts">18 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">Contact &amp; Conversion</span><div class="score-bar-track"><div class="score-bar-fill" style="width:83%"></div></div><span class="score-bar-pts">15 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">SEO</span><div class="score-bar-track"><div class="score-bar-fill" style="width:72%"></div></div><span class="score-bar-pts">13 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">Mobile Experience</span><div class="score-bar-track"><div class="score-bar-fill" style="width:72%"></div></div><span class="score-bar-pts">13 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">Content Quality</span><div class="score-bar-track"><div class="score-bar-fill" style="width:67%"></div></div><span class="score-bar-pts">12 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">Design &amp; Experience</span><div class="score-bar-track"><div class="score-bar-fill" style="width:61%"></div></div><span class="score-bar-pts">11 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">Accessibility</span><div class="score-bar-track"><div class="score-bar-fill" style="width:56%"></div></div><span class="score-bar-pts">10 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">Audience Resonance</span><div class="score-bar-track"><div class="score-bar-fill" style="width:44%"></div></div><span class="score-bar-pts">8 pts</span></div>
-        </div>
-        <div>
-          <div class="score-overview-label">Score thresholds</div>
-          <div class="threshold-stack">
-            <div class="threshold-item green">
-              <span class="threshold-dot"></span>
-              <div class="threshold-content">
-                <div class="threshold-range">80 – 100</div>
-                <div class="threshold-label">Strong</div>
-              </div>
-            </div>
-            <div class="threshold-item amber">
-              <span class="threshold-dot"></span>
-              <div class="threshold-content">
-                <div class="threshold-range">50 – 79</div>
-                <div class="threshold-label">Needs work</div>
-              </div>
-            </div>
-            <div class="threshold-item red">
-              <span class="threshold-dot"></span>
-              <div class="threshold-content">
-                <div class="threshold-range">0 – 49</div>
-                <div class="threshold-label">At risk</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 01 AUDIENCE RESONANCE -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">01</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Audience Resonance</div>
-              <span class="criterion-pts">8 pts</span>
-            </div>
-            <p class="criterion-desc">Does this site feel made for the right client? Within seconds of landing, a potential client should feel like the site is speaking directly to them.</p>
-          </div>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-chip">First impressions form in as little as <strong>50 milliseconds</strong></div>
-          <div class="stat-chip">Users give a homepage <strong>3 to 5 seconds</strong> to earn trust</div>
-          <div class="stat-chip"><strong>75%</strong> of consumers judge credibility based on website design alone</div>
-          <div class="stat-chip">Specific, targeted messaging converts <strong>202% better</strong> than generic copy</div>
-          <div class="stat-chip">Only <strong>13%</strong> of customers feel brands truly understand their needs</div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>5-second clarity test:</strong> can an AI reading the homepage answer what this agency does, who they serve, and why a client should care?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Audience specificity:</strong> does the copy call out a specific type of client, industry, or pain point rather than speaking to everyone?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Pain point language:</strong> does the homepage reflect the actual problems potential clients have, in the words they would use?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Generic claim detection:</strong> hollow buzzwords ("results-driven," "passionate," "full-service") with no supporting specifics lower the score.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Hero headline clarity:</strong> does the H1 communicate the value proposition immediately, or is it vague?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Above-fold content presence:</strong> is there meaningful text above the fold, or only a full-screen image or video with no copy?</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://www.tandfonline.com/doi/abs/10.1080/01449290500330448" target="_blank">50ms First Impression Study (Behaviour &amp; Information Technology)</a></li>
-            <li><a href="https://www.nngroup.com/articles/first-impressions-human-automaticity/" target="_blank">First Impressions (Nielsen Norman Group)</a></li>
-            <li><a href="https://www.looppanel.com/blog/five-second-testing" target="_blank">Five-Second Testing (Looppanel)</a></li>
-            <li><a href="https://www.trajectorywebdesign.com/blog/b2b-website-messaging" target="_blank">B2B Website Messaging Framework (Trajectory)</a></li>
-            <li><a href="https://blog.hubspot.com/marketing/personalized-calls-to-action-convert-better-data" target="_blank">Personalized CTAs Convert 202% Better (HubSpot)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 02 CONTENT QUALITY -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">02</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Content Quality</div>
-              <span class="criterion-pts">12 pts</span>
-            </div>
-            <p class="criterion-desc">Is the writing compelling, clear, and professional? Errors and poor readability erode trust before a client has read a single sentence.</p>
-          </div>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-chip"><strong>97.2%</strong> of people say grammar influences their perception of a company</div>
-          <div class="stat-chip">Pages with spelling or grammar errors have <strong>85% higher bounce rates</strong></div>
-          <div class="stat-chip"><strong>59%</strong> of consumers are less likely to trust a brand with copy errors</div>
-          <div class="stat-chip">Ideal Flesch Reading Ease score for web content: <strong>60 to 70</strong> (8th to 9th grade level)</div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Flesch Reading Ease score</strong> calculated from extracted page text. A score of 60 to 70 is the target. Below 50 is flagged.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Sentence and paragraph length:</strong> a proxy for scannability. Long unbroken walls of text score lower.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Content volume:</strong> is there enough copy for a reader to understand what this agency does, or is the page mostly images?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Heading and subheading usage:</strong> does the page use H2s and H3s to break up content, or is it one uninterrupted block?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Grammar and spelling:</strong> AI reads the page copy and flags visible errors.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Passive voice density:</strong> excessive passive voice weakens authority and clarity.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Buzzword and jargon density:</strong> overlaps with Audience Resonance but scores how the copy reads, not who it speaks to.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Clarity per section:</strong> does each section say something meaningful, or is it filler?</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://www.researchgate.net/publication/318086625_Article_Recall_Credibility_Lower_with_Grammar_Errors" target="_blank">Grammar Errors Lower Credibility (ResearchGate)</a></li>
-            <li><a href="https://www.websitesuccess.co.uk/blog/what-do-typos-cost-you" target="_blank">Typos, SEO and Conversions (Website Success)</a></li>
-            <li><a href="https://yoast.com/flesch-reading-ease-score/" target="_blank">Flesch Reading Ease Score (Yoast)</a></li>
-            <li><a href="https://readable.com/readability/flesch-reading-ease-flesch-kincaid-grade-level/" target="_blank">Flesch Kincaid Grade Level (Readable)</a></li>
-            <li><a href="https://vwo.com/blog/website-copy-readability/" target="_blank">Website Readability (VWO)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 03 DESIGN & EXPERIENCE -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">03</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Design &amp; Experience</div>
-              <span class="criterion-pts">11 pts</span>
-            </div>
-            <p class="criterion-desc">Does the site look credible and feel effortless to use? All signals in this criterion are grounded in the Laws of UX, a framework of established psychological and behavioral principles applied to interface design.</p>
-          </div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured via DOM analysis</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Hick's Law:</strong> decision time increases with the number of choices. Nav item count, visible CTAs, and form fields are checked. Menus exceeding seven items are flagged.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Miller's Law:</strong> working memory holds approximately seven items. Elements competing for attention in key zones (nav, hero, footer) are counted and flagged when excessive.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Fitts's Law:</strong> CTA button dimensions, touch target sizes, and spacing between clickable elements. Small or crowded targets score lower. This signal also feeds the Mobile Experience score.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col">
-                <span class="badge badge-prog">Programmatic</span>
-                <span class="badge badge-salt">Context-dependent</span>
-              </div>
-              <div class="signal-text"><strong>Jakob's Law:</strong> users expect sites to work like other sites. Standard pattern conformance is checked: logo placement, nav position, primary CTA, footer links.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Serial Position Effect:</strong> the first and last items in a series are best remembered. Key content placement in nav, hero, and page structure is evaluated.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="grain-note">
-          <span class="grain-note-icon">⚠️</span>
-          <span><strong>Jakob's Law is context-dependent.</strong> Agencies with intentionally non-standard designs should not be penalized the same as those with oversight-driven deviations. Use this signal as a directional indicator, not a verdict.</span>
-        </div>
-
-        <div class="signals-section" style="margin-top:24px;">
-          <div class="section-label">Signals measured via AI visual analysis</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Aesthetic-Usability Effect:</strong> beautiful design is perceived as more usable. Overall visual polish scored from a screenshot.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Von Restorff Effect:</strong> the element that stands out gets remembered. Does the primary CTA visually differentiate from everything around it?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col">
-                <span class="badge badge-ai">AI</span>
-                <span class="badge badge-salt">Context-dependent</span>
-              </div>
-              <div class="signal-text"><strong>Peak-End Rule:</strong> people judge an experience by its most intense moment and its ending. The hero (peak) and final CTA or footer (end) are evaluated.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Gestalt Laws</strong> (Proximity, Common Region, Similarity, Uniform Connectedness, Prägnanz): are related elements grouped? Is the layout clean or cluttered? Scored as one composite signal.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="grain-note">
-          <span class="grain-note-icon">⚠️</span>
-          <span><strong>Peak-End Rule is context-dependent.</strong> This signal assumes the hero is the site's strongest moment, which is not always the case. Use the score directionally and consider what your actual peak moment is.</span>
-        </div>
-
-        <div class="sources-section" style="margin-top:20px;">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://lawsofux.com/" target="_blank">Laws of UX (lawsofux.com)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 04 TRUST SIGNALS -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">04</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Trust Signals</div>
-              <span class="criterion-pts">18 pts</span>
-            </div>
-            <p class="criterion-desc">Does this site give a potential client enough evidence to feel safe handing over a project? All signals are evaluated on the homepage only. A link to a dedicated page counts as sufficient evidence.</p>
-          </div>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-chip"><strong>72%</strong> of consumers find testimonials more credible than brand claims</div>
-          <div class="stat-chip">Testimonials drive a <strong>34% increase</strong> in conversions on sales pages</div>
-          <div class="stat-chip"><strong>97%</strong> of consumers say reviews impact their purchasing decisions</div>
-          <div class="stat-chip">5 or more reviews makes a service <strong>270% more likely to convert</strong></div>
-          <div class="stat-chip">Above-fold award placement outperforms footer placement by <strong>40 to 60%</strong> in A/B tests</div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Testimonials:</strong> present on or linked from the homepage. Attributed testimonials (name, company, photo) score higher than anonymous ones.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Case studies:</strong> link or reference to case study content. Quality signal: presence of quantified outcomes (problem, solution, result with numbers).</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Client logos:</strong> any client logos present on the homepage.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Results and metrics:</strong> any quantified outcomes mentioned on the homepage ("increased conversions by 40%").</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Social proof volume:</strong> existence of reviews or ratings. Five or more is a meaningful threshold per research.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Awards and recognition:</strong> any awards present. Placement is also scored: above-fold visibility is rated higher than footer placement.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Team or About page:</strong> a homepage link or blurb counts as sufficient. Real people with names and faces signal legitimacy.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Years in business or client count:</strong> any mention on the homepage counts.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://boast.io/20-statistics-about-using-testimonials-in-marketing/" target="_blank">Testimonial Statistics (Boast)</a></li>
-            <li><a href="https://optinmonster.com/social-proof-statistics/" target="_blank">Social Proof Statistics (OptinMonster)</a></li>
-            <li><a href="https://wisernotify.com/blog/social-proof-statistics/" target="_blank">33 Social Proof Statistics (WiserNotify)</a></li>
-            <li><a href="https://digitalagencynetwork.com/master-case-studies-to-attract-more-clients-quick-guide-for-digital-agencies/" target="_blank">Agency Case Study Guide (Digital Agency Network)</a></li>
-            <li><a href="https://instapage.com/blog/digital-agency-case-studies" target="_blank">Agency Case Studies (Instapage)</a></li>
-            <li><a href="https://emplicit.co/how-to-use-trust-badges-for-higher-conversions/" target="_blank">Trust Badge Placement (Emplicit)</a></li>
-            <li><a href="https://hashmeta.com/blog/why-trust-blocks-increase-conversions-significantly-the-psychology-and-data-behind-digital-trust-signals/" target="_blank">Trust Blocks and Conversions (Hashmeta)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 05 MOBILE EXPERIENCE -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">05</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Mobile Experience</div>
-              <span class="criterion-pts">13 pts</span>
-            </div>
-            <p class="criterion-desc">A first impression increasingly happens on a phone. Does the site hold up when a potential client pulls it up on their device?</p>
-          </div>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-chip">Mobile accounts for <strong>62 to 64%</strong> of global web traffic as of 2026</div>
-          <div class="stat-chip">Google minimum touch target: <strong>48x48px</strong> with 8px spacing</div>
-          <div class="stat-chip">Minimum body font size: <strong>16px.</strong> Below this, iOS Safari auto-zooms.</div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured via DOM analysis</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Viewport meta tag:</strong> <code>width=device-width, initial-scale=1</code> must be present. Without it, the page renders at desktop width and scales down.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Font size:</strong> body text must meet the 16px minimum. Below this threshold, iOS auto-zooms on form fields.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Touch targets:</strong> minimum 48x48px with 8px spacing per Google guidelines. This signal also feeds the Design and Experience score via Fitts's Law.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Horizontal overflow:</strong> any content that bleeds beyond the viewport width and causes horizontal scrolling is flagged.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Responsive breakpoints:</strong> does the CSS include mobile media queries at all?</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured via AI visual analysis</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Navigation usability:</strong> does the desktop nav collapse into something usable on mobile (hamburger menu, drawer, etc.)?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Content legibility:</strong> does the layout hold up at mobile viewport, or do elements overlap and stack awkwardly?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Intrusive interstitials:</strong> pop-ups or overlays that cover content on mobile. This signal also feeds the SEO score, as Google penalizes intrusive interstitials.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://gs.statcounter.com/platform-market-share/desktop-mobile/worldwide/" target="_blank">Mobile Market Share (StatCounter)</a></li>
-            <li><a href="https://www.mobiloud.com/blog/what-percentage-of-internet-traffic-is-mobile" target="_blank">Mobile Traffic Percentage (MobiLoud)</a></li>
-            <li><a href="https://blog.mobileviewer.io/blog/touch-target-size/" target="_blank">Touch Target Size, Google Guidelines</a></li>
-            <li><a href="https://fontfyi.com/blog/mobile-typography-accessibility/" target="_blank">Mobile Font Size Standards (FontFYI)</a></li>
-            <li><a href="https://digital.gov/guides/mobile-principles/tap-targets" target="_blank">Size fonts and tap targets (Digital.gov)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 06 SEO -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">06</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">SEO</div>
-              <span class="criterion-pts">13 pts</span>
-            </div>
-            <p class="criterion-desc">Can a potential client find this agency when they search? All SEO signals are sourced directly from Google Search Central documentation.</p>
-          </div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured via DOM analysis</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Title tag:</strong> present, unique, under 60 characters, and keyword-relevant.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Meta description:</strong> present and under 160 characters.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>H1 and heading hierarchy:</strong> one H1 present, logical H1 to H2 to H3 structure. Also feeds the Accessibility score.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Image alt text:</strong> meaningful images have descriptive alt attributes. Also feeds the Accessibility score.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Canonical tag:</strong> self-referencing canonical present.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>robots.txt and noindex:</strong> the page is not accidentally blocking crawlers.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Structured data:</strong> any schema markup present on the homepage. This signal also feeds the AI Mode score.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Intrusive interstitials:</strong> Google penalizes these on mobile. This signal also feeds the Mobile Experience score.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured via AI content analysis</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Keyword relevance:</strong> does the page content reflect what the agency actually does, in language clients would search for?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Thin content:</strong> is there enough substance for Google to understand what this page is about?</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank">SEO Starter Guide (Google Search Central)</a></li>
-            <li><a href="https://developers.google.com/search/docs/appearance/title-link" target="_blank">Title Links (Google Search Central)</a></li>
-            <li><a href="https://developers.google.com/search/docs/appearance/snippet" target="_blank">Meta Descriptions (Google Search Central)</a></li>
-            <li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" target="_blank">Canonical URLs (Google Search Central)</a></li>
-            <li><a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro" target="_blank">robots.txt Guide (Google Search Central)</a></li>
-            <li><a href="https://developers.google.com/search/docs/crawling-indexing/block-indexing" target="_blank">Noindex (Google Search Central)</a></li>
-            <li><a href="https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing" target="_blank">Mobile-first Indexing (Google Search Central)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 07 ACCESSIBILITY -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">07</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Accessibility</div>
-              <span class="criterion-pts">10 pts</span>
-            </div>
-            <p class="criterion-desc">Does the site work for everyone, regardless of how they experience the web? Amplify measures against the WCAG AA conformance level, the widely accepted standard referenced by courts and regulators globally.</p>
-          </div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured via DOM analysis</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Image alt text</strong> <span class="wcag-ref">WCAG 1.1.1</span>: all meaningful images have descriptive alt attributes. Also feeds SEO.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Color contrast ratio</strong> <span class="wcag-ref">WCAG 1.4.3</span>: minimum 4.5:1 for normal text, 3:1 for large text.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Form labels</strong> <span class="wcag-ref">WCAG 1.3.1</span>: all input fields have associated labels.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Language attribute</strong> <span class="wcag-ref">WCAG 3.1.1</span>: <code>&lt;html lang=""&gt;</code> present so screen readers identify the language.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Skip navigation link</strong> <span class="wcag-ref">WCAG 2.4.1</span>: allows keyboard users to skip past repeated nav.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>No auto-playing media</strong> <span class="wcag-ref">WCAG 1.4.2</span>: audio or video that plays without user action.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Heading structure</strong> <span class="wcag-ref">WCAG 1.3.1</span>: logical, non-skipping hierarchy. Also feeds SEO.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured via AI visual analysis</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Focus indicators</strong> <span class="wcag-ref">WCAG 2.4.7</span>: are interactive elements visually distinguishable when focused?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-phase2">Phase 2</span></div>
-              <div class="signal-text"><strong>Keyboard navigability:</strong> full keyboard-only navigation testing requires interaction and will be added in a future release.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank">WCAG, Web Content Accessibility Guidelines (W3C)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 08 CONTACT & CONVERSION -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">08</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Contact &amp; Conversion</div>
-              <span class="criterion-pts">15 pts</span>
-            </div>
-            <p class="criterion-desc">A potential client has made it through the site and is ready to reach out. Does the site make that easy, or does it create friction at the worst possible moment?</p>
-          </div>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-chip">Reducing a form from 11 to 4 fields increases conversions by <strong>120%</strong></div>
-          <div class="stat-chip">Action-oriented CTAs convert <strong>121% more</strong> than passive ones ("Learn More," "Submit")</div>
-          <div class="stat-chip">First-person CTA phrasing boosts click-through by <strong>90%</strong></div>
-          <div class="stat-chip">Above-fold CTAs outperform below-fold by <strong>304%</strong></div>
-          <div class="stat-chip">Personalized CTAs convert <strong>202% better</strong> than generic defaults</div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured via DOM analysis</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Contact information present:</strong> email address, phone number, or contact form visible on or linked from the homepage.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>CTA above the fold:</strong> at least one clear call-to-action is visible without scrolling.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>CTA repetition:</strong> does a CTA also appear near the bottom of the page? Ties back to the Peak-End Rule in Design and Experience.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col">
-                <span class="badge badge-prog">Programmatic</span>
-                <span class="badge badge-salt">Context-dependent</span>
-              </div>
-              <div class="signal-text"><strong>Form field count:</strong> fewer fields generally reduces friction. The research threshold is 4 or fewer for maximum conversion, but project inquiry forms reasonably require more context.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="grain-note">
-          <span class="grain-note-icon">⚠️</span>
-          <span><strong>Form field count is context-dependent.</strong> Fewer fields is not always better. A client requesting a project estimate expects to provide more detail than a newsletter subscriber. Use this signal directionally.</span>
-        </div>
-
-        <div class="signals-section" style="margin-top:24px;">
-          <div class="section-label">Signals measured via AI analysis</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>CTA clarity:</strong> is it obvious what happens when you click? Vague CTAs ("Learn more") score lower than action-oriented ones ("Start your project").</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Response time promise:</strong> does the site mention how quickly they respond? Any commitment ("we'll get back to you within 24 hours") reduces friction.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Friction language near CTAs:</strong> does anything adjacent to the CTA create hesitation? Requiring account creation before contact, or no privacy reassurance near a form, will lower the score.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://ventureharbour.com/how-form-length-impacts-conversion-rates/" target="_blank">Form Length and Conversion Rates (Venture Harbour)</a></li>
-            <li><a href="https://www.imagescape.com/media/filer_public/06/94/0694c7f4-8914-4598-8871-b857fbc12737/form_case_study.pdf" target="_blank">Form Field Case Study (Imagescape)</a></li>
-            <li><a href="https://wisernotify.com/blog/call-to-action-stats/" target="_blank">CTA Statistics 2026 (WiserNotify)</a></li>
-            <li><a href="https://blog.hubspot.com/marketing/personalized-calls-to-action-convert-better-data" target="_blank">Personalized CTAs (HubSpot)</a></li>
-            <li><a href="https://avintivmedia.com/blog/cta-placement-strategies-that-work/" target="_blank">CTA Placement Strategies (Avintiv)</a></li>
-            <li><a href="https://unbounce.com/conversion-rate-optimization/landing-page-cta-placement/" target="_blank">Best CTA Placement (Unbounce)</a></li>
-          </ul>
-        </div>
-      </div>
-
-    </div><!-- /panel-human -->
-
-    <!-- AI MODE PANEL -->
-    <div class="mode-panel" id="panel-ai">
-
-      <p class="mode-intro">AI Mode evaluates your site the way AI tools do: crawling it, parsing its structure, extracting entities, and deciding whether to cite it in a generated answer. As potential clients increasingly use tools like ChatGPT and Perplexity to find agencies, this score reflects how well your site performs for that audience.</p>
-
-      <!-- SCORE OVERVIEW -->
-      <div class="score-overview">
-        <div>
-          <div class="score-overview-label">Criteria breakdown — 100 points total</div>
-          <div class="score-bar-row"><span class="score-bar-name">Technical Health</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-pts">20 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">Structured Data</span><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div><span class="score-bar-pts">18 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">AEO Readiness</span><div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div><span class="score-bar-pts">16 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">E-E-A-T Signals</span><div class="score-bar-track"><div class="score-bar-fill" style="width:70%"></div></div><span class="score-bar-pts">14 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">Content Freshness</span><div class="score-bar-track"><div class="score-bar-fill" style="width:60%"></div></div><span class="score-bar-pts">12 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">Entity Clarity</span><div class="score-bar-track"><div class="score-bar-fill" style="width:50%"></div></div><span class="score-bar-pts">10 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">Content Specificity</span><div class="score-bar-track"><div class="score-bar-fill" style="width:35%"></div></div><span class="score-bar-pts">7 pts</span></div>
-          <div class="score-bar-row"><span class="score-bar-name">llms.txt</span><div class="score-bar-track"><div class="score-bar-fill" style="width:15%"></div></div><span class="score-bar-pts">3 pts</span></div>
-        </div>
-        <div>
-          <div class="score-overview-label">Score thresholds</div>
-          <div class="threshold-stack">
-            <div class="threshold-item green">
-              <span class="threshold-dot"></span>
-              <div class="threshold-content">
-                <div class="threshold-range">80 – 100</div>
-                <div class="threshold-label">Strong</div>
-              </div>
-            </div>
-            <div class="threshold-item amber">
-              <span class="threshold-dot"></span>
-              <div class="threshold-content">
-                <div class="threshold-range">50 – 79</div>
-                <div class="threshold-label">Needs work</div>
-              </div>
-            </div>
-            <div class="threshold-item red">
-              <span class="threshold-dot"></span>
-              <div class="threshold-content">
-                <div class="threshold-range">0 – 49</div>
-                <div class="threshold-label">At risk</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 01 TECHNICAL HEALTH -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">01</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Technical Health</div>
-              <span class="criterion-pts">20 pts</span>
-            </div>
-            <p class="criterion-desc">Can AI tools access, crawl, and render your site? If a crawler cannot reach your content, nothing else matters. This criterion covers both accessibility and raw performance.</p>
-          </div>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-chip"><strong>53%</strong> of mobile users abandon a page that takes more than 3 seconds to load</div>
-          <div class="stat-chip">A <strong>1-second delay</strong> in load time reduces conversions by 7%</div>
-          <div class="stat-chip">Core Web Vitals became an official <strong>Google ranking factor</strong> in 2021</div>
-          <div class="stat-chip">HTTPS has been a confirmed <strong>Google ranking signal</strong> since 2014</div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>robots.txt:</strong> present and not blocking AI crawlers (GPTBot, ClaudeBot, anthropic-ai) alongside standard Googlebot. Many sites accidentally block AI tools with blanket rules.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>noindex:</strong> the homepage and key content pages are not flagged to prevent indexing.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>HTTPS:</strong> SSL active with no mixed content warnings. A baseline trust and ranking signal.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Sitemap:</strong> present, linked in robots.txt, with valid lastmod dates so crawlers know what has been updated.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>JavaScript dependency:</strong> critical content readable in raw HTML, not locked behind client-side rendering that crawlers cannot execute.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Core Web Vitals:</strong> LCP (load speed), CLS (layout stability), and INP (interactivity) measured against Google's thresholds.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro" target="_blank">Robots.txt Guide (Google Search Central)</a></li>
-            <li><a href="https://developers.google.com/search/docs/appearance/core-web-vitals" target="_blank">Core Web Vitals (Google Search Central)</a></li>
-            <li><a href="https://web.dev/articles/vitals" target="_blank">Core Web Vitals (web.dev)</a></li>
-            <li><a href="https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers" target="_blank">Google Crawlers Overview (Google Search Central)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 02 STRUCTURED DATA -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">02</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Structured Data</div>
-              <span class="criterion-pts">18 pts</span>
-            </div>
-            <p class="criterion-desc">Schema markup tells AI tools exactly what your site is about rather than making them infer it. It is the difference between an AI accurately describing your agency and producing a generic summary.</p>
-          </div>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-chip">Sites with structured data see an average <strong>20 to 30% higher CTR</strong> in search results</div>
-          <div class="stat-chip">FAQ schema can take up to <strong>50% more SERP real estate</strong>, increasing visibility</div>
-          <div class="stat-chip"><strong>JSON-LD</strong> is Google's preferred structured data format</div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Organization schema:</strong> name, URL, logo, description, and sameAs social profiles marked up in JSON-LD.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Service schema:</strong> individual services listed with structured markup, not just free-form text.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>FAQ schema:</strong> question-and-answer content marked up for direct extraction by AI tools and search engines.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Review / AggregateRating schema:</strong> if testimonials or reviews are present, are they marked up so search engines and AI can read them?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Open Graph and Twitter Card meta:</strong> og:title, og:description, og:image, and Twitter card type all present and accurate.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://schema.org/" target="_blank">Schema.org (Full vocabulary)</a></li>
-            <li><a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank">Structured Data Overview (Google Search Central)</a></li>
-            <li><a href="https://developers.google.com/search/docs/appearance/structured-data/organization" target="_blank">Organization Schema (Google Search Central)</a></li>
-            <li><a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage" target="_blank">FAQ Schema (Google Search Central)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 03 ENTITY CLARITY -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">03</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Entity Clarity</div>
-              <span class="criterion-pts">10 pts</span>
-            </div>
-            <p class="criterion-desc">Is your agency identifiable as a distinct, named entity with a clear type, location, and specialty? AI tools build knowledge graphs from the web. Sites with clear entity signals get described accurately. Vague sites get ignored or misrepresented.</p>
-          </div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Named entity identification:</strong> can an AI extract the business name, type, and core specialty in a single sentence from the homepage?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Service specificity:</strong> "WordPress agency specialising in WooCommerce for DTC brands" scores far higher than "we build websites for businesses."</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Geographic or market clarity:</strong> location, timezone, or market served is stated somewhere on the homepage.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Consistent identity signals:</strong> name, specialty, and positioning are consistent across the hero, about section, and footer. Contradictory or vague signals across zones lower the score.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Social profile links:</strong> LinkedIn and other professional profiles linked from the footer, providing cross-reference signals for knowledge graph construction.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://developers.google.com/search/docs/appearance/site-names" target="_blank">Site Names and Entity Understanding (Google Search Central)</a></li>
-            <li><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank">SEO Starter Guide (Google Search Central)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 04 CONTENT SPECIFICITY -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">04</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Content Specificity</div>
-              <span class="criterion-pts">7 pts</span>
-            </div>
-            <p class="criterion-desc">Specific copy produces specific AI summaries. Generic copy produces generic answers that fail to differentiate your agency. When a potential client asks an AI tool "find me a WordPress agency for my ecommerce brand," only specific sites get cited.</p>
-          </div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Service detail:</strong> each service described with what it is, who it is for, and what outcome it delivers. Category labels alone score lower.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Named platforms and technologies:</strong> WordPress, WooCommerce, Shopify, Figma, and other tools stated explicitly rather than implied.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Named industries or client types:</strong> "DTC ecommerce brands" or "B2B SaaS companies" score higher than "businesses of all sizes."</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Specific outcomes:</strong> quantified results, named client wins, or concrete before-and-after improvements. Vague claims ("we get results") score lower.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Passage extraction quality:</strong> can a clean, accurate one or two sentence summary be pulled from each section without ambiguity or filler?</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://blog.google/products/search/passages/" target="_blank">Passage Ranking (Google Blog)</a></li>
-            <li><a href="https://ahrefs.com/blog/ai-search-optimization/" target="_blank">AI Search Optimization (Ahrefs)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 05 AEO READINESS -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">05</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">AEO Readiness</div>
-              <span class="criterion-pts">16 pts</span>
-            </div>
-            <p class="criterion-desc">Answer Engine Optimization. Is your content structured to surface in AI-generated answers? AI tools prioritize pages that answer questions directly and clearly, not pages that bury key information in long paragraphs.</p>
-          </div>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-chip">ChatGPT reached <strong>100 million users</strong> in 2 months, the fastest-growing consumer app in history</div>
-          <div class="stat-chip">AI-generated answers from tools like ChatGPT, Perplexity, and Google AIO are now the <strong>first result</strong> many users see</div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>FAQ section present:</strong> clear question-and-answer pairs exist on the homepage or linked FAQ page.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>FAQ schema applied:</strong> Q&amp;A content confirmed to crawlers via structured markup, not just visually formatted.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Question-framed headings:</strong> H2s and H3s phrased as questions anticipate what a prospect or AI tool would ask ("What kind of agencies do you work with?").</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Direct answers:</strong> the first sentence after each heading answers the heading's implied question rather than building up to the answer slowly.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Who / what / who content:</strong> who you are, what you do, and who you serve: all three clear and findable above the fold or within the first scroll.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Featured snippet structure:</strong> key facts stated as clean, extractable sentences, not buried in paragraph three of a section.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://www.searchenginejournal.com/answer-engine-optimization/" target="_blank">Answer Engine Optimization Guide (Search Engine Journal)</a></li>
-            <li><a href="https://ahrefs.com/blog/ai-search-optimization/" target="_blank">How to Optimize for AI Search (Ahrefs)</a></li>
-            <li><a href="https://developers.google.com/search/docs/appearance/featured-snippets" target="_blank">Featured Snippets (Google Search Central)</a></li>
-            <li><a href="https://searchengineland.com/google-ai-overviews-optimization-guide" target="_blank">AI Overviews Optimization Guide (Search Engine Land)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 06 E-E-A-T SIGNALS -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">06</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">E-E-A-T Signals</div>
-              <span class="criterion-pts">14 pts</span>
-            </div>
-            <p class="criterion-desc">Experience, Expertise, Authoritativeness, Trustworthiness. Google's quality framework and the backbone of how AI tools evaluate whether a source is worth citing. Sites that demonstrate real-world expertise consistently outperform those that merely claim it.</p>
-          </div>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-chip">E-E-A-T is a core framework in Google's <strong>Search Quality Evaluator Guidelines</strong></div>
-          <div class="stat-chip">Google added the first <strong>"E" for Experience</strong> in December 2022, recognising first-hand knowledge as distinct from expertise</div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Named team members with roles:</strong> real people with titles, not just "our team." Named individuals are a foundational trust signal for AI tools.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Author credentials:</strong> bios that cite experience, past clients, or certifications. Generic "about me" copy scores lower.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Demonstrated expertise:</strong> copy that shows knowledge through specifics rather than simply claiming expertise ("award-winning agency" with no evidence scores lower than a site with named case study outcomes).</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>External citations or press:</strong> mentions in other publications, podcast appearances, industry awards with named bodies.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Industry certifications:</strong> Google Partner, WooCommerce Expert, and similar. Listed with enough detail to verify.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>About / Team page linked:</strong> a dedicated page reachable from the homepage homepage navigation or footer.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Years in business stated:</strong> founding year or years of experience mentioned anywhere on the homepage.</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://static.googleusercontent.com/media/guidelines.raterhub.com/en//searchqualityevaluatorguidelines.pdf" target="_blank">Search Quality Evaluator Guidelines (Google)</a></li>
-            <li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank">Creating Helpful Content / E-E-A-T (Google Search Central)</a></li>
-            <li><a href="https://www.searchenginejournal.com/google-eat/what-is-eat/" target="_blank">E-E-A-T Explainer (Search Engine Journal)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 07 CONTENT FRESHNESS -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">07</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">Content Freshness</div>
-              <span class="criterion-pts">12 pts</span>
-            </div>
-            <p class="criterion-desc">AI tools and search engines deprioritise stale content. An outdated copyright year, a blog with nothing newer than 2022, or case studies from three redesigns ago all signal a site that has been left to gather dust.</p>
-          </div>
-        </div>
-
-        <div class="stats-row">
-          <div class="stat-chip">Google's <strong>Query Deserves Freshness</strong> algorithm actively boosts recently updated content for time-sensitive queries</div>
-          <div class="stat-chip">Sites that update content regularly see up to <strong>3x more inbound traffic</strong> (HubSpot)</div>
-        </div>
-
-        <div class="signals-section">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Copyright year in footer:</strong> is it the current year? A stale year is an immediate credibility failure. AI tools read it.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Date stamps:</strong> visible publish or update dates on posts or case studies.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Blog or news section:</strong> present with content published within the last 6 months.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>Sitemap lastmod dates:</strong> recently updated entries confirm to crawlers that the site is actively maintained.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Recent portfolio or case study work:</strong> does the work shown feel current, or does it reference tools and trends from several years ago?</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Technology references:</strong> are platforms and tools mentioned still current, or are deprecated technologies being cited as current expertise?</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://googleblog.blogspot.com/2010/06/our-new-search-index-caffeine.html" target="_blank">Caffeine Update / Freshness Algorithm (Google Blog)</a></li>
-            <li><a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" target="_blank">Sitemaps and Freshness Signals (Google Search Central)</a></li>
-            <li><a href="https://www.searchenginejournal.com/content-freshness-seo/" target="_blank">Content Freshness and Rankings (Search Engine Journal)</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- 08 LLMS.TXT -->
-      <div class="criterion">
-        <div class="criterion-header">
-          <span class="criterion-num">08</span>
-          <div>
-            <div class="criterion-title-row">
-              <div class="criterion-title">llms.txt</div>
-              <span class="criterion-pts">3 pts</span>
-            </div>
-            <p class="criterion-desc">A plain-text file at your site root that gives AI tools a curated, concise summary of what your site contains, written specifically for LLMs rather than humans. Think of it as a robots.txt for the AI era.</p>
-          </div>
-        </div>
-
-        <div class="grain-note">
-          <span class="grain-note-icon">🌱</span>
-          <span><strong>Emerging standard.</strong> llms.txt was proposed in September 2024 and adoption is still minimal. Absence will not significantly penalise your score, but presence is a meaningful differentiator. We will flag the opportunity with implementation guidance in your report.</span>
-        </div>
-
-        <div class="signals-section" style="margin-top: 16px;">
-          <div class="section-label">Signals measured</div>
-          <ul class="signal-list">
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>llms.txt present:</strong> file exists at <code>yourdomain.com/llms.txt</code> with a concise, accurate description of the site.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-              <div class="signal-text"><strong>llms-full.txt present:</strong> extended version with deeper context about services, team, and expertise.</div>
-            </li>
-            <li class="signal-item">
-              <div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
-              <div class="signal-text"><strong>Content quality:</strong> if present, does the file accurately and specifically describe the agency, or is it vague boilerplate that adds no signal value?</div>
-            </li>
-          </ul>
-        </div>
-
-        <div class="sources-section">
-          <div class="section-label">Sources</div>
-          <ul class="source-list">
-            <li><a href="https://llmstxt.org" target="_blank">llms.txt Specification (llmstxt.org)</a></li>
-            <li><a href="https://www.answer.ai/posts/2024-09-03-llmstxt.html" target="_blank">Original llms.txt Proposal by Jeremy Howard (Answer.AI)</a></li>
-            <li><a href="https://docs.anthropic.com" target="_blank">Anthropic Documentation</a></li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-  </div><!-- /scores-content -->
-
-  <!-- DISCLAIMER -->
-  <div class="disclaimer-section">
-    <div class="disclaimer-card">
-      <h3>Important notice</h3>
-      <p>Amplify scores are directional indicators grounded in established research and the collective expertise of Automattic. They are not definitive verdicts. A score reflects a point-in-time audit of your homepage and may not account for all site-specific context, audience nuances, or intentional design decisions.</p>
-      <p>Modifying your website based on Amplify recommendations is done at your own discretion and risk. Amplify does not guarantee specific outcomes as a result of acting on its recommendations. This includes changes to traffic, conversion rates, search rankings, or client enquiries.</p>
-      <p>Some signals in this tool are generated through AI analysis. These scores carry a higher degree of interpretive variance than programmatic checks and should be treated accordingly.</p>
-      <div class="disclaimer-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Automattic for Agencies Program</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-brand">Amplify · Automattic for Agencies</span>
-    <span class="footer-copy">© 2026 Automattic Inc.</span>
-    <div class="footer-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#">Automattic for Agencies Program</a>
-    </div>
-  </footer>
-
-  <script>
+<!-- NAV -->
+<nav>
+<div class="nav-left">
+<a class="nav-wordmark" href="amplify.html">
+<span class="nav-wordmark-title">Amplify</span>
+<span class="nav-wordmark-sub">by Automattic for Agencies</span>
+</a>
+</div>
+<div class="nav-right">
+<a class="btn-nav-ghost" href="amplify.html">Back to Amplify</a>
+<a class="btn-nav-primary" href="amplify.html#audit">Amplify a site</a>
+<button aria-label="Toggle theme" class="theme-toggle" id="themeToggle">☾</button>
+</div>
+</nav>
+<!-- PAGE HEADER -->
+<div class="page-header">
+<span class="page-header-eyebrow">Methodology</span>
+<h1>How scores are calculated</h1>
+<p class="page-header-sub">Every score Amplify produces is grounded in established research, published standards, and real conversion data. Here is what we measure, how we measure it, and the sources behind each signal.</p>
+<div class="disclaimer-card" style="margin-top: 28px;">
+<h3>How to read your score</h3>
+<p>Amplify scores are directional indicators grounded in established research and the collective expertise of Automattic. They are not definitive verdicts. A score reflects a point-in-time audit of your homepage and may not account for all site-specific context, audience nuances, or intentional design decisions.</p>
+<p>Modifying your website based on Amplify recommendations is done at your own discretion and risk. Amplify does not guarantee specific outcomes as a result of acting on its recommendations. This includes changes to traffic, conversion rates, search rankings, or client enquiries.</p>
+<p>Some signals in this tool are generated through AI analysis. These scores carry a higher degree of interpretive variance than programmatic checks and should be treated accordingly.</p>
+<div class="disclaimer-links">
+<a href="https://automattic.com/privacy/" rel="noopener" target="_blank">Privacy Policy</a>
+<a href="https://automattic.com/for-agencies/platform-agreement/" rel="noopener" target="_blank">Automattic for Agencies Platform Agreement</a>
+</div>
+</div>
+</div>
+<!-- MODE TABS -->
+<div class="mode-tabs-wrap">
+<div class="mode-tabs">
+<button class="mode-tab active" onclick="switchMode('human', this)">Human Mode</button>
+<button class="mode-tab" onclick="switchMode('ai', this)">AI Mode</button>
+</div>
+</div>
+<!-- CONTENT -->
+<div class="scores-content">
+<!-- HUMAN MODE PANEL -->
+<div class="mode-panel active" id="panel-human">
+<p class="mode-intro">Human Mode evaluates your site the way a potential client does, forming impressions in seconds, scanning for trust signals, and deciding whether you are worth reaching out to. The eight criteria below reflect the dimensions that research consistently shows influence whether a visitor becomes an enquiry.</p>
+<!-- SCORE OVERVIEW -->
+<div class="score-overview">
+<div>
+<div class="score-overview-label">Criteria breakdown — 100 points total</div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#trust-signals">Trust Signals</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-pts">18 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#contact-conversion">Contact &amp; Conversion</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:83%"></div></div><span class="score-bar-pts">15 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#seo">SEO</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:72%"></div></div><span class="score-bar-pts">13 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#mobile-experience">Mobile Experience</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:72%"></div></div><span class="score-bar-pts">13 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#content-quality">Content Quality</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:67%"></div></div><span class="score-bar-pts">12 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#design-experience">Design &amp; Experience</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:61%"></div></div><span class="score-bar-pts">11 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#accessibility">Accessibility</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:56%"></div></div><span class="score-bar-pts">10 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#audience-resonance">Audience Resonance</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:44%"></div></div><span class="score-bar-pts">8 pts</span></div>
+</div>
+<div>
+<div class="score-overview-label">Score thresholds</div>
+<div class="threshold-stack">
+<div class="threshold-item green">
+<span class="threshold-dot"></span>
+<div class="threshold-content">
+<div class="threshold-range">80 – 100</div>
+<div class="threshold-label">Strong</div>
+</div>
+</div>
+<div class="threshold-item amber">
+<span class="threshold-dot"></span>
+<div class="threshold-content">
+<div class="threshold-range">50 – 79</div>
+<div class="threshold-label">Needs work</div>
+</div>
+</div>
+<div class="threshold-item red">
+<span class="threshold-dot"></span>
+<div class="threshold-content">
+<div class="threshold-range">0 – 49</div>
+<div class="threshold-label">At risk</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 01 AUDIENCE RESONANCE -->
+<!-- 02 CONTENT QUALITY -->
+<!-- 03 DESIGN & EXPERIENCE -->
+<!-- 04 TRUST SIGNALS -->
+<!-- 05 MOBILE EXPERIENCE -->
+<!-- 06 SEO -->
+<!-- 07 ACCESSIBILITY -->
+<!-- 08 CONTACT & CONVERSION -->
+<div class="criterion" id="trust-signals">
+<div class="criterion-header">
+<span class="criterion-num">01</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Trust Signals</div>
+<span class="criterion-pts">18 pts</span>
+</div>
+<p class="criterion-desc">Does this site give a potential client enough evidence to feel safe handing over a project? All signals are evaluated on the homepage only. A link to a dedicated page counts as sufficient evidence.</p>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-chip"><strong>72%</strong> of consumers find testimonials more credible than brand claims</div>
+<div class="stat-chip">Testimonials drive a <strong>34% increase</strong> in conversions on sales pages</div>
+<div class="stat-chip"><strong>97%</strong> of consumers say reviews impact their purchasing decisions</div>
+<div class="stat-chip">5 or more reviews makes a service <strong>270% more likely to convert</strong></div>
+<div class="stat-chip">Above-fold award placement outperforms footer placement by <strong>40 to 60%</strong> in A/B tests</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Testimonials:</strong> present on or linked from the homepage. Attributed testimonials with a name, company, and photo score highest -- anonymous quotes score lower. Peer experience outweighs brand claims: 72% of consumers say testimonials are more credible than marketing copy, and a real person vouching for you removes doubt that nothing you write about yourself can.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Case studies:</strong> link or reference to case study content on the homepage. Quality signal: presence of quantified outcomes -- a problem, a solution, and a result with numbers. Specific results are harder to fabricate and far more convincing than claims. An agency that can show they increased a client's revenue by 40% is inherently more trustworthy than one that claims they "deliver results."</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Client logos:</strong> any client logos present on the homepage. Logos borrow trust from recognized brands. Seeing a client a visitor recognizes immediately elevates the agency's credibility and answers the unspoken question every prospect has: has anyone I have heard of trusted these people?</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Results and metrics:</strong> any quantified outcomes mentioned on the homepage -- for example, "increased conversions by 40%." Numbers are harder to fake and easier to believe than adjectives. They give a potential client something concrete to hold onto rather than another generic claim about quality.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Social proof volume:</strong> existence of reviews or ratings. Five or more is the threshold where trust begins to compound -- a single glowing review is forgettable, but a pattern of positive reviews is persuasive. Research consistently shows that volume of social proof matters as much as the quality of individual reviews.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Awards and recognition:</strong> any awards present on the homepage. Third-party validation signals that the agency's quality has been evaluated by someone other than themselves. Placement is also scored: above-fold visibility can outperform footer-only placement by 40 to 60% in A/B tests.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Team or About page:</strong> a link or blurb on the homepage is sufficient. Real people with names and faces signal legitimacy and make the agency feel approachable. Faceless agencies are harder to trust -- showing who is behind the work reduces the perceived risk of reaching out.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Years in business or client count:</strong> any mention on the homepage counts. Longevity signals stability and reduces the perceived risk of hiring an unproven outfit. Even a modest track record builds confidence when stated directly -- "150 clients" or "founded in 2012" gives a visitor something to anchor their trust on.</div>
+<span class="signal-pts">2 pts</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://boast.io/20-statistics-about-using-testimonials-in-marketing/" target="_blank">Testimonial Statistics (Boast)</a></li>
+<li><a href="https://optinmonster.com/social-proof-statistics/" target="_blank">Social Proof Statistics (OptinMonster)</a></li>
+<li><a href="https://wisernotify.com/blog/social-proof-statistics/" target="_blank">33 Social Proof Statistics (WiserNotify)</a></li>
+<li><a href="https://digitalagencynetwork.com/master-case-studies-to-attract-more-clients-quick-guide-for-digital-agencies/" target="_blank">Agency Case Study Guide (Digital Agency Network)</a></li>
+<li><a href="https://instapage.com/blog/digital-agency-case-studies" target="_blank">Agency Case Studies (Instapage)</a></li>
+<li><a href="https://emplicit.co/how-to-use-trust-badges-for-higher-conversions/" target="_blank">Trust Badge Placement (Emplicit)</a></li>
+<li><a href="https://hashmeta.com/blog/why-trust-blocks-increase-conversions-significantly-the-psychology-and-data-behind-digital-trust-signals/" target="_blank">Trust Blocks and Conversions (Hashmeta)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="contact-conversion">
+<div class="criterion-header">
+<span class="criterion-num">02</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Contact &amp; Conversion</div>
+<span class="criterion-pts">15 pts</span>
+</div>
+<p class="criterion-desc">A potential client has made it through the site and is ready to reach out. Does the site make that easy, or does it create friction at the worst possible moment?</p>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-chip">Reducing a form from 11 to 4 fields increases conversions by <strong>120%</strong></div>
+<div class="stat-chip">Action-oriented CTAs convert <strong>121% more</strong> than passive ones ("Learn More," "Submit")</div>
+<div class="stat-chip">First-person CTA phrasing boosts click-through by <strong>90%</strong></div>
+<div class="stat-chip">Above-fold CTAs outperform below-fold by <strong>304%</strong></div>
+<div class="stat-chip">Personalized CTAs convert <strong>202% better</strong> than generic defaults</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured via DOM analysis</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Contact information present:</strong> email address, phone number, or contact form visible on or linked from the homepage. If a potential client is ready to reach out and cannot easily find how, they will not. Removing that friction is the single most direct path to converting a site visit into an enquiry.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>CTA above the fold:</strong> at least one clear call-to-action is visible without scrolling. A motivated visitor should not have to scroll to act. Above-fold CTAs outperform below-fold by up to 304% -- every pixel of scroll is a potential exit point for someone who arrived ready to engage.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>CTA repetition:</strong> a call-to-action also appears near the bottom of the page. Not every visitor reads linearly. A CTA near the bottom catches the visitor who scrolled through the entire page but did not act at the top -- tying back to the Peak-End Rule in Design and Experience.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col">
+<span class="badge badge-prog">Programmatic</span>
+<span class="badge badge-salt">Context-dependent</span>
+</div>
+<div class="signal-text"><strong>Form field count:</strong> fewer fields reduces friction. The research threshold is 4 or fewer for maximum conversion, but project inquiry forms reasonably require more context. Every additional field is a reason not to complete the form -- reducing from 11 to 4 fields has been shown to increase conversions by 120%.</div>
+<span class="signal-pts">3 pts</span></li>
+</ul>
+</div>
+<div class="grain-note">
+<span class="grain-note-icon">⚠️</span>
+<span><strong>Form field count is context-dependent.</strong> Fewer fields is not always better. A client requesting a project estimate expects to provide more detail than a newsletter subscriber. Use this signal directionally.</span>
+</div>
+<div class="signals-section" style="margin-top:24px;">
+<div class="section-label">Signals measured via AI analysis</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>CTA clarity:</strong> is it obvious what happens when you click? Vague CTAs like "Learn more" create decision paralysis -- they could mean anything. Action-oriented, specific copy like "Start your project" or "Get a proposal" sets clear expectations, reduces uncertainty, and motivates action. Action-oriented CTAs convert 121% more than passive ones.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Response time promise:</strong> does the site mention how quickly they respond? Any commitment -- "we will get back to you within 24 hours" -- reduces the perceived risk of reaching out. Uncertainty about what happens after you submit a form is one of the most underappreciated sources of conversion friction.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Friction language near CTAs:</strong> does anything adjacent to the CTA create hesitation? Requiring account creation before contact, the absence of a privacy reassurance near a form, or ambiguous commitment language all reduce completion rates. Even a well-designed CTA can be undermined by a single friction-creating sentence nearby.</div>
+<span class="signal-pts">1 pt</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://ventureharbour.com/how-form-length-impacts-conversion-rates/" target="_blank">Form Length and Conversion Rates (Venture Harbour)</a></li>
+<li><a href="https://www.imagescape.com/media/filer_public/06/94/0694c7f4-8914-4598-8871-b857fbc12737/form_case_study.pdf" target="_blank">Form Field Case Study (Imagescape)</a></li>
+<li><a href="https://wisernotify.com/blog/call-to-action-stats/" target="_blank">CTA Statistics 2026 (WiserNotify)</a></li>
+<li><a href="https://blog.hubspot.com/marketing/personalized-calls-to-action-convert-better-data" target="_blank">Personalized CTAs (HubSpot)</a></li>
+<li><a href="https://avintivmedia.com/blog/cta-placement-strategies-that-work/" target="_blank">CTA Placement Strategies (Avintiv)</a></li>
+<li><a href="https://unbounce.com/conversion-rate-optimization/landing-page-cta-placement/" target="_blank">Best CTA Placement (Unbounce)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="seo">
+<div class="criterion-header">
+<span class="criterion-num">03</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">SEO</div>
+<span class="criterion-pts">13 pts</span>
+</div>
+<p class="criterion-desc">Can a potential client find this agency when they search? All SEO signals are sourced directly from Google Search Central documentation.</p>
+</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured via DOM analysis</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Title tag:</strong> present, unique, under 60 characters, and keyword-relevant. The title tag is the first thing both search engines and users read in results. It must accurately communicate what the page is about in language a potential client would recognize and click -- and stay within 60 characters so it is not truncated.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Meta description:</strong> present and under 160 characters. While not a direct ranking factor, a well-written meta description significantly influences click-through rate. It is often the only copy a potential client reads before deciding whether to visit -- a weak or missing meta description wastes that opportunity entirely.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>H1 and heading hierarchy:</strong> one H1 present, logical H1 to H2 to H3 structure. A clear H1 tells both search engines and users what the page is fundamentally about. Logical heading structure helps crawlers understand content hierarchy and helps human visitors scan to find relevant sections without reading every word.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Image alt text:</strong> meaningful images have descriptive alt attributes. Also feeds the Accessibility score. Alt text makes images readable to search crawlers and screen readers alike. Missing alt text means search engines see blank spaces where your best visual evidence -- case study screenshots, team photos, client logos -- should be.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Canonical tag:</strong> self-referencing canonical present. Canonicals prevent search engines from splitting ranking signals across duplicate or near-duplicate URLs. Without one, your own site can inadvertently compete against itself -- for example, the HTTP and HTTPS versions of a page each accruing partial authority instead of one strong signal.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>robots.txt and noindex:</strong> the page is not accidentally blocking crawlers. Misconfigured robots.txt or a stray noindex tag is one of the most common and damaging SEO errors -- it can silently remove a page from search results entirely. These are set once and often forgotten, making them a high-value check.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Structured data:</strong> any schema markup present on the homepage. Schema gives crawlers an unambiguous, machine-readable description of the site's content, reducing the chance of misrepresentation in AI-generated summaries and search results. This signal also feeds the AI Mode score.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Intrusive interstitials:</strong> pop-ups or overlays that block content on mobile. Google actively penalizes these in mobile rankings. They are also one of the most common reasons visitors bounce immediately -- particularly on mobile, where a full-screen overlay covering the content a user just clicked to see is a near-universal abandonment trigger. This signal also feeds the Mobile Experience score.</div>
+</li>
+</ul>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured via AI content analysis</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Keyword relevance:</strong> does the page content reflect what the agency actually does, in language clients would search for? A site full of insider jargon or generic terms fails to appear in the searches that matter. If the words on the page do not match the words a potential client types into Google, no amount of technical SEO will close the gap.</div>
+</li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Thin content:</strong> is there enough substance for Google to understand what this page is about? Pages with too little text give search engines almost nothing to parse and rank. Thin content also signals low effort -- a strong agency homepage should be able to explain its value, its work, and its clients in enough words for a crawler to form a clear picture.</div>
+</li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank">SEO Starter Guide (Google Search Central)</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/title-link" target="_blank">Title Links (Google Search Central)</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/snippet" target="_blank">Meta Descriptions (Google Search Central)</a></li>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls" target="_blank">Canonical URLs (Google Search Central)</a></li>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro" target="_blank">robots.txt Guide (Google Search Central)</a></li>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/block-indexing" target="_blank">Noindex (Google Search Central)</a></li>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing" target="_blank">Mobile-first Indexing (Google Search Central)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="mobile-experience">
+<div class="criterion-header">
+<span class="criterion-num">04</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Mobile Experience</div>
+<span class="criterion-pts">13 pts</span>
+</div>
+<p class="criterion-desc">A first impression increasingly happens on a phone. Does the site hold up when a potential client pulls it up on their device?</p>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-chip">Mobile accounts for <strong>62 to 64%</strong> of global web traffic as of 2026</div>
+<div class="stat-chip">Google minimum touch target: <strong>48x48px</strong> with 8px spacing</div>
+<div class="stat-chip">Minimum body font size: <strong>16px.</strong> Below this, iOS Safari auto-zooms.</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured via DOM analysis</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Viewport meta tag:</strong> <code>width=device-width, initial-scale=1</code> must be present. Without it, the page renders at desktop width and scales down to fit a phone screen -- making text unreadably small and touch targets impossibly tight before the visitor has read a single word.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Font size:</strong> body text must meet the 16px minimum. Below this threshold, iOS Safari triggers automatic zoom on form fields, disrupting the reading experience mid-interaction. It also strains readability for anyone on a small screen or with slightly reduced vision -- two groups that represent a large share of mobile visitors.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Touch targets:</strong> minimum 48x48px with 8px spacing per Google guidelines. Tappable elements that are too small or too close together cause mis-taps, frustration, and abandonment -- particularly on phones used one-handed. This signal also feeds the Design and Experience score via Fitts's Law.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Horizontal overflow:</strong> any content that bleeds beyond the viewport width and causes horizontal scrolling is flagged. Horizontal scrolling on mobile is a near-universal signal that the layout was never tested on an actual phone. It is disorienting for users and immediately signals that the site is not properly maintained.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Responsive breakpoints:</strong> does the CSS include mobile media queries? Their presence is the baseline signal that someone thought about the mobile experience at all. Their absence often correlates with a layout that breaks on smaller screens -- not guaranteed, but strongly predictive.</div>
+<span class="signal-pts">1 pt</span></li>
+</ul>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured via AI visual analysis</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Navigation usability:</strong> does the desktop nav collapse into something usable on mobile -- hamburger menu, drawer, or similar? Desktop navigation rarely translates directly to a phone. If the nav is unusable on mobile, a visitor cannot find anything -- and they will not stay to figure it out.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Content legibility:</strong> does the layout hold up at mobile viewport, or do elements overlap and stack awkwardly? A layout that works perfectly on desktop but breaks on mobile signals incomplete testing. Overlapping text, cropped images, and misaligned sections make the page feel broken -- and broken pages do not convert.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Intrusive interstitials:</strong> pop-ups or overlays that cover content on mobile. These are one of the most common reasons users abandon a page immediately on mobile. Google actively penalizes them, and users almost universally react negatively to content being blocked the moment they arrive on a page. This signal also feeds the SEO score.</div>
+<span class="signal-pts">2 pts</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://gs.statcounter.com/platform-market-share/desktop-mobile/worldwide/" target="_blank">Mobile Market Share (StatCounter)</a></li>
+<li><a href="https://www.mobiloud.com/blog/what-percentage-of-internet-traffic-is-mobile" target="_blank">Mobile Traffic Percentage (MobiLoud)</a></li>
+<li><a href="https://blog.mobileviewer.io/blog/touch-target-size/" target="_blank">Touch Target Size, Google Guidelines</a></li>
+<li><a href="https://fontfyi.com/blog/mobile-typography-accessibility/" target="_blank">Mobile Font Size Standards (FontFYI)</a></li>
+<li><a href="https://digital.gov/guides/mobile-principles/tap-targets" target="_blank">Size fonts and tap targets (Digital.gov)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="content-quality">
+<div class="criterion-header">
+<span class="criterion-num">05</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Content Quality</div>
+<span class="criterion-pts">12 pts</span>
+</div>
+<p class="criterion-desc">Is the writing compelling, clear, and professional? Errors and poor readability erode trust before a client has read a single sentence.</p>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-chip"><strong>97.2%</strong> of people say grammar influences their perception of a company</div>
+<div class="stat-chip">Pages with spelling or grammar errors have <strong>85% higher bounce rates</strong></div>
+<div class="stat-chip"><strong>59%</strong> of consumers are less likely to trust a brand with copy errors</div>
+<div class="stat-chip">Ideal Flesch Reading Ease score for web content: <strong>60 to 70</strong> (8th to 9th grade level)</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Flesch Reading Ease score</strong> calculated from extracted page text. A score of 60 to 70 targets 8th to 9th grade reading level -- widely accessible without being patronising. Below 50 means dense, tiring prose that potential clients will skim over without absorbing. Readable writing is not dumbing down; it is respecting the reader's time.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Sentence and paragraph length:</strong> a proxy for scannability. Long, unbroken walls of text discourage reading before a single word is processed. Short sentences and short paragraphs signal a site that respects how people actually read on screens -- which is rarely word by word.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Content volume:</strong> is there enough copy for a reader to understand what this agency does, or is the page mostly images? A page that is predominantly visual gives search crawlers and AI tools very little to parse. Sufficient text is the minimum required for the site to be understood, indexed, and cited accurately.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Heading and subheading usage:</strong> does the page use H2s and H3s to break up content, or is it one uninterrupted block? Headings do not just break up text visually -- they signal content structure to crawlers and help skimmers find what is relevant to them without reading every section sequentially.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Grammar and spelling:</strong> AI reads the page copy and flags visible errors. Errors in copy undermine everything else on the page. 59% of consumers say they are less likely to trust a brand with copy errors. A single noticeable typo or grammar mistake can undo dozens of other trust signals in a visitor's mind.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Passive voice density:</strong> excessive passive voice weakens authority and clarity. "Results were achieved" is less compelling than "We achieved." Active voice signals confidence and ownership -- it makes the agency the actor rather than a bystander in their own story. High passive voice density correlates with copy that feels evasive.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Buzzword and jargon density:</strong> overlaps with Audience Resonance but scores how the copy reads, not who it speaks to. Terms like "synergy," "disruptive," and "results-driven" are so overused they carry no information. They signal padding rather than substance and reduce the overall credibility of the copy around them.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Clarity per section:</strong> does each section say something meaningful, or is it filler? Every section should earn its place by communicating something specific. Filler content -- sections that look substantive but say nothing new -- dilutes the signal-to-noise ratio and makes the overall site feel less considered and less trustworthy.</div>
+<span class="signal-pts">1 pt</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://www.researchgate.net/publication/318086625_Article_Recall_Credibility_Lower_with_Grammar_Errors" target="_blank">Grammar Errors Lower Credibility (ResearchGate)</a></li>
+<li><a href="https://www.websitesuccess.co.uk/blog/what-do-typos-cost-you" target="_blank">Typos, SEO and Conversions (Website Success)</a></li>
+<li><a href="https://yoast.com/flesch-reading-ease-score/" target="_blank">Flesch Reading Ease Score (Yoast)</a></li>
+<li><a href="https://readable.com/readability/flesch-reading-ease-flesch-kincaid-grade-level/" target="_blank">Flesch Kincaid Grade Level (Readable)</a></li>
+<li><a href="https://vwo.com/blog/website-copy-readability/" target="_blank">Website Readability (VWO)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="design-experience">
+<div class="criterion-header">
+<span class="criterion-num">06</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Design &amp; Experience</div>
+<span class="criterion-pts">11 pts</span>
+</div>
+<p class="criterion-desc">Does the site look credible and feel effortless to use? All signals in this criterion are grounded in the Laws of UX, a framework of established psychological and behavioral principles applied to interface design.</p>
+</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured via DOM analysis</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Hick's Law:</strong> decision time increases with the number of choices. Nav item count, visible CTAs, and form fields are checked -- menus exceeding seven items are flagged. Too many choices slow decisions and cause visitors to leave without acting. A cleaner, more focused set of options gives visitors a clearer path to conversion.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Miller's Law:</strong> working memory holds approximately seven items. Elements competing for attention in key zones -- nav, hero, footer -- are counted and flagged when excessive. When too many elements vie for attention simultaneously, none of them register. This is a context signal for Hick's Law, not a standalone scoring criterion.</div>
+</li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Fitts's Law:</strong> CTA button dimensions, touch target sizes, and spacing between clickable elements. Small or crowded targets require more precision to click or tap, and mis-taps on mobile are frustrating. Button size directly affects conversion rate, particularly on mobile where fingers replace pointers. This signal also feeds the Mobile Experience score.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col">
+<span class="badge badge-prog">Programmatic</span>
+<span class="badge badge-salt">Context-dependent</span>
+</div>
+<div class="signal-text"><strong>Jakob's Law:</strong> users expect sites to work like other sites. Standard pattern conformance is checked -- logo placement, nav position, primary CTA, footer links. Visitors spend most of their time on other sites, so they bring those expectations to yours. Deviating from familiar patterns creates unnecessary cognitive friction that costs conversions.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Serial Position Effect:</strong> the first and last items in a series are best remembered. Key content placement in nav, hero, and page structure is evaluated. What you put first and last gets remembered. Key messages and CTAs placed at the start and end of sections have higher recall than those buried in the middle.</div>
+<span class="signal-pts">1 pt</span></li>
+</ul>
+</div>
+<div class="grain-note">
+<span class="grain-note-icon">⚠️</span>
+<span><strong>Jakob's Law is context-dependent.</strong> Agencies with intentionally non-standard designs should not be penalized the same as those with oversight-driven deviations. Use this signal as a directional indicator, not a verdict.</span>
+</div>
+<div class="signals-section" style="margin-top:24px;">
+<div class="section-label">Signals measured via AI visual analysis</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Aesthetic-Usability Effect:</strong> beautiful design is perceived as more usable. Overall visual polish scored from a screenshot. Visually polished design builds immediate trust and is perceived as more capable, even before a word is read. Low visual quality is often the unconscious reason a visitor bounces within the first five seconds.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Von Restorff Effect:</strong> the element that stands out gets remembered. Does the primary CTA visually differentiate from everything around it? If the CTA does not stand out from the surrounding content, visitors cannot act on it even when they want to. Differentiation drives attention, and attention drives clicks.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col">
+<span class="badge badge-ai">AI</span>
+<span class="badge badge-salt">Context-dependent</span>
+</div>
+<div class="signal-text"><strong>Peak-End Rule:</strong> people judge an experience by its most intense moment and its ending. The hero -- the peak -- and the final CTA or footer -- the end -- are evaluated. A weak hero or a poorly considered footer anchor can drag down the overall impression of a visit, even if the middle sections are strong.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Gestalt Laws</strong> (Proximity, Common Region, Similarity, Uniform Connectedness, Praegnanz): are related elements grouped? Is the layout clean or cluttered? Scored as one composite signal. Cluttered or ungrouped layouts make pages harder to process and feel less credible. Clear visual grouping helps visitors understand page structure instantly -- without having to think about it.</div>
+<span class="signal-pts">1 pt</span></li>
+</ul>
+</div>
+<div class="grain-note">
+<span class="grain-note-icon">⚠️</span>
+<span><strong>Peak-End Rule is context-dependent.</strong> This signal assumes the hero is the site's strongest moment, which is not always the case. Use the score directionally and consider what your actual peak moment is.</span>
+</div>
+<div class="sources-section" style="margin-top:20px;">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://lawsofux.com/" target="_blank">Laws of UX (lawsofux.com)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="accessibility">
+<div class="criterion-header">
+<span class="criterion-num">07</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Accessibility</div>
+<span class="criterion-pts">10 pts</span>
+</div>
+<p class="criterion-desc">Does the site work for everyone, regardless of how they experience the web? Amplify measures against the WCAG AA conformance level, the widely accepted standard referenced by courts and regulators globally.</p>
+</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured via DOM analysis</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Image alt text</strong> <span class="wcag-ref">WCAG 1.1.1</span>: all meaningful images have descriptive alt attributes. Screen readers read alt text aloud to visually impaired users -- without it, meaningful images are completely invisible to them. Alt text also gives crawlers richer context about the page's content. Also feeds SEO.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Color contrast ratio</strong> <span class="wcag-ref">WCAG 1.4.3</span>: minimum 4.5:1 for normal text, 3:1 for large text. Low contrast makes text hard to read for anyone with reduced vision, in bright sunlight, or on a lower-quality screen. The WCAG AA threshold is a legal standard in many jurisdictions, not just a best practice.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Form labels</strong> <span class="wcag-ref">WCAG 1.3.1</span>: all input fields have associated labels. Unlabeled form fields break the experience for screen reader users entirely -- they cannot tell what a field is asking without a label. Labels also reduce ambiguity for all users, which reduces form abandonment.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Language attribute</strong> <span class="wcag-ref">WCAG 3.1.1</span>: <code>&lt;html lang=""&gt;</code> present so screen readers identify the language. Without it, a French-language site might be read aloud with English pronunciation, making it incomprehensible to its intended audience. A one-attribute fix that affects every screen reader user on the page.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Skip navigation link</strong> <span class="wcag-ref">WCAG 2.4.1</span>: allows keyboard users to skip past repeated nav. Without a skip link, keyboard users must tab through every navigation item on every page load -- a slow, frustrating barrier that affects all keyboard-only users, not just those using screen readers.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>No auto-playing media</strong> <span class="wcag-ref">WCAG 1.4.2</span>: audio or video that plays without user action. Unexpected audio startles users, is disruptive in quiet environments, and is particularly disorienting for screen reader users who suddenly cannot hear their own tool. Auto-playing video also drains mobile data without consent.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Heading structure</strong> <span class="wcag-ref">WCAG 1.3.1</span>: logical, non-skipping hierarchy. Screen reader users navigate by headings -- it is their table of contents. Skipped levels or multiple H1s break this navigation model entirely. A logical heading structure also reinforces SEO signals and helps all users scan page structure.</div>
+<span class="signal-pts">1 pt</span></li>
+</ul>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured via AI visual analysis</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Focus indicators</strong> <span class="wcag-ref">WCAG 2.4.7</span>: are interactive elements visually distinguishable when focused? Users who navigate by keyboard need to see which element is currently focused. Hidden focus rings -- often removed by CSS resets -- make a page effectively unusable for keyboard-only navigation.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-phase2">Phase 2</span></div>
+<div class="signal-text"><strong>Keyboard navigability:</strong> full keyboard-only navigation testing requires interaction and will be added in a future release.</div>
+</li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank">WCAG, Web Content Accessibility Guidelines (W3C)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="audience-resonance">
+<div class="criterion-header">
+<span class="criterion-num">08</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Audience Resonance</div>
+<span class="criterion-pts">8 pts</span>
+</div>
+<p class="criterion-desc">Does this site feel made for the right client? Within seconds of landing, a potential client should feel like the site is speaking directly to them.</p>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-chip">First impressions form in as little as <strong>50 milliseconds</strong></div>
+<div class="stat-chip">Users give a homepage <strong>3 to 5 seconds</strong> to earn trust</div>
+<div class="stat-chip"><strong>75%</strong> of consumers judge credibility based on website design alone</div>
+<div class="stat-chip">Specific, targeted messaging converts <strong>202% better</strong> than generic copy</div>
+<div class="stat-chip">Only <strong>13%</strong> of customers feel brands truly understand their needs</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>5-second clarity test:</strong> can an AI reading the homepage answer what this agency does, who they serve, and why a client should care? Visitors decide whether to stay within 3 to 5 seconds. If the page cannot answer those three questions in that window, the opportunity is lost -- regardless of how strong the rest of the site is.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Audience specificity:</strong> does the copy call out a specific type of client, industry, or pain point rather than speaking to everyone? Specific messaging converts 202% better than generic. "We build WooCommerce stores for DTC brands" creates immediate recognition in the right visitor -- a feeling of "that's me" -- that no generic copy can replicate.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Pain point language:</strong> does the homepage reflect the actual problems potential clients have, in the words they would use? When a visitor reads copy that names their exact problem in their own language, they feel understood. That moment of recognition is what turns a casual browse into a genuine enquiry.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Generic claim detection:</strong> hollow buzzwords -- "results-driven," "passionate," "full-service" -- with no supporting specifics lower the score. These phrases describe every agency equally, which means they differentiate none of them. Generic claims are the single most common reason an agency homepage fails to convert despite looking professional.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Hero headline clarity:</strong> does the H1 communicate the value proposition immediately, or is it vague? The H1 is the single highest-attention element on the page. A vague H1 like "Welcome to our agency" wastes that attention entirely. A specific one like "We build WooCommerce stores for independent brands" earns the next scroll.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Above-fold content presence:</strong> is there meaningful text above the fold, or only a full-screen image or video with no copy? A page that is all visual and no text gives visitors nothing to evaluate in the critical first seconds -- and gives search engines and AI tools nothing to index. Meaningful above-fold copy is the minimum signal that this page exists to communicate something.</div>
+<span class="signal-pts">1 pt</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://www.tandfonline.com/doi/abs/10.1080/01449290500330448" target="_blank">50ms First Impression Study (Behaviour &amp; Information Technology)</a></li>
+<li><a href="https://www.nngroup.com/articles/first-impressions-human-automaticity/" target="_blank">First Impressions (Nielsen Norman Group)</a></li>
+<li><a href="https://www.looppanel.com/blog/five-second-testing" target="_blank">Five-Second Testing (Looppanel)</a></li>
+<li><a href="https://www.trajectorywebdesign.com/blog/b2b-website-messaging" target="_blank">B2B Website Messaging Framework (Trajectory)</a></li>
+<li><a href="https://blog.hubspot.com/marketing/personalized-calls-to-action-convert-better-data" target="_blank">Personalized CTAs Convert 202% Better (HubSpot)</a></li>
+</ul>
+</div>
+</div></div><!-- /panel-human -->
+<!-- AI MODE PANEL -->
+<div class="mode-panel" id="panel-ai">
+<p class="mode-intro">AI Mode evaluates your site the way AI tools do: crawling it, parsing its structure, extracting entities, and deciding whether to cite it in a generated answer. As potential clients increasingly use tools like ChatGPT and Perplexity to find agencies, this score reflects how well your site performs for that audience.</p>
+<!-- SCORE OVERVIEW -->
+<div class="score-overview">
+<div>
+<div class="score-overview-label">Criteria breakdown — 100 points total</div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#technical-health">Technical Health</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-pts">20 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#structured-data">Structured Data</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div><span class="score-bar-pts">18 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#aeo-readiness">AEO Readiness</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div><span class="score-bar-pts">16 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#eeat-signals">E-E-A-T Signals</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:70%"></div></div><span class="score-bar-pts">14 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#content-freshness">Content Freshness</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:60%"></div></div><span class="score-bar-pts">12 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#entity-clarity">Entity Clarity</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:50%"></div></div><span class="score-bar-pts">10 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#content-specificity">Content Specificity</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:35%"></div></div><span class="score-bar-pts">7 pts</span></div>
+<div class="score-bar-row"><span class="score-bar-name"><a class="score-bar-link" href="#llms-txt">llms.txt</a></span><div class="score-bar-track"><div class="score-bar-fill" style="width:15%"></div></div><span class="score-bar-pts">3 pts</span></div>
+</div>
+<div>
+<div class="score-overview-label">Score thresholds</div>
+<div class="threshold-stack">
+<div class="threshold-item green">
+<span class="threshold-dot"></span>
+<div class="threshold-content">
+<div class="threshold-range">80 – 100</div>
+<div class="threshold-label">Strong</div>
+</div>
+</div>
+<div class="threshold-item amber">
+<span class="threshold-dot"></span>
+<div class="threshold-content">
+<div class="threshold-range">50 – 79</div>
+<div class="threshold-label">Needs work</div>
+</div>
+</div>
+<div class="threshold-item red">
+<span class="threshold-dot"></span>
+<div class="threshold-content">
+<div class="threshold-range">0 – 49</div>
+<div class="threshold-label">At risk</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 01 TECHNICAL HEALTH -->
+<!-- 02 STRUCTURED DATA -->
+<!-- 03 ENTITY CLARITY -->
+<!-- 04 CONTENT SPECIFICITY -->
+<!-- 05 AEO READINESS -->
+<!-- 06 E-E-A-T SIGNALS -->
+<!-- 07 CONTENT FRESHNESS -->
+<!-- 08 LLMS.TXT -->
+<div class="criterion" id="technical-health">
+<div class="criterion-header">
+<span class="criterion-num">01</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Technical Health</div>
+<span class="criterion-pts">20 pts</span>
+</div>
+<p class="criterion-desc">Can AI tools access, crawl, and render your site? If a crawler cannot reach your content, nothing else matters. This criterion covers both accessibility and raw performance.</p>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-chip"><strong>53%</strong> of mobile users abandon a page that takes more than 3 seconds to load</div>
+<div class="stat-chip">A <strong>1-second delay</strong> in load time reduces conversions by 7%</div>
+<div class="stat-chip">Core Web Vitals became an official <strong>Google ranking factor</strong> in 2021</div>
+<div class="stat-chip">HTTPS has been a confirmed <strong>Google ranking signal</strong> since 2014</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>robots.txt:</strong> present and not blocking AI crawlers -- GPTBot, ClaudeBot, anthropic-ai -- alongside standard Googlebot. Many sites use blanket Disallow rules that were never intended to block AI crawlers but do. If crawlers cannot reach the content, no other optimization matters. This is the most fundamental gate in AI Mode.</div>
+<span class="signal-pts">4 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>noindex:</strong> the homepage and key content pages are not flagged to prevent indexing. A noindex on the homepage is almost always a development-environment mistake that made it to production. The result is immediate and severe: the page is completely absent from search and AI crawl queues.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>HTTPS:</strong> SSL active with no mixed content warnings. SSL is not just a trust signal for visitors -- it is a prerequisite for Google ranking. Mixed content warnings mean parts of the page are served over HTTP even on an HTTPS site, triggering browser security warnings that erode trust immediately.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Sitemap:</strong> present, linked in robots.txt, with valid lastmod dates so crawlers know what has been updated. Without accurate lastmod dates, crawlers guess which content to re-index -- and may skip recently updated pages entirely. A sitemap is how you tell crawlers what matters and when it changed.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>JavaScript dependency:</strong> critical content readable in raw HTML, not locked behind client-side rendering that crawlers cannot execute. Many AI crawlers and some search bots do not execute JavaScript. If your core content only renders after JS runs, crawlers see a blank page. Static-first content is the safe baseline for discoverability.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Core Web Vitals:</strong> LCP (load speed), CLS (layout stability), and INP (interactivity) measured against Google's thresholds. Core Web Vitals are an official Google ranking factor. Poor scores directly affect search rankings. Slow loads cause 53% of mobile users to abandon before a page finishes loading -- and a 1-second delay reduces conversions by 7%.</div>
+<span class="signal-pts">7 pts</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro" target="_blank">Robots.txt Guide (Google Search Central)</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/core-web-vitals" target="_blank">Core Web Vitals (Google Search Central)</a></li>
+<li><a href="https://web.dev/articles/vitals" target="_blank">Core Web Vitals (web.dev)</a></li>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/overview-google-crawlers" target="_blank">Google Crawlers Overview (Google Search Central)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="structured-data">
+<div class="criterion-header">
+<span class="criterion-num">02</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Structured Data</div>
+<span class="criterion-pts">18 pts</span>
+</div>
+<p class="criterion-desc">Schema markup tells AI tools exactly what your site is about rather than making them infer it. It is the difference between an AI accurately describing your agency and producing a generic summary.</p>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-chip">Sites with structured data see an average <strong>20 to 30% higher CTR</strong> in search results</div>
+<div class="stat-chip">FAQ schema can take up to <strong>50% more SERP real estate</strong>, increasing visibility</div>
+<div class="stat-chip"><strong>JSON-LD</strong> is Google's preferred structured data format</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Organization schema:</strong> name, URL, logo, description, and sameAs social profiles marked up in JSON-LD. Without it, AI tools have to infer who you are from raw HTML. With it, they get an unambiguous, machine-readable record of your business name, logo, location, and where else you exist on the web.</div>
+<span class="signal-pts">5 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Service schema:</strong> individual services listed with structured markup, not just free-form text. Service schema turns prose descriptions into structured records that AI tools can summarize and cite with confidence. Without it, your services exist as unstructured text that may or may not be parsed correctly -- and is frequently summarized generically.</div>
+<span class="signal-pts">4 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>FAQ schema:</strong> question-and-answer content marked up for direct extraction by AI tools and search engines. FAQ schema can take up to 50% more SERP real estate in featured answers. More importantly, it makes your Q&amp;A content directly extractable by AI tools looking for authoritative, well-structured answers to surface to users.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Review / AggregateRating schema:</strong> if testimonials or reviews are present, are they marked up so search engines and AI can read them? Even if you have compelling testimonials on the page, unmarked reviews are invisible to crawlers. Review schema lets your social proof travel beyond your own homepage and appear in AI-generated answers.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Open Graph and Twitter Card meta:</strong> og:title, og:description, og:image, and Twitter card type all present and accurate. These tags control how your site appears when shared on social platforms and in AI-generated link previews. Without them, previews show whatever the platform guesses -- often poorly cropped images and truncated text that misrepresent the agency.</div>
+<span class="signal-pts">5 pts</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://schema.org/" target="_blank">Schema.org (Full vocabulary)</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" target="_blank">Structured Data Overview (Google Search Central)</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/structured-data/organization" target="_blank">Organization Schema (Google Search Central)</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/structured-data/faqpage" target="_blank">FAQ Schema (Google Search Central)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="aeo-readiness">
+<div class="criterion-header">
+<span class="criterion-num">03</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">AEO Readiness</div>
+<span class="criterion-pts">16 pts</span>
+</div>
+<p class="criterion-desc">Answer Engine Optimization. Is your content structured to surface in AI-generated answers? AI tools prioritize pages that answer questions directly and clearly, not pages that bury key information in long paragraphs.</p>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-chip">ChatGPT reached <strong>100 million users</strong> in 2 months, the fastest-growing consumer app in history</div>
+<div class="stat-chip">AI-generated answers from tools like ChatGPT, Perplexity, and Google AIO are now the <strong>first result</strong> many users see</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>FAQ section present:</strong> clear question-and-answer pairs exist on the homepage or linked FAQ page. FAQ sections signal that the page was written with questions in mind -- the most natural format for AI tools to extract and surface in generated answers. They are also the most direct way to appear in featured snippets.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>FAQ schema applied:</strong> Q&amp;A content confirmed to crawlers via structured markup, not just visually formatted. Visual FAQ formatting is not enough -- AI tools and search engines need machine-readable markup to extract and cite specific Q&amp;A pairs with confidence. The schema is what elevates a visual design decision into a search signal.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Question-framed headings:</strong> H2s and H3s phrased as questions anticipate what a prospect or AI tool would ask -- for example, "What kind of agencies do you work with?" Headings phrased as questions directly match the format of user queries, telling AI tools exactly what each section answers and making the content far more likely to be cited.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Direct answers:</strong> the first sentence after each heading answers the heading's implied question rather than building up to the answer slowly. AI tools favor pages where the answer appears immediately after the question, not buried in a paragraph. Every heading should be followed by a sentence that directly and concisely answers it.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Who / what / who content:</strong> who you are, what you do, and who you serve -- all three clear and findable above the fold or within the first scroll. AI-generated recommendations require confidence about these three things. Missing any one of them means the AI cannot accurately represent the business when answering a user's query.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Featured snippet structure:</strong> key facts stated as clean, extractable sentences, not buried in paragraph three of a section. AI tools pull sentences from web pages to construct answers. Dense paragraphs buried in long copy rarely get cited. Key facts stated as clear, standalone sentences are far more likely to surface in AI-generated responses.</div>
+<span class="signal-pts">3 pts</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://www.searchenginejournal.com/answer-engine-optimization/" target="_blank">Answer Engine Optimization Guide (Search Engine Journal)</a></li>
+<li><a href="https://ahrefs.com/blog/ai-search-optimization/" target="_blank">How to Optimize for AI Search (Ahrefs)</a></li>
+<li><a href="https://developers.google.com/search/docs/appearance/featured-snippets" target="_blank">Featured Snippets (Google Search Central)</a></li>
+<li><a href="https://searchengineland.com/google-ai-overviews-optimization-guide" target="_blank">AI Overviews Optimization Guide (Search Engine Land)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="eeat-signals">
+<div class="criterion-header">
+<span class="criterion-num">04</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">E-E-A-T Signals</div>
+<span class="criterion-pts">14 pts</span>
+</div>
+<p class="criterion-desc">Experience, Expertise, Authoritativeness, Trustworthiness. Google's quality framework and the backbone of how AI tools evaluate whether a source is worth citing. Sites that demonstrate real-world expertise consistently outperform those that merely claim it.</p>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-chip">E-E-A-T is a core framework in Google's <strong>Search Quality Evaluator Guidelines</strong></div>
+<div class="stat-chip">Google added the first <strong>"E" for Experience</strong> in December 2022, recognising first-hand knowledge as distinct from expertise</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Named team members with roles:</strong> real people with titles, not just "our team." Google's Search Quality Evaluator Guidelines treat anonymous content as lower quality. Named individuals give AI tools a foundation for assessing authoritativeness -- a site that hides its team has no individual credibility for AI to evaluate.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Author credentials:</strong> bios that cite experience, past clients, or certifications. Generic "about me" copy adds nothing to E-E-A-T. Credentials that cite specific experience, named clients, or verifiable qualifications give AI tools -- and potential clients -- concrete evidence to evaluate expertise rather than a claim to take on faith.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Demonstrated expertise:</strong> copy that shows knowledge through specifics rather than simply claiming it. Claiming to be an expert is easy. Showing expertise through specific case outcomes, named techniques, or detailed service descriptions is harder to fake and far more convincing -- to both AI tools and human visitors.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>External citations or press:</strong> mentions in other publications, podcast appearances, industry awards with named bodies. Third-party validation from named publications or award bodies confirms the agency exists and has been recognized beyond its own website -- a crucial signal for knowledge graph credibility that self-published content cannot provide.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Industry certifications:</strong> Google Partner, WooCommerce Expert, and similar badges listed with enough detail to verify. Certifications carry implicit third-party verification -- they signal that an external body has evaluated the agency's skills and found them sufficient. Generic "trusted by" claims without named certifications carry far less weight.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>About / Team page linked:</strong> a dedicated page reachable from homepage navigation or footer. A linked team page confirms the team exists and is worth exploring. Its absence makes it harder for AI tools and potential clients to find the people behind the work -- and harder to build the trust that an anonymous homepage alone cannot establish.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Years in business stated:</strong> founding year or years of experience mentioned anywhere on the homepage. Longevity is a proxy for stability and track record. An agency that has been operating for seven years is statistically less likely to disappear before a project is delivered -- and AI tools treat duration as a credibility signal.</div>
+<span class="signal-pts">2 pts</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://static.googleusercontent.com/media/guidelines.raterhub.com/en//searchqualityevaluatorguidelines.pdf" target="_blank">Search Quality Evaluator Guidelines (Google)</a></li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/creating-helpful-content" target="_blank">Creating Helpful Content / E-E-A-T (Google Search Central)</a></li>
+<li><a href="https://www.searchenginejournal.com/google-eat/what-is-eat/" target="_blank">E-E-A-T Explainer (Search Engine Journal)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="content-freshness">
+<div class="criterion-header">
+<span class="criterion-num">05</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Content Freshness</div>
+<span class="criterion-pts">12 pts</span>
+</div>
+<p class="criterion-desc">AI tools and search engines deprioritise stale content. An outdated copyright year, a blog with nothing newer than 2022, or case studies from three redesigns ago all signal a site that has been left to gather dust.</p>
+</div>
+</div>
+<div class="stats-row">
+<div class="stat-chip">Google's <strong>Query Deserves Freshness</strong> algorithm actively boosts recently updated content for time-sensitive queries</div>
+<div class="stat-chip">Sites that update content regularly see up to <strong>3x more inbound traffic</strong> (HubSpot)</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Copyright year in footer:</strong> is it the current year? A stale copyright year is one of the most common credibility failures on agency sites. It tells every visitor -- and every crawler -- that nobody is actively maintaining this site. AI tools read footer copyright dates as a freshness signal.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Date stamps:</strong> visible publish or update dates on posts or case studies. Visible dates let crawlers and AI tools assess how recently the site was updated -- a key input for freshness ranking signals. They also give human visitors confidence that the content they are reading reflects the agency's current state, not its state from three years ago.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Blog or news section:</strong> present with content published within the last 6 months. Regular content signals an active, engaged agency. A blog section with nothing newer than 18 months ago is one of the most common freshness failures -- it tells crawlers and visitors alike that the agency has gone quiet.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Sitemap lastmod dates:</strong> recently updated entries confirm to crawlers that the site is actively maintained. Accurate lastmod dates allow crawlers to prioritize re-indexing efficiently. Without them, crawlers may skip recently updated content entirely and keep serving stale versions of pages in search results and AI-generated answers.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Recent portfolio or case study work:</strong> does the work shown feel current, or does it reference tools and trends from several years ago? Case studies referencing outdated platforms or technologies signal stagnation. Work samples should reflect the agency's current capabilities, not its state from the last redesign.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Technology references:</strong> are platforms and tools mentioned still current, or are deprecated technologies being cited as current expertise? Citing deprecated technologies as active expertise is a trust-breaking signal for both potential clients and AI tools parsing the page for credibility. It suggests the agency has not kept pace with the industry.</div>
+<span class="signal-pts">1 pt</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://googleblog.blogspot.com/2010/06/our-new-search-index-caffeine.html" target="_blank">Caffeine Update / Freshness Algorithm (Google Blog)</a></li>
+<li><a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap" target="_blank">Sitemaps and Freshness Signals (Google Search Central)</a></li>
+<li><a href="https://www.searchenginejournal.com/content-freshness-seo/" target="_blank">Content Freshness and Rankings (Search Engine Journal)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="entity-clarity">
+<div class="criterion-header">
+<span class="criterion-num">06</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Entity Clarity</div>
+<span class="criterion-pts">10 pts</span>
+</div>
+<p class="criterion-desc">Is your agency identifiable as a distinct, named entity with a clear type, location, and specialty? AI tools build knowledge graphs from the web. Sites with clear entity signals get described accurately. Vague sites get ignored or misrepresented.</p>
+</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Named entity identification:</strong> can an AI extract the business name, type, and core specialty in a single sentence from the homepage? AI tools build knowledge graphs by extracting entities from web pages. If a single clear sentence cannot identify the business name, type, and specialty, the AI has to guess -- and guesses are often generic or inaccurate.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Service specificity:</strong> "WordPress agency specialising in WooCommerce for DTC brands" scores far higher than "we build websites for businesses." Specificity is what differentiates one agency from the next in an AI-generated answer. A citation-ready description gets cited. A generic one gets passed over in favor of a more specific competitor.</div>
+<span class="signal-pts">3 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Geographic or market clarity:</strong> location, timezone, or market served is stated somewhere on the homepage. Location or market focus narrows the entity in ways that make AI citations more accurate and more useful. An agency with no location signal cannot be matched to regionally specific queries -- a significant missed opportunity.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Consistent identity signals:</strong> name, specialty, and positioning are consistent across the hero, about section, and footer. Contradictory signals across zones -- describing the agency differently in the hero versus the about section -- confuse both visitors and crawlers, reducing entity confidence and making accurate AI representation less likely.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>Social profile links:</strong> LinkedIn and other professional profiles linked from the footer. Social profile links provide cross-reference points that help search engines and AI tools verify the agency's identity across the web -- a key input for knowledge graph accuracy. They also give potential clients a second place to validate the agency before reaching out.</div>
+<span class="signal-pts">2 pts</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://developers.google.com/search/docs/appearance/site-names" target="_blank">Site Names and Entity Understanding (Google Search Central)</a></li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide" target="_blank">SEO Starter Guide (Google Search Central)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="content-specificity">
+<div class="criterion-header">
+<span class="criterion-num">07</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">Content Specificity</div>
+<span class="criterion-pts">7 pts</span>
+</div>
+<p class="criterion-desc">Specific copy produces specific AI summaries. Generic copy produces generic answers that fail to differentiate your agency. When a potential client asks an AI tool "find me a WordPress agency for my ecommerce brand," only specific sites get cited.</p>
+</div>
+</div>
+<div class="signals-section">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Service detail:</strong> each service described with what it is, who it is for, and what outcome it delivers. Category labels like "web design" or "development" tell visitors nothing they could not get from any agency. Descriptions that cover the what, who, and outcome are specific enough to convert -- and specific enough for AI tools to cite accurately.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Named platforms and technologies:</strong> WordPress, WooCommerce, Shopify, Figma, and other tools stated explicitly rather than implied. Explicitly naming platforms is how AI tools match an agency to a specific client query like "find me a WooCommerce agency." Implied expertise is never surfaced in AI-generated answers -- only what is stated explicitly.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Named industries or client types:</strong> "DTC ecommerce brands" or "B2B SaaS companies" score higher than "businesses of all sizes." AI tools answer queries like "find me a WordPress agency for my ecommerce brand." Only agencies that have explicitly named the industry will be matched to that query. Generic descriptions match no one specifically.</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Specific outcomes:</strong> quantified results, named client wins, or concrete before-and-after improvements. Quantified results are harder to fake and more convincing than vague claims. Named client wins give potential clients a benchmark for what they might expect -- and give AI tools something specific to cite rather than a generic "we get results."</div>
+<span class="signal-pts">1 pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Passage extraction quality:</strong> can a clean, accurate one or two sentence summary be pulled from each section without ambiguity or filler? AI tools construct answers by pulling clear sentences from web pages. Ambiguous, filler-heavy sections are skipped entirely. Every section should contain at least one clean, quotable sentence that accurately represents the agency.</div>
+<span class="signal-pts">1 pt</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://blog.google/products/search/passages/" target="_blank">Passage Ranking (Google Blog)</a></li>
+<li><a href="https://ahrefs.com/blog/ai-search-optimization/" target="_blank">AI Search Optimization (Ahrefs)</a></li>
+</ul>
+</div>
+</div><div class="criterion" id="llms-txt">
+<div class="criterion-header">
+<span class="criterion-num">08</span>
+<div>
+<div class="criterion-title-row">
+<div class="criterion-title">llms.txt</div>
+<span class="criterion-pts">3 pts</span>
+</div>
+<p class="criterion-desc">A plain-text file at your site root that gives AI tools a curated, concise summary of what your site contains, written specifically for LLMs rather than humans. Think of it as a robots.txt for the AI era.</p>
+</div>
+</div>
+<div class="grain-note">
+<span class="grain-note-icon">🌱</span>
+<span><strong>Emerging standard.</strong> llms.txt was proposed in September 2024 and adoption is still minimal. Absence will not significantly penalise your score, but presence is a meaningful differentiator. We will flag the opportunity with implementation guidance in your report.</span>
+</div>
+<div class="signals-section" style="margin-top: 16px;">
+<div class="section-label">Signals measured</div>
+<ul class="signal-list">
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>llms.txt present:</strong> file exists at <code>yourdomain.com/llms.txt</code> with a concise, accurate description of the site. An llms.txt file gives AI tools a curated briefing on what the site contains -- written for machines, not humans. It is the fastest way to ensure AI tools understand the agency accurately without having to infer it from raw HTML.</div>
+<span class="signal-pts">2 pts</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
+<div class="signal-text"><strong>llms-full.txt present:</strong> extended version with deeper context about services, team, and expertise. The full version provides richer context for AI tools that do deeper research before generating an answer or recommendation. Its presence signals a higher level of intentional AI-readiness.</div>
+<span class="signal-pts">½ pt</span></li>
+<li class="signal-item">
+<div class="signal-badge-col"><span class="badge badge-ai">AI</span></div>
+<div class="signal-text"><strong>Content quality:</strong> if present, does the file accurately and specifically describe the agency, or is it vague boilerplate that adds no signal value? A generic llms.txt is nearly as useless as none at all. The benefit comes entirely from specificity -- named services, named team members, named client types, and honest scope of work.</div>
+<span class="signal-pts">½ pt</span></li>
+</ul>
+</div>
+<div class="sources-section">
+<div class="section-label">Sources</div>
+<ul class="source-list">
+<li><a href="https://llmstxt.org" target="_blank">llms.txt Specification (llmstxt.org)</a></li>
+<li><a href="https://www.answer.ai/posts/2024-09-03-llmstxt.html" target="_blank">Original llms.txt Proposal by Jeremy Howard (Answer.AI)</a></li>
+<li><a href="https://docs.anthropic.com" target="_blank">Anthropic Documentation</a></li>
+</ul>
+</div>
+</div></div>
+</div><!-- /scores-content -->
+<button aria-label="Back to top" class="back-to-top" id="backToTop">↑</button>
+<script>
     // Theme toggle
     const toggle = document.getElementById('themeToggle');
     const html = document.documentElement;
@@ -1805,7 +1753,12 @@
       btn.classList.add('active');
       document.getElementById('panel-' + mode).classList.add('active');
     }
-  </script>
-
-</body>
+  
+    // Back to top
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      btt.classList.toggle('visible', window.scrollY > 300);
+    });
+    btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script></body>
 </html>
