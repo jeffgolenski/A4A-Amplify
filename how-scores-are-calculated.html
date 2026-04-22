@@ -443,8 +443,141 @@
     .footer-links a { font-size: 12px; color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
     .footer-links a:hover { color: var(--text); }
 
+    /* ── CRITERION TITLE ROW ── */
+    .criterion-title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .criterion-title-row .criterion-title {
+      margin-bottom: 0;
+    }
+
+    .criterion-pts {
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2px 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── SCORE OVERVIEW ── */
+    .score-overview {
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 24px;
+      margin-bottom: 48px;
+      padding: 24px;
+      background: var(--bg-subtle);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .score-overview-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--label-color);
+      margin-bottom: 12px;
+    }
+
+    .score-bar-row {
+      display: grid;
+      grid-template-columns: 160px 1fr 38px;
+      gap: 10px;
+      align-items: center;
+      padding: 4px 0;
+    }
+
+    .score-bar-name {
+      font-size: 13px;
+      color: var(--text-mid);
+      font-weight: 500;
+    }
+
+    .score-bar-track {
+      height: 4px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      background: var(--blue);
+      border-radius: 4px;
+      opacity: 0.55;
+    }
+
+    .score-bar-pts {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .threshold-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .threshold-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 10px;
+      border-radius: 6px;
+    }
+
+    .threshold-item.green { background: rgba(16,185,129,0.07); }
+    .threshold-item.amber { background: rgba(245,158,11,0.07); }
+    .threshold-item.red   { background: rgba(239,68,68,0.07); }
+
+    [data-theme="dark"] .threshold-item.green { background: rgba(16,185,129,0.10); }
+    [data-theme="dark"] .threshold-item.amber { background: rgba(245,158,11,0.10); }
+    [data-theme="dark"] .threshold-item.red   { background: rgba(239,68,68,0.10); }
+
+    .threshold-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .threshold-item.green .threshold-dot { background: #10b981; }
+    .threshold-item.amber .threshold-dot { background: #f59e0b; }
+    .threshold-item.red   .threshold-dot { background: #ef4444; }
+
+    .threshold-content { flex: 1; }
+
+    .threshold-range {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .threshold-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
+      .score-overview { grid-template-columns: 1fr; }
+      .score-bar-row { grid-template-columns: 120px 1fr 36px; }
       .page-header { padding: 56px 20px 48px; }
       .mode-tabs-wrap { padding: 24px 20px 0; }
       .scores-content { padding: 40px 20px 80px; }
@@ -497,12 +630,56 @@
 
       <p class="mode-intro">Human Mode evaluates your site the way a potential client does, forming impressions in seconds, scanning for trust signals, and deciding whether you are worth reaching out to. The eight criteria below reflect the dimensions that research consistently shows influence whether a visitor becomes an enquiry.</p>
 
+      <!-- SCORE OVERVIEW -->
+      <div class="score-overview">
+        <div>
+          <div class="score-overview-label">Criteria breakdown — 100 points total</div>
+          <div class="score-bar-row"><span class="score-bar-name">Trust Signals</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-pts">18 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">Contact &amp; Conversion</span><div class="score-bar-track"><div class="score-bar-fill" style="width:83%"></div></div><span class="score-bar-pts">15 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">SEO</span><div class="score-bar-track"><div class="score-bar-fill" style="width:72%"></div></div><span class="score-bar-pts">13 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">Mobile Experience</span><div class="score-bar-track"><div class="score-bar-fill" style="width:72%"></div></div><span class="score-bar-pts">13 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">Content Quality</span><div class="score-bar-track"><div class="score-bar-fill" style="width:67%"></div></div><span class="score-bar-pts">12 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">Design &amp; Experience</span><div class="score-bar-track"><div class="score-bar-fill" style="width:61%"></div></div><span class="score-bar-pts">11 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">Accessibility</span><div class="score-bar-track"><div class="score-bar-fill" style="width:56%"></div></div><span class="score-bar-pts">10 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">Audience Resonance</span><div class="score-bar-track"><div class="score-bar-fill" style="width:44%"></div></div><span class="score-bar-pts">8 pts</span></div>
+        </div>
+        <div>
+          <div class="score-overview-label">Score thresholds</div>
+          <div class="threshold-stack">
+            <div class="threshold-item green">
+              <span class="threshold-dot"></span>
+              <div class="threshold-content">
+                <div class="threshold-range">80 – 100</div>
+                <div class="threshold-label">Strong</div>
+              </div>
+            </div>
+            <div class="threshold-item amber">
+              <span class="threshold-dot"></span>
+              <div class="threshold-content">
+                <div class="threshold-range">50 – 79</div>
+                <div class="threshold-label">Needs work</div>
+              </div>
+            </div>
+            <div class="threshold-item red">
+              <span class="threshold-dot"></span>
+              <div class="threshold-content">
+                <div class="threshold-range">0 – 49</div>
+                <div class="threshold-label">At risk</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- 01 AUDIENCE RESONANCE -->
       <div class="criterion">
         <div class="criterion-header">
           <span class="criterion-num">01</span>
           <div>
-            <div class="criterion-title">Audience Resonance</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Audience Resonance</div>
+              <span class="criterion-pts">8 pts</span>
+            </div>
             <p class="criterion-desc">Does this site feel made for the right client? Within seconds of landing, a potential client should feel like the site is speaking directly to them.</p>
           </div>
         </div>
@@ -562,7 +739,10 @@
         <div class="criterion-header">
           <span class="criterion-num">02</span>
           <div>
-            <div class="criterion-title">Content Quality</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Content Quality</div>
+              <span class="criterion-pts">12 pts</span>
+            </div>
             <p class="criterion-desc">Is the writing compelling, clear, and professional? Errors and poor readability erode trust before a client has read a single sentence.</p>
           </div>
         </div>
@@ -629,7 +809,10 @@
         <div class="criterion-header">
           <span class="criterion-num">03</span>
           <div>
-            <div class="criterion-title">Design &amp; Experience</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Design &amp; Experience</div>
+              <span class="criterion-pts">11 pts</span>
+            </div>
             <p class="criterion-desc">Does the site look credible and feel effortless to use? All signals in this criterion are grounded in the Laws of UX, a framework of established psychological and behavioral principles applied to interface design.</p>
           </div>
         </div>
@@ -711,7 +894,10 @@
         <div class="criterion-header">
           <span class="criterion-num">04</span>
           <div>
-            <div class="criterion-title">Trust Signals</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Trust Signals</div>
+              <span class="criterion-pts">18 pts</span>
+            </div>
             <p class="criterion-desc">Does this site give a potential client enough evidence to feel safe handing over a project? All signals are evaluated on the homepage only. A link to a dedicated page counts as sufficient evidence.</p>
           </div>
         </div>
@@ -781,7 +967,10 @@
         <div class="criterion-header">
           <span class="criterion-num">05</span>
           <div>
-            <div class="criterion-title">Mobile Experience</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Mobile Experience</div>
+              <span class="criterion-pts">13 pts</span>
+            </div>
             <p class="criterion-desc">A first impression increasingly happens on a phone. Does the site hold up when a potential client pulls it up on their device?</p>
           </div>
         </div>
@@ -853,7 +1042,10 @@
         <div class="criterion-header">
           <span class="criterion-num">06</span>
           <div>
-            <div class="criterion-title">SEO</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">SEO</div>
+              <span class="criterion-pts">13 pts</span>
+            </div>
             <p class="criterion-desc">Can a potential client find this agency when they search? All SEO signals are sourced directly from Google Search Central documentation.</p>
           </div>
         </div>
@@ -929,7 +1121,10 @@
         <div class="criterion-header">
           <span class="criterion-num">07</span>
           <div>
-            <div class="criterion-title">Accessibility</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Accessibility</div>
+              <span class="criterion-pts">10 pts</span>
+            </div>
             <p class="criterion-desc">Does the site work for everyone, regardless of how they experience the web? Amplify measures against the WCAG AA conformance level, the widely accepted standard referenced by courts and regulators globally.</p>
           </div>
         </div>
@@ -995,7 +1190,10 @@
         <div class="criterion-header">
           <span class="criterion-num">08</span>
           <div>
-            <div class="criterion-title">Contact &amp; Conversion</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Contact &amp; Conversion</div>
+              <span class="criterion-pts">15 pts</span>
+            </div>
             <p class="criterion-desc">A potential client has made it through the site and is ready to reach out. Does the site make that easy, or does it create friction at the worst possible moment?</p>
           </div>
         </div>
@@ -1076,12 +1274,56 @@
 
       <p class="mode-intro">AI Mode evaluates your site the way AI tools do: crawling it, parsing its structure, extracting entities, and deciding whether to cite it in a generated answer. As potential clients increasingly use tools like ChatGPT and Perplexity to find agencies, this score reflects how well your site performs for that audience.</p>
 
+      <!-- SCORE OVERVIEW -->
+      <div class="score-overview">
+        <div>
+          <div class="score-overview-label">Criteria breakdown — 100 points total</div>
+          <div class="score-bar-row"><span class="score-bar-name">Technical Health</span><div class="score-bar-track"><div class="score-bar-fill" style="width:100%"></div></div><span class="score-bar-pts">20 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">Structured Data</span><div class="score-bar-track"><div class="score-bar-fill" style="width:90%"></div></div><span class="score-bar-pts">18 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">AEO Readiness</span><div class="score-bar-track"><div class="score-bar-fill" style="width:80%"></div></div><span class="score-bar-pts">16 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">E-E-A-T Signals</span><div class="score-bar-track"><div class="score-bar-fill" style="width:70%"></div></div><span class="score-bar-pts">14 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">Content Freshness</span><div class="score-bar-track"><div class="score-bar-fill" style="width:60%"></div></div><span class="score-bar-pts">12 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">Entity Clarity</span><div class="score-bar-track"><div class="score-bar-fill" style="width:50%"></div></div><span class="score-bar-pts">10 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">Content Specificity</span><div class="score-bar-track"><div class="score-bar-fill" style="width:35%"></div></div><span class="score-bar-pts">7 pts</span></div>
+          <div class="score-bar-row"><span class="score-bar-name">llms.txt</span><div class="score-bar-track"><div class="score-bar-fill" style="width:15%"></div></div><span class="score-bar-pts">3 pts</span></div>
+        </div>
+        <div>
+          <div class="score-overview-label">Score thresholds</div>
+          <div class="threshold-stack">
+            <div class="threshold-item green">
+              <span class="threshold-dot"></span>
+              <div class="threshold-content">
+                <div class="threshold-range">80 – 100</div>
+                <div class="threshold-label">Strong</div>
+              </div>
+            </div>
+            <div class="threshold-item amber">
+              <span class="threshold-dot"></span>
+              <div class="threshold-content">
+                <div class="threshold-range">50 – 79</div>
+                <div class="threshold-label">Needs work</div>
+              </div>
+            </div>
+            <div class="threshold-item red">
+              <span class="threshold-dot"></span>
+              <div class="threshold-content">
+                <div class="threshold-range">0 – 49</div>
+                <div class="threshold-label">At risk</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- 01 TECHNICAL HEALTH -->
       <div class="criterion">
         <div class="criterion-header">
           <span class="criterion-num">01</span>
           <div>
-            <div class="criterion-title">Technical Health</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Technical Health</div>
+              <span class="criterion-pts">20 pts</span>
+            </div>
             <p class="criterion-desc">Can AI tools access, crawl, and render your site? If a crawler cannot reach your content, nothing else matters. This criterion covers both accessibility and raw performance.</p>
           </div>
         </div>
@@ -1139,7 +1381,10 @@
         <div class="criterion-header">
           <span class="criterion-num">02</span>
           <div>
-            <div class="criterion-title">Structured Data</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Structured Data</div>
+              <span class="criterion-pts">18 pts</span>
+            </div>
             <p class="criterion-desc">Schema markup tells AI tools exactly what your site is about rather than making them infer it. It is the difference between an AI accurately describing your agency and producing a generic summary.</p>
           </div>
         </div>
@@ -1192,7 +1437,10 @@
         <div class="criterion-header">
           <span class="criterion-num">03</span>
           <div>
-            <div class="criterion-title">Entity Clarity</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Entity Clarity</div>
+              <span class="criterion-pts">10 pts</span>
+            </div>
             <p class="criterion-desc">Is your agency identifiable as a distinct, named entity with a clear type, location, and specialty? AI tools build knowledge graphs from the web. Sites with clear entity signals get described accurately. Vague sites get ignored or misrepresented.</p>
           </div>
         </div>
@@ -1237,7 +1485,10 @@
         <div class="criterion-header">
           <span class="criterion-num">04</span>
           <div>
-            <div class="criterion-title">Content Specificity</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Content Specificity</div>
+              <span class="criterion-pts">7 pts</span>
+            </div>
             <p class="criterion-desc">Specific copy produces specific AI summaries. Generic copy produces generic answers that fail to differentiate your agency. When a potential client asks an AI tool "find me a WordPress agency for my ecommerce brand," only specific sites get cited.</p>
           </div>
         </div>
@@ -1282,7 +1533,10 @@
         <div class="criterion-header">
           <span class="criterion-num">05</span>
           <div>
-            <div class="criterion-title">AEO Readiness</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">AEO Readiness</div>
+              <span class="criterion-pts">16 pts</span>
+            </div>
             <p class="criterion-desc">Answer Engine Optimization. Is your content structured to surface in AI-generated answers? AI tools prioritize pages that answer questions directly and clearly, not pages that bury key information in long paragraphs.</p>
           </div>
         </div>
@@ -1338,7 +1592,10 @@
         <div class="criterion-header">
           <span class="criterion-num">06</span>
           <div>
-            <div class="criterion-title">E-E-A-T Signals</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">E-E-A-T Signals</div>
+              <span class="criterion-pts">14 pts</span>
+            </div>
             <p class="criterion-desc">Experience, Expertise, Authoritativeness, Trustworthiness. Google's quality framework and the backbone of how AI tools evaluate whether a source is worth citing. Sites that demonstrate real-world expertise consistently outperform those that merely claim it.</p>
           </div>
         </div>
@@ -1397,7 +1654,10 @@
         <div class="criterion-header">
           <span class="criterion-num">07</span>
           <div>
-            <div class="criterion-title">Content Freshness</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">Content Freshness</div>
+              <span class="criterion-pts">12 pts</span>
+            </div>
             <p class="criterion-desc">AI tools and search engines deprioritise stale content. An outdated copyright year, a blog with nothing newer than 2022, or case studies from three redesigns ago all signal a site that has been left to gather dust.</p>
           </div>
         </div>
@@ -1452,7 +1712,10 @@
         <div class="criterion-header">
           <span class="criterion-num">08</span>
           <div>
-            <div class="criterion-title">llms.txt</div>
+            <div class="criterion-title-row">
+              <div class="criterion-title">llms.txt</div>
+              <span class="criterion-pts">3 pts</span>
+            </div>
             <p class="criterion-desc">A plain-text file at your site root that gives AI tools a curated, concise summary of what your site contains, written specifically for LLMs rather than humans. Think of it as a robots.txt for the AI era.</p>
           </div>
         </div>
