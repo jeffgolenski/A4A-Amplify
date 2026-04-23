@@ -390,7 +390,7 @@
       border-radius: 8px;
       padding: 12px 14px;
       margin-top: 10px;
-      margin-bottom: 4px;
+      margin-bottom: 24px;
     }
     [data-theme="dark"] .grain-note {
       background: rgba(251,191,36,0.05);
@@ -1020,7 +1020,7 @@
 <li class="signal-item">
 <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
 <div class="signal-text"><strong>Touch targets:</strong> minimum 48x48px with 8px spacing per Google guidelines. Tappable elements that are too small or too close together cause mis-taps, frustration, and abandonment, particularly on phones used one-handed. This signal also feeds the Design and Experience score via Fitts's Law.</div>
-<span class="signal-pts">3 pts</span></li><li class="signal-item">
+<span class="signal-pts">4 pts</span></li><li class="signal-item">
 <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
 <div class="signal-text"><strong>Font size:</strong> body text must meet the 16px minimum. Below this threshold, iOS Safari triggers automatic zoom on form fields, disrupting the reading experience mid-interaction. It also strains readability for anyone on a small screen or with slightly reduced vision, two groups that represent a large share of mobile visitors.</div>
 <span class="signal-pts">2 pts</span></li><li class="signal-item">
@@ -1028,11 +1028,12 @@
 <div class="signal-text"><strong>Horizontal overflow:</strong> any content that bleeds beyond the viewport width and causes horizontal scrolling is flagged. Horizontal scrolling on mobile is a near-universal signal that the layout was never tested on an actual phone. It is disorienting for users and immediately signals that the site is not properly maintained.</div>
 <span class="signal-pts">2 pts</span></li><li class="signal-item">
 <div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
-<div class="signal-text"><strong>Viewport meta tag:</strong> <code>width=device-width, initial-scale=1</code> must be present. Without it, the page renders at desktop width and scales down to fit a phone screen, making text unreadably small and touch targets impossibly tight before the visitor has read a single word.</div>
-<span class="signal-pts">1 pt</span></li><li class="signal-item">
-<div class="signal-badge-col"><span class="badge badge-prog">Programmatic</span></div>
 <div class="signal-text"><strong>Responsive breakpoints:</strong> does the CSS include mobile media queries? Their presence is the baseline signal that someone thought about the mobile experience at all. Their absence often correlates with a layout that breaks on smaller screens. Not guaranteed, but strongly predictive.</div>
 <span class="signal-pts">1 pt</span></li></ul>
+</div>
+<div class="grain-note">
+<span class="grain-note-icon">ℹ️</span>
+<span><strong>Viewport meta tag is not scored.</strong> The <code>width=device-width, initial-scale=1</code> tag is present on over 99% of websites as of 2026. It is effectively universal and no longer a differentiating signal. Amplify verifies its presence but does not include it in scoring. A site missing it would already surface failures across the other signals in this criterion.</span>
 </div>
 <div class="signals-section">
 <div class="section-label">Signals measured via AI visual analysis</div>
